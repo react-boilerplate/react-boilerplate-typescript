@@ -49,6 +49,19 @@
   <sub>Created by <a href="https://twitter.com/mxstbr">Max Stoiber</a> and maintained with ❤️ by an amazing <a href="https://github.com/orgs/react-boilerplate/teams/core">team of developers</a>.</sub>
 </div>
 
+---
+## Typescript
+
+This fork is the typescript implementation of this awesome boilerplate with `strict:true` flag.
+
+Boilerplate version: `3.6.0`
+
+Based on works of <a href="https://github.com/piotrwitek/react-redux-typescript-guide">react-typescript-guide</a> and <a href="https://github.com/StrikeForceZero/react-typescript-boilerplate"> typescript fork </a>(which was for previous versions)
+
+For details: [**Check Typescript docs**](docs/general/typescript.md)
+
+---
+
 ## Features
 
 <dl>

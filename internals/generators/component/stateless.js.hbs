@@ -4,16 +4,18 @@
  *
  */
 
-import React from 'react';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import * as React from 'react';
+
+// import styled from 'styles/styled-components';
 
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 {{/if}}
 
-function {{ properCase name }}() {
+interface OwnProps {}
+
+const {{ properCase name }}: React.SFC<OwnProps> = (props: OwnProps) => {
   return (
     <div>
     {{#if wantMessages}}
@@ -21,8 +23,6 @@ function {{ properCase name }}() {
     {{/if}}
     </div>
   );
-}
-
-{{ properCase name }}.propTypes = {};
+};
 
 export default {{ properCase name }};

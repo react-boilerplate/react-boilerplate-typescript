@@ -4,8 +4,7 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 {{#if wantHeaders}}
 import { Helmet } from 'react-helmet';
@@ -16,14 +15,14 @@ import { FormattedMessage } from 'react-intl';
 {{#if wantActionsAndReducer}}
 import { createStructuredSelector } from 'reselect';
 {{/if}}
-import { compose } from 'redux';
+import { compose, Dispatch } from 'redux';
 
 {{#if wantSaga}}
 import injectSaga from 'utils/injectSaga';
 {{/if}}
 {{#if wantActionsAndReducer}}
 import injectReducer from 'utils/injectReducer';
-import makeSelect{{properCase name}} from './selectors';
+import select{{properCase name}} from './selectors';
 import reducer from './reducer';
 {{/if}}
 {{#if wantSaga}}
@@ -33,9 +32,19 @@ import saga from './saga';
 import messages from './messages';
 {{/if}}
 
-/* eslint-disable react/prefer-stateless-function */
-export class {{ properCase name }} extends {{{ type }}} {
-  render() {
+import { RootState } from './types';
+
+
+interface OwnProps {}
+
+interface StateProps {}
+
+interface DispatchProps {}
+
+type Props = StateProps & DispatchProps & OwnProps;
+
+export class {{ properCase name }} extends {{{ type }}}<Props> {
+  public render() {
     return (
       <div>
       {{#if wantHeaders}}
@@ -52,42 +61,46 @@ export class {{ properCase name }} extends {{{ type }}} {
   }
 }
 
-{{ properCase name }}.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
-
 {{#if wantActionsAndReducer}}
-const mapStateToProps = createStructuredSelector({
-  {{ lowerCase name }}: makeSelect{{properCase name}}(),
+const mapStateToProps = createStructuredSelector<RootState, StateProps>({
+  {{ lowerCase name }}: select{{properCase name}}(),
 });
 {{/if}}
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch, ownProps: OwnProps): DispatchProps {
   return {
-    dispatch,
+    dispatch: dispatch,
   };
 }
 
 {{#if wantActionsAndReducer}}
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: '{{ camelCase name }}', reducer });
+// <OwnProps> restricts access to the HOC's other props. This component must not do anything with reducer hoc
+const withReducer = injectReducer<OwnProps>({ key: '{{ camelCase name }}', reducer: reducer });
 {{else}}
 const withConnect = connect(null, mapDispatchToProps);
 {{/if}}
 {{#if wantSaga}}
-const withSaga = injectSaga({ key: '{{ camelCase name }}', saga });
+// <OwnProps> restricts access to the HOC's other props. This component must not do anything with saga hoc
+const withSaga = injectSaga<OwnProps>({ key: '{{ camelCase name }}', saga: saga });
 {{/if}}
 
-export default compose(
+// export default withReducer(withSaga(withConnect({{ properCase name }}))); // identical to compose function, but requires no explicit type declaration
+export default compose<TReducer, TSaga, TConnect, ReturnType>(
 {{#if wantActionsAndReducer}}
   withReducer,
 {{/if}}
 {{#if wantSaga}}
   withSaga,
 {{/if}}
-  withConnect
+  withConnect,
 )({{ properCase name }});
+
+type ReturnType = React.ComponentType<OwnProps>;
+type TReducer = ReturnType;
+type TSaga = ReturnType;
+type TConnect = typeof {{ properCase name }};

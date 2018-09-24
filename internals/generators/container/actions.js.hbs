@@ -4,10 +4,9 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import { action } from 'typesafe-actions';
+import { } from './types';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+import ActionTypes from './constants';
+
+export const defaultAction = () => action(ActionTypes.DEFAULT_ACTION);

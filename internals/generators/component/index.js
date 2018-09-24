@@ -16,11 +16,7 @@ module.exports = {
       name: 'type',
       message: 'Select the type of component',
       default: 'Stateless Function',
-      choices: () => [
-        'Stateless Function',
-        'React.PureComponent',
-        'React.Component',
-      ],
+      choices: () => ['Stateless Function', 'React.PureComponent', 'React.Component'],
     },
     {
       type: 'input',
@@ -29,9 +25,7 @@ module.exports = {
       default: 'Button',
       validate: value => {
         if (/.+/.test(value)) {
-          return componentExists(value)
-            ? 'A component or container with this name already exists'
-            : true;
+          return componentExists(value) ? 'A component or container with this name already exists' : true;
         }
 
         return 'The name is required';
@@ -67,13 +61,13 @@ module.exports = {
     const actions = [
       {
         type: 'add',
-        path: '../../app/components/{{properCase name}}/index.js',
+        path: '../../app/components/{{properCase name}}/index.tsx',
         templateFile: componentTemplate,
         abortOnFail: true,
       },
       {
         type: 'add',
-        path: '../../app/components/{{properCase name}}/tests/index.test.js',
+        path: '../../app/components/{{properCase name}}/tests/index.test.ts',
         templateFile: './component/test.js.hbs',
         abortOnFail: true,
       },
@@ -83,7 +77,7 @@ module.exports = {
     if (data.wantMessages) {
       actions.push({
         type: 'add',
-        path: '../../app/components/{{properCase name}}/messages.js',
+        path: '../../app/components/{{properCase name}}/messages.ts',
         templateFile: './component/messages.js.hbs',
         abortOnFail: true,
       });
@@ -93,7 +87,7 @@ module.exports = {
     if (data.wantLoadable) {
       actions.push({
         type: 'add',
-        path: '../../app/components/{{properCase name}}/Loadable.js',
+        path: '../../app/components/{{properCase name}}/Loadable.ts',
         templateFile: './component/loadable.js.hbs',
         abortOnFail: true,
       });

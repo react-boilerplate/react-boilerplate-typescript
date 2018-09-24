@@ -1,12 +1,15 @@
 import { createSelector } from 'reselect';
+import { ApplicationRootState } from 'types';
 import { initialState } from './reducer';
+
 
 /**
  * Direct selector to the {{ camelCase name }} state domain
  */
 
-const select{{ properCase name }}Domain = state =>
-  state.get('{{ camelCase name }}', initialState);
+const select{{ properCase name }}Domain = (state: ApplicationRootState) => {
+  return state ? state : initialState;
+};
 
 /**
  * Other specific selectors
@@ -16,8 +19,10 @@ const select{{ properCase name }}Domain = state =>
  * Default selector used by {{ properCase name }}
  */
 
-const makeSelect{{ properCase name }} = () =>
-  createSelector(select{{ properCase name }}Domain, substate => substate.toJS());
+const select{{ properCase name }} = () =>
+  createSelector(select{{ properCase name }}Domain, substate => {
+    return substate;
+  });
 
-export default makeSelect{{ properCase name }};
+export default select{{ properCase name }};
 export { select{{ properCase name }}Domain };

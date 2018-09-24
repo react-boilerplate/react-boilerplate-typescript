@@ -43,7 +43,7 @@ module.exports = require('./webpack.base.babel')({
   entry: [
     'eventsource-polyfill', // Necessary for hot reloading with IE
     'webpack-hot-middleware/client?reload=true',
-    path.join(process.cwd(), 'app/app.js'), // Start with js/app.js
+    path.join(process.cwd(), 'app/app.tsx'), // Start with js/app.js
   ],
 
   // Don't use hashes in dev mode for better performance
@@ -58,6 +58,12 @@ module.exports = require('./webpack.base.babel')({
 
   // Add development plugins
   plugins: dependencyHandlers().concat(plugins), // eslint-disable-line no-use-before-define
+
+  tsLoaders: [
+    {
+      loader: 'awesome-typescript-loader',
+    },
+  ],
 
   // Emit a source map for easier debugging
   // See https://webpack.js.org/configuration/devtool/#devtool
@@ -91,7 +97,7 @@ function dependencyHandlers() {
   const dllPath = path.resolve(
     process.cwd(),
     dllPlugin.path || 'node_modules/react-boilerplate-dlls',
-  );
+    );
 
   /**
    * If DLLs aren't explicitly defined, we assume all production dependencies listed in package.json
@@ -103,7 +109,7 @@ function dependencyHandlers() {
     if (!fs.existsSync(manifestPath)) {
       logger.error(
         'The DLL manifest is missing. Please run `npm run build:dll`',
-      );
+        );
       process.exit(0);
     }
 
@@ -116,7 +122,7 @@ function dependencyHandlers() {
   }
 
   // If DLLs are explicitly defined, we automatically create a DLLReferencePlugin for each of them.
-  const dllManifests = Object.keys(dllPlugin.dlls).map(name =>
+  const dllManifests = Object.keys(dllPlugin.dlls).map(name => 
     path.join(dllPath, `/${name}.json`),
   );
 
@@ -126,7 +132,7 @@ function dependencyHandlers() {
         logger.error(
           `The following Webpack DLL manifest is missing: ${path.basename(
             manifestPath,
-          )}`,
+            )}`,
         );
         logger.error(`Expected to find it in ${dllPath}`);
         logger.error('Please run: npm run build:dll');

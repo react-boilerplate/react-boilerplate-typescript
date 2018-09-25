@@ -2,14 +2,6 @@ import { ActionType } from 'typesafe-actions';
 import * as actions from './actions';
 import { ApplicationRootState } from 'types';
 
-/* --- EXPORTS --- */
-
-type RootState = ApplicationRootState;
-type ContainerState = {{ properCase name }}State;
-type ContainerActions = {{ properCase name }}Actions;
-
-export { RootState, ContainerState, ContainerActions };
-
 /* --- STATE --- */
 interface {{ properCase name }}State {
   readonly default: any;
@@ -18,3 +10,12 @@ interface {{ properCase name }}State {
 
 /* --- ACTIONS --- */
 type {{ properCase name }}Actions = ActionType<typeof actions>;
+
+
+/* --- EXPORTS --- */
+
+type RootState = ApplicationRootState;
+type ContainerState = {{ properCase name }}State;
+type ContainerActions = {{ properCase name }}Actions;
+
+export { RootState, ContainerState, ContainerActions };

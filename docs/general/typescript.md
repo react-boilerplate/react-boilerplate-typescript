@@ -15,6 +15,7 @@ Based on works of [react-typescript-guide] and <a href="https://github.com/Strik
 **Type-safety:** Follow [react-typescript-guide] rules and tips for maintaining type safety through out the layers
 
 
+> Most of the components are not explicitly typed, especially their props are marked as any. The type-safety logic is same across the whole project, so, I only restricted and declared types for HomePage container to set an example. You can apply the same logic to all the components etc... 
 
 Feedback is extremely welcome (I created a typescript version for the project I was doing. It was switched on the fly, so it is probably missing lot of things)
 

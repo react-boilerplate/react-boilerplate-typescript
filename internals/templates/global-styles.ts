@@ -1,6 +1,6 @@
-import { injectGlobal } from 'styled-components';
+import { injectGlobal } from 'styles/styled-components';
 
-/* eslint no-unused-expressions: 0 */
+// tslint:disable-next-line:no-unused-expression
 injectGlobal`
   html,
   body {

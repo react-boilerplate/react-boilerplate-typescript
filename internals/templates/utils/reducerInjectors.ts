@@ -1,14 +1,18 @@
-import invariant from 'invariant';
-import isEmpty from 'lodash/isEmpty';
-import isFunction from 'lodash/isFunction';
-import isString from 'lodash/isString';
+import invariant = require('invariant');
+import isEmpty = require('lodash/isEmpty');
+import isFunction = require('lodash/isFunction');
+import isString = require('lodash/isString');
 
 import checkStore from './checkStore';
 import createReducer from '../reducers';
+import { LifeStore } from 'types';
+import { Reducer } from 'redux';
 
-export function injectReducerFactory(store, isValid) {
-  return function injectReducer(key, reducer) {
-    if (!isValid) checkStore(store);
+export function injectReducerFactory(store: LifeStore, isValid: boolean) {
+  return function injectReducer(key: string, reducer: Reducer<object>) {
+    if (!isValid) {
+      checkStore(store);
+    }
 
     invariant(
       isString(key) && !isEmpty(key) && isFunction(reducer),
@@ -19,15 +23,16 @@ export function injectReducerFactory(store, isValid) {
     if (
       Reflect.has(store.injectedReducers, key) &&
       store.injectedReducers[key] === reducer
-    )
+    ) {
       return;
+    }
 
     store.injectedReducers[key] = reducer; // eslint-disable-line no-param-reassign
     store.replaceReducer(createReducer(store.injectedReducers));
   };
 }
 
-export default function getInjectors(store) {
+export default function getInjectors(store: LifeStore) {
   checkStore(store);
 
   return {

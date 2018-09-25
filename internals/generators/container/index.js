@@ -12,7 +12,11 @@ module.exports = {
       name: 'type',
       message: 'Select the base component type:',
       default: 'Stateless Function',
-      choices: () => ['Stateless Function', 'React.PureComponent', 'React.Component'],
+      choices: () => [
+        'Stateless Function',
+        'React.PureComponent',
+        'React.Component',
+      ],
     },
     {
       type: 'input',
@@ -21,7 +25,9 @@ module.exports = {
       default: 'Form',
       validate: value => {
         if (/.+/.test(value)) {
-          return componentExists(value) ? 'A component or container with this name already exists' : true;
+          return componentExists(value)
+            ? 'A component or container with this name already exists'
+            : true;
         }
 
         return 'The name is required';
@@ -37,7 +43,8 @@ module.exports = {
       type: 'confirm',
       name: 'wantActionsAndReducer',
       default: true,
-      message: 'Do you want an actions/constants/selectors/reducer tuple for this container?',
+      message:
+        'Do you want an actions/constants/selectors/reducer tuple for this container?',
     },
     {
       type: 'confirm',
@@ -137,7 +144,8 @@ module.exports = {
       });
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/selectors.test.ts',
+        path:
+          '../../app/containers/{{properCase name}}/tests/selectors.test.ts',
         templateFile: './container/selectors.test.js.hbs',
         abortOnFail: true,
       });

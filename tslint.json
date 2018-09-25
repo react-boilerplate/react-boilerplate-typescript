@@ -22,5 +22,8 @@
     "no-implicit-dependencies": false,
     "no-submodule-imports": false,
     "jsx-alignment": false
+  },
+  "linterOptions": {
+    "exclude": ["**/*.js"]
   }
 }

@@ -10,6 +10,7 @@
  * reloading is not a necessity for you then you can refactor it and remove
  * the linting exception.
  */
+import { hot } from 'react-hot-loader';
 
 import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
@@ -17,7 +18,7 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
-export default function App() {
+function App() {
   return (
     <div>
       <Switch>
@@ -27,3 +28,5 @@ export default function App() {
     </div>
   );
 }
+
+export default hot(module)(App);

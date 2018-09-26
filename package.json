@@ -12,7 +12,7 @@
   },
   "author": "Max Stoiber",
   "license": "MIT",
-    "scripts": {
+  "scripts": {
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
     "analyze": "node ./internals/scripts/analyze.js",
@@ -25,9 +25,9 @@
     "build:clean": "rimraf ./build",
     "build:dll": "node ./internals/scripts/dependencies.js",
     "start": "cross-env NODE_ENV=development node server",
-    "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true ts-node -F -r tsconfig-paths/register server",
+    "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
     "start:production": "npm run test && npm run build && npm run start:prod",
-    "start:prod": "cross-env NODE_ENV=production ts-node -F -r tsconfig-paths/register server",
+    "start:prod": "cross-env NODE_ENV=production node server",
     "presetup": "npm i chalk shelljs",
     "setup": "node ./internals/scripts/setup.js",
     "postsetup": "npm run build:dll",
@@ -64,7 +64,9 @@
   "pre-commit": "lint:staged",
   "babel": {
     "plugins": [
-      "styled-components"
+      [
+        "styled-components"
+      ]
     ],
     "presets": [
       [
@@ -280,6 +282,7 @@
     "tslint-loader": "^3.4.3",
     "tslint-react": "^2.3.0",
     "typescript": "^3.0.3",
+    "typescript-plugin-styled-components": "^1.0.0",
     "url-loader": "1.0.1",
     "webpack": "4.12.0",
     "webpack-cli": "3.0.8",

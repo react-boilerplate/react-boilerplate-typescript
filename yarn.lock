@@ -10392,6 +10392,10 @@ typesafe-actions@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/typesafe-actions/-/typesafe-actions-2.0.4.tgz#31c8f8df3566d549eb52edb64a75997e970c17d0"
 
+typescript-plugin-styled-components@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/typescript-plugin-styled-components/-/typescript-plugin-styled-components-1.0.0.tgz#b4de4ecd668fedd225d5c94bb5fe9cafbc0f045d"
+
 typescript@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.3.tgz#4853b3e275ecdaa27f78fda46dc273a7eb7fc1c8"

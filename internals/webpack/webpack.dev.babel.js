@@ -35,6 +35,13 @@ if (dllPlugin) {
     );
   });
 }
+// 1. import default from the plugin module
+const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
+  .default;
+
+// 2. create a transformer;
+// the factory additionally accepts an options object which described below
+const styledComponentsTransformer = createStyledComponentsTransformer();
 
 module.exports = require('./webpack.base.babel')({
   mode: 'development',
@@ -62,6 +69,16 @@ module.exports = require('./webpack.base.babel')({
   tsLoaders: [
     {
       loader: 'awesome-typescript-loader',
+      options: {
+        useBabel: true,
+        babelOptions: {
+          babelrc: true,
+        },
+        useCache: true,
+        getCustomTransformers: () => ({
+          before: [styledComponentsTransformer],
+        }),
+      },
     },
   ],
 

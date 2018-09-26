@@ -14,6 +14,8 @@ Based on works of [react-typescript-guide] and <a href="https://github.com/Strik
 
 **Type-safety:** Follow [react-typescript-guide] rules and tips for maintaining type safety through out the layers
 
+**Webpack:** awesome-typescript-loader is used with babel. However, styled-components transformer is used with plug-in instead of [babel plugin] due to the [discussion]
+
 > Most of the components are not explicitly typed, especially their props are marked as any. The type-safety logic is same across the whole project, so, I only restricted and declared types for HomePage container to set an example. You can apply the same logic to all the components etc...
 
 > All the test files are removed. Testing with jest is for now to-do
@@ -240,3 +242,5 @@ type TConnect = typeof HomePage;
 ```
 
 [react-typescript-guide]: https://github.com/piotrwitek/react-redux-typescript-guide
+[discussion]: https://github.com/styled-components/babel-plugin-styled-components/issues/41
+[babel plugin]: https://github.com/styled-components/babel-plugin-styled-components

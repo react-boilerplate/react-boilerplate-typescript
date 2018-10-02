@@ -74,7 +74,7 @@ module.exports = require('./webpack.base.babel')({
         babelOptions: {
           babelrc: true,
         },
-        useCache: true,
+        useCache: false,
         getCustomTransformers: () => ({
           before: [styledComponentsTransformer],
         }),

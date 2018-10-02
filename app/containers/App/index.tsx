@@ -6,8 +6,6 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
-import { hot } from 'react-hot-loader';
-
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styles/styled-components';
@@ -48,4 +46,4 @@ const App: React.SFC<{}> = () => {
   );
 };
 
-export default hot(module)(App);
+export default App;

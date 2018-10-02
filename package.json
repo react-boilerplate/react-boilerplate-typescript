@@ -63,11 +63,7 @@
   },
   "pre-commit": "lint:staged",
   "babel": {
-    "plugins": [
-      [
-        "styled-components"
-      ]
-    ],
+    "plugins": [],
     "presets": [
       [
         "env",
@@ -264,7 +260,6 @@
     "plop": "2.0.0",
     "pre-commit": "1.2.2",
     "prettier": "1.13.5",
-    "react-hot-loader": "^4.3.3",
     "react-test-renderer": "16.4.1",
     "rimraf": "2.6.2",
     "shelljs": "0.8.2",

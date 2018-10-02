@@ -50,12 +50,12 @@ const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app') as HTMLElement;
 
-const render = messages => {
+const render = (messages, Component = App) => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App />
+          <Component />
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
@@ -63,15 +63,16 @@ const render = messages => {
   );
 };
 
-if (module['hot']) {
-  // Hot reloadable React components and translation json files
-  // modules.hot.accept does not accept dynamic dependencies,
-  // have to be constants at compile-time
-  module['hot'].accept(['./i18n', 'containers/App'], () => {
+declare const module: any;
+if (module.hot) {
+  module.hot.accept(['./i18n', './containers/App'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    render(translationMessages);
+    // tslint:disable-next-line:max-line-length
+    const App = require('./containers/App').default; // https://github.com/webpack/webpack-dev-server/issues/100
+    render(translationMessages, App);
   });
 }
+
 
 // Chunked polyfill for browsers without Intl support
 if (!window.Intl) {

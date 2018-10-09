@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/react-boilerplate/react-boilerplate-brand/master/assets/banner-metal-optimized.jpg" alt="react boilerplate banner" align="center" />
+<img src="https://user-images.githubusercontent.com/3495307/46663063-ca6df600-cbc5-11e8-8a77-d26ab7857f13.png" alt="react boilerplate typescript banner" align="center" />
 
 <br />
 

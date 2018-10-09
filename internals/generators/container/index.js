@@ -194,7 +194,7 @@ module.exports = {
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/types.d.ts',
-        templateFile: './containers/types.js.hbs',
+        templateFile: './container/types.js.hbs',
         abortOnFail: true,
       });
     }

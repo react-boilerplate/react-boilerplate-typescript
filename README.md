@@ -56,6 +56,8 @@ This fork is the typescript implementation of this awesome boilerplate with `str
 
 Boilerplate version: `3.6.0`
 
+`Boilerplate 3.7 is released and I will sync with it as soon as I can`
+
 Based on works of <a href="https://github.com/piotrwitek/react-redux-typescript-guide">react-typescript-guide</a> and <a href="https://github.com/StrikeForceZero/react-typescript-boilerplate"> typescript fork </a>(which was for previous versions)
 
 For details: [**Check Typescript docs**](docs/general/typescript.md)

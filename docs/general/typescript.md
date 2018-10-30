@@ -2,7 +2,7 @@
 
 Boilerplate in Typescript with `strict:true` flag on, for typescript lovers like me ;)
 
-Based on works of [react-typescript-guide] and <a href="https://github.com/StrikeForceZero/react-typescript-boilerplate"> typescript fork </a>(which was for previous versions)
+Based on the works of [react-typescript-guide] and <a href="https://github.com/StrikeForceZero/react-typescript-boilerplate"> typescript fork </a>(which was for previous versions)
 
 ### Key Notes
 

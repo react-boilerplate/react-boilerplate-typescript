@@ -18,12 +18,12 @@ export const theme = {
 const {
   default: styled,
   css,
-  injectGlobal,
+  createGlobalStyle,
   keyframes,
   ThemeProvider,
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<
   IThemeInterface
 >;
 
-export { css, injectGlobal, keyframes, ThemeProvider };
+export { css, createGlobalStyle, keyframes, ThemeProvider };
 export default styled;

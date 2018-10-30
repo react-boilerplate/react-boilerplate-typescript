@@ -10,7 +10,7 @@ const selectGlobal = (state: ApplicationRootState) => {
 };
 
 const selectRoute = (state: ApplicationRootState) => {
-  return state.route;
+  return state.router;
 };
 
 const makeSelectCurrentUser = () =>

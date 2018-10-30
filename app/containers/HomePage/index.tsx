@@ -146,6 +146,7 @@ const withConnect = connect(
 const withReducer = injectReducer<OwnProps>({ key: 'home', reducer: reducer });
 const withSaga = injectSaga<OwnProps>({ key: 'home', saga: saga });
 
+// tslint:disable-next-line:max-line-length
 // export default withReducer(withSaga(withConnect(HomePage))); // identical to compose function, but requires no type declaration
 export default compose<TReducer, TSaga, TConnect, ReturnType>(
   withReducer,

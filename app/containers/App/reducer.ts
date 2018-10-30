@@ -2,7 +2,7 @@ import { ContainerState, ContainerActions } from './types';
 import ActionTypes from './constants';
 
 // The initial state of the App
-const initialState: ContainerState = {
+export const initialState: ContainerState = {
   loading: false,
   error: false,
   currentUser: '',

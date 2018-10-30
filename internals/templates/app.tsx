@@ -6,15 +6,15 @@
  */
 
 // Needed for redux-saga es6 generator support
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 // Import all the third party stuff
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
-import createHistory from 'history/createBrowserHistory';
+import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
@@ -25,15 +25,12 @@ import LanguageProvider from 'containers/LanguageProvider';
 
 // Load the favicon and the .htaccess file
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
-import 'file-loader?name=[name].[ext]!./.htaccess'; // eslint-disable-line import/extensions
+import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
 
 import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from 'i18n';
-
-// Import CSS reset and Global Styles
-import './styles/global-styles';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -46,7 +43,6 @@ openSansObserver.load().then(() => {
 
 // Create redux store with history
 const initialState = {};
-const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app') as HTMLElement;
 
@@ -72,8 +68,6 @@ if (module.hot) {
     render(translationMessages, App);
   });
 }
-
-
 // Chunked polyfill for browsers without Intl support
 if (!window.Intl) {
   new Promise(resolve => {
@@ -84,7 +78,7 @@ if (!window.Intl) {
         import('intl/locale-data/jsonp/en.js'),
         import('intl/locale-data/jsonp/de.js'),
       ]),
-    )
+    ) // eslint-disable-line prettier/prettier
     .then(() => render(translationMessages))
     .catch(err => {
       throw err;

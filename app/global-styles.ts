@@ -1,7 +1,6 @@
-import { injectGlobal } from 'styles/styled-components';
+import { createGlobalStyle } from 'styles/styled-components';
 
-// tslint:disable-next-line:no-unused-expression
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   html,
   body {
     height: 100%;
@@ -28,3 +27,5 @@ injectGlobal`
     line-height: 1.5em;
   }
 `;
+
+export default GlobalStyle;

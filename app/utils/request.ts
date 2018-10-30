@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 
 export class ResponseError extends Error {
   public response: Response;
@@ -44,8 +43,7 @@ function checkStatus(response): Response {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url: string, options?: RequestInit): Promise<{ } | { err: ResponseError }> {
-  const f = window ? window.fetch : fetch;
-  return f(url, options)
+  return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
     .then((data) => (data))

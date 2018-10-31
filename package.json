@@ -129,6 +129,7 @@
     "@types/redux-devtools-dock-monitor": "^1.1.30",
     "@types/redux-devtools-log-monitor": "^1.0.30",
     "@types/sinon": "^5.0.1",
+    "@types/styled-components": "^4.0.3",
     "@types/systemjs": "^0.20.2",
     "@types/webpack": "^4.4.2",
     "@types/webpack-env": "^1.13.6",

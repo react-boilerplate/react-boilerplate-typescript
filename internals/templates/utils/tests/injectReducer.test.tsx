@@ -1,28 +1,34 @@
+import * as React from 'react';
+
 /**
  * Test injectors
  */
 
-import { memoryHistory } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { shallow } from 'enzyme';
-import React from 'react';
 import { identity } from 'lodash';
 
-import configureStore from '../../configureStore.ts';
-import injectReducer from '../injectReducer.tsx';
-import * as reducerInjectors from '../reducerInjectors.ts';
+import configureStore from '../../configureStore';
 
 // Fixtures
 const Component = () => null;
 
 const reducer = identity;
 
+const memoryHistory = createMemoryHistory();
+
 describe('injectReducer decorator', () => {
   let store;
   let injectors;
   let ComponentWithReducer;
+  let injectReducer;
 
   beforeAll(() => {
-    reducerInjectors.default = jest.fn().mockImplementation(() => injectors);
+    jest.mock('../reducerInjectors', () => ({
+      __esModule: true, // this property makes it work
+      default: jest.fn().mockImplementation(() => injectors),
+    }));
+    injectReducer = require('../injectReducer').default;
   });
 
   beforeEach(() => {
@@ -30,12 +36,12 @@ describe('injectReducer decorator', () => {
     injectors = {
       injectReducer: jest.fn(),
     };
-    ComponentWithReducer = injectReducer({ key: 'test', reducer })(Component);
-    reducerInjectors.default.mockClear();
+    ComponentWithReducer = injectReducer({ key: 'test', reducer: reducer })(Component);
+    jest.unmock('../reducerInjectors');
   });
 
   it('should inject a given reducer', () => {
-    shallow(<ComponentWithReducer />, { context: { store } });
+    shallow(<ComponentWithReducer />, { context: { store: store } });
 
     expect(injectors.injectReducer).toHaveBeenCalledTimes(1);
     expect(injectors.injectReducer).toHaveBeenCalledWith('test', reducer);
@@ -44,14 +50,14 @@ describe('injectReducer decorator', () => {
   it('should set a correct display name', () => {
     expect(ComponentWithReducer.displayName).toBe('withReducer(Component)');
     expect(
-      injectReducer({ key: 'test', reducer })(() => null).displayName,
+      injectReducer({ key: 'test', reducer: reducer })(() => null).displayName,
     ).toBe('withReducer(Component)');
   });
 
   it('should propagate props', () => {
     const props = { testProp: 'test' };
     const renderedComponent = shallow(<ComponentWithReducer {...props} />, {
-      context: { store },
+      context: { store: store },
     });
 
     expect(renderedComponent.prop('testProp')).toBe('test');

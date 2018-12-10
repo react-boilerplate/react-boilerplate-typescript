@@ -2,14 +2,17 @@
  * Test injectors
  */
 
-import { memoryHistory } from 'react-router-dom';
+import * as React from 'react';
+
 import { put } from 'redux-saga/effects';
 import { shallow } from 'enzyme';
-import React from 'react';
 
-import configureStore from '../../configureStore.ts';
-import injectSaga from '../injectSaga.tsx';
-import * as sagaInjectors from '../sagaInjectors.ts';
+
+import configureStore from '../../configureStore';
+import { createMemoryHistory } from 'history';
+import { DAEMON } from '../constants';
+
+const memoryHistory = createMemoryHistory();
 
 // Fixtures
 const Component = () => null;
@@ -22,9 +25,15 @@ describe('injectSaga decorator', () => {
   let store;
   let injectors;
   let ComponentWithSaga;
+  let injectSaga;
 
   beforeAll(() => {
-    sagaInjectors.default = jest.fn().mockImplementation(() => injectors);
+    jest.mock('../sagaInjectors', () => ({
+      __esModule: true,
+      default: jest.fn().mockImplementation(() => injectors),
+    }));
+
+    injectSaga = require('../injectSaga').default;
   });
 
   beforeEach(() => {
@@ -36,19 +45,19 @@ describe('injectSaga decorator', () => {
     ComponentWithSaga = injectSaga({
       key: 'test',
       saga: testSaga,
-      mode: 'testMode',
+      mode: DAEMON,
     })(Component);
-    sagaInjectors.default.mockClear();
+    jest.unmock('../sagaInjectors');
   });
 
   it('should inject given saga, mode, and props', () => {
     const props = { test: 'test' };
-    shallow(<ComponentWithSaga {...props} />, { context: { store } });
+    shallow(<ComponentWithSaga {...props} />, { context: { store: store } });
 
     expect(injectors.injectSaga).toHaveBeenCalledTimes(1);
     expect(injectors.injectSaga).toHaveBeenCalledWith(
       'test',
-      { saga: testSaga, mode: 'testMode' },
+      { saga: testSaga, mode: DAEMON },
       props,
     );
   });
@@ -56,7 +65,7 @@ describe('injectSaga decorator', () => {
   it('should eject on unmount with a correct saga key', () => {
     const props = { test: 'test' };
     const renderedComponent = shallow(<ComponentWithSaga {...props} />, {
-      context: { store },
+      context: { store: store },
     });
     renderedComponent.unmount();
 
@@ -74,7 +83,7 @@ describe('injectSaga decorator', () => {
   it('should propagate props', () => {
     const props = { testProp: 'test' };
     const renderedComponent = shallow(<ComponentWithSaga {...props} />, {
-      context: { store },
+      context: { store: store },
     });
 
     expect(renderedComponent.prop('testProp')).toBe('test');

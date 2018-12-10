@@ -27,4 +27,6 @@ export interface ApplicationRootState {
   readonly global: AppState;
   readonly language: ILanguageProviderProps;
   readonly home: HomeState;
+  // for testing purposes
+  readonly test: any;
 }

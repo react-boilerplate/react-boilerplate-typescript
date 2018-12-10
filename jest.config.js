@@ -1,4 +1,5 @@
 module.exports = {
+  preset: 'ts-jest/presets/js-with-babel',
   collectCoverageFrom: [
     'app/**/*.{js,jsx}',
     '!app/**/*.test.{js,jsx}',
@@ -15,6 +16,12 @@ module.exports = {
       lines: 98,
     },
   },
+  moduleFileExtensions: ['ts', 'tsx', 'js'],
+  globals: {
+    'ts-jest': {
+      tsConfig: 'tsconfig.json',
+    },
+  },
   moduleDirectories: ['node_modules', 'app'],
   moduleNameMapper: {
     '.*\\.(css|less|styl|scss|sass)$': '<rootDir>/internals/mocks/cssModule.js',
@@ -23,6 +30,6 @@ module.exports = {
   },
   setupTestFrameworkScriptFile: '<rootDir>/internals/testing/test-bundler.js',
   setupFiles: ['raf/polyfill', '<rootDir>/internals/testing/enzyme-setup.js'],
-  testRegex: 'tests/.*\\.test\\.js$',
+  // testRegex: 'tests/.*\\.test\\.js$',
   snapshotSerializers: ['enzyme-to-json/serializer'],
 };

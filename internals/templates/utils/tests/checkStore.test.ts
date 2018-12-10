@@ -2,7 +2,7 @@
  * Test injectors
  */
 
-import checkStore from '../checkStore.ts';
+import checkStore from '../checkStore';
 
 describe('checkStore', () => {
   let store;

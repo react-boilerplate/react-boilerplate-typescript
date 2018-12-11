@@ -1,7 +1,8 @@
-import invariant = require('invariant');
-import isEmpty = require('lodash/isEmpty');
-import isFunction = require('lodash/isFunction');
-import isString = require('lodash/isString');
+import invariant from 'invariant';
+import isEmpty from 'lodash/isEmpty';
+import isFunction from 'lodash/isFunction';
+import isString from 'lodash/isString';
+
 
 import checkStore from './checkStore';
 import createReducer from '../reducers';

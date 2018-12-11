@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import hoistNonReactStatics = require('hoist-non-react-statics');
+import hoistNonReactStatics from 'hoist-non-react-statics';
 import getInjectors from './reducerInjectors';
 import { InjectReducerParams } from 'types';
 

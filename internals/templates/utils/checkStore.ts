@@ -1,7 +1,7 @@
-import conformsTo = require('lodash/conformsTo');
-import isFunction = require('lodash/isFunction');
-import isObject = require('lodash/isObject');
-import invariant = require('invariant');
+import conformsTo from 'lodash/conformsTo';
+import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
+import invariant from 'invariant';
 
 /**
  * Validate the shape of redux store

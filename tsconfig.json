@@ -2,7 +2,7 @@
   "compilerOptions": {
     "noEmit": true,
     "target": "es6",
-    "module": "commonjs",
+    "module": "esnext", //commonjs destroys 'dynamic imports' which is used for code splitting
     "noImplicitAny": false,
     "preserveConstEnums": true,
     "typeRoots": ["node_modules/@types"],

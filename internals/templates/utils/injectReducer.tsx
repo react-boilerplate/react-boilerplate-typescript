@@ -15,7 +15,7 @@ import { InjectReducerParams } from 'types';
 export default function hocWithReducer<P>({ key, reducer }: InjectReducerParams) {
   function wrap(WrappedComponent: React.ComponentType<P>): React.ComponentType<P> {
     // dont wanna give access to HOC. Child only
-    class ReducerInjector extends React.Component {
+    class ReducerInjector extends React.Component<P> {
       public static WrappedComponent = WrappedComponent;
       public static contextTypes = {
         store: PropTypes.object.isRequired,

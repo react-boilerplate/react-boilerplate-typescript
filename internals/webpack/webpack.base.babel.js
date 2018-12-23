@@ -26,16 +26,17 @@ module.exports = options => ({
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: options.tsLoaders,
-      },
-      {
         test: /\.js$/, // Transform all .js files required somewhere with Babel
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: options.babelQuery,
         },
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: options.tsLoaders,
       },
       {
         // Preprocess our own .css files

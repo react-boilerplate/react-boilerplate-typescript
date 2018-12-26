@@ -36,7 +36,6 @@ import { RootState } from './types';
 // tslint:disable-next-line:no-empty-interface
 interface OwnProps {}
 
-// tslint:disable-next-line:no-empty-interface
 interface StateProps {
   loading: boolean;
   error: object | boolean;
@@ -45,12 +44,12 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  onChangeUsername(evt); // Not gonna declare event types here. No need. any is fine
-  onSubmitForm(evt?); // Not gonna declare event types here. No need. any is fine
+  onChangeUsername(evt: any): void; // Not gonna declare event types here. No need. any is fine
+  onSubmitForm(evt?: any): void; // Not gonna declare event types here. No need. any is fine
 }
 
 type Props = StateProps & DispatchProps & OwnProps;
-/* eslint-disable react/prefer-stateless-function */
+
 export class HomePage extends React.PureComponent<Props> {
   /**
    * when initial state username is not null, submit the form to load repos
@@ -146,15 +145,8 @@ const withConnect = connect(
 const withReducer = injectReducer<OwnProps>({ key: 'home', reducer: reducer });
 const withSaga = injectSaga<OwnProps>({ key: 'home', saga: saga });
 
-// tslint:disable-next-line:max-line-length
-// export default withReducer(withSaga(withConnect(HomePage))); // identical to compose function, but requires no type declaration
-export default compose<TReducer, TSaga, TConnect, ReturnType>(
+export default compose(
   withReducer,
   withSaga,
   withConnect,
 )(HomePage);
-
-type ReturnType = React.ComponentType<OwnProps>;
-type TReducer = ReturnType;
-type TSaga = ReturnType;
-type TConnect = typeof HomePage;

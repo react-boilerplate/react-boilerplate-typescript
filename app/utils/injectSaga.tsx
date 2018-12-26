@@ -22,7 +22,7 @@ export default function hocWithSaga<P>({ key, saga, mode }: InjectSagaParams) {
     WrappedComponent: React.ComponentType<P>,
   ): React.ComponentType<P> {
     // dont wanna give access to HOC. Child only
-    class InjectSaga extends React.Component {
+    class InjectSaga extends React.Component<P> {
       public static WrappedComponent = WrappedComponent;
       public static contextTypes = {
         store: PropTypes.object.isRequired,

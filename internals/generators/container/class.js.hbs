@@ -89,8 +89,7 @@ const withConnect = connect(null, mapDispatchToProps);
 const withSaga = injectSaga<OwnProps>({ key: '{{ camelCase name }}', saga: saga });
 {{/if}}
 
-// export default withReducer(withSaga(withConnect({{ properCase name }}))); // identical to compose function, but requires no explicit type declaration
-export default compose<TReducer, TSaga, TConnect, ReturnType>(
+export default compose(
 {{#if wantActionsAndReducer}}
   withReducer,
 {{/if}}
@@ -99,8 +98,3 @@ export default compose<TReducer, TSaga, TConnect, ReturnType>(
 {{/if}}
   withConnect,
 )({{ properCase name }});
-
-type ReturnType = React.ComponentType<OwnProps>;
-type TReducer = ReturnType;
-type TSaga = ReturnType;
-type TConnect = typeof {{ properCase name }};

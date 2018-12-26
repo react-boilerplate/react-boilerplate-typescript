@@ -25,7 +25,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  onLocaleToggle(evt);
+  onLocaleToggle(evt: any): void;
   dispatch: Dispatch;
 }
 

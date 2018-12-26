@@ -69,7 +69,7 @@ if (module.hot) {
   });
 }
 // Chunked polyfill for browsers without Intl support
-if (!window.Intl) {
+if (!(window as any).Intl) {
   new Promise(resolve => {
     resolve(import('intl'));
   })

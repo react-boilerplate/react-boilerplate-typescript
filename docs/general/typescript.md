@@ -8,6 +8,27 @@ Based on the works of [react-typescript-guide] and <a href="https://github.com/S
 
 **Styled Components:** To be able to type styled components you must import from `styles/styled-components` instead of `styled-components` directly. Exports are explicitly typed.
 
+**css modules:** CSS modules with typescript require slightly more work than regular CSS.  Details are here: https://medium.com/@sapegin/css-modules-with-typescript-and-webpack-6b221ebe5f10.  TL;DR version, if you want to use CSS modules, in internals/webpack/webpack.base.babel.js:L47 replace 
+
+        use: ['style-loader', 'css-loader'],
+
+with 
+
+        use: [
+          'style-loader',
+          {
+            loader: 'typings-for-css-modules-loader',
+            options: {
+              modules: true,
+              namedExport: true
+            }
+          },
+        ],
+        
+To tell webpack to ignore the generated css.d.ts files, add the following to the plugins section on line 132
+
+        new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
+
 **Immutable.js:** Immutable data structers are removed and state is held with normal js objects. Typescript provides compile-time immutability with `readonly` interfaces. Type-safety with `immutable.js` is unnecessarily complicated in this case.
 
 **Saga/Reducer Injectors:** Only the containers props are exported explicity and for simplicity even though it was enhanced with injector components. I see no use in accessing their props.

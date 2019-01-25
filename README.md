@@ -58,6 +58,9 @@ Boilerplate version: `3.7.0`
 
 Based on the works of <a href="https://github.com/piotrwitek/react-redux-typescript-guide">react-typescript-guide</a> and <a href="https://github.com/StrikeForceZero/react-typescript-boilerplate"> typescript fork </a>(which was for previous versions)
 
+Project built with this, as an advanced example and guide: [Web Application](https://github.com/International-Slackline-Association/Rankings-UI)
+
+
 For details: [**Check Typescript docs**](docs/general/typescript.md)
 
 ---

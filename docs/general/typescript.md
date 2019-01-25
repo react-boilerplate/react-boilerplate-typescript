@@ -4,6 +4,8 @@ Boilerplate in Typescript with `strict:true` flag on, for typescript lovers like
 
 Based on the works of [react-typescript-guide] and <a href="https://github.com/StrikeForceZero/react-typescript-boilerplate"> typescript fork </a>(which was for previous versions)
 
+Check the [web application](https://github.com/International-Slackline-Association/Rankings-UI) to see the boilerplate in action and see how to use the typescript in this boilerplate in a more advanced way. 
+
 ### Key Notes
 
 **Styled Components:** To be able to type styled components you must import from `styles/styled-components` instead of `styled-components` directly. Exports are explicitly typed.

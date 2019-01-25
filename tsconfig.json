@@ -31,5 +31,6 @@
     "removeComments": true,
     "sourceMap": true
   },
+  "include": ["app/**/*"],
   "exclude": ["node_modules"]
 }

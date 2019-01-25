@@ -46,6 +46,9 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write"
   },
+  "eslintIgnore": [
+    "**/*.ts"
+  ],
   "lint-staged": {
     "*.js": [
       "npm run lint:eslint:fix",

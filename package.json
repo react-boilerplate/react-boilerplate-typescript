@@ -47,7 +47,8 @@
     "prettify": "prettier --write"
   },
   "eslintIgnore": [
-    "**/*.ts"
+    "**/*.ts",
+    "**/*.tsx"
   ],
   "lint-staged": {
     "*.js": [

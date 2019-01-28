@@ -248,18 +248,11 @@ const withReducer = injectReducer<OwnProps>({ key: 'home', reducer: reducer });
 // Explicitly restrict props to this components props after injection. There is no use accessing saga injector props. 
 const withSaga = injectSaga<OwnProps>({ key: 'home', saga: saga });
 
-// export default withReducer(withSaga(withConnect(HomePage))); // identical to compose function, but requires no type declaration
-export default compose<TReducer, TSaga, TConnect, ReturnType>(
+export default compose(
   withReducer,
   withSaga,
   withConnect,
 )(HomePage);
-
-// compose doesn't infer types. As mentioned, composed component will only export OwnProps to outside, so mark them as ReturnType here.
-type ReturnType = React.ComponentType<OwnProps>;
-type TReducer = ReturnType;
-type TSaga = ReturnType;
-type TConnect = typeof HomePage;
 
 
 ```

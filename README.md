@@ -63,6 +63,9 @@ Project built with this, as an advanced example and guide: [Web Application](htt
 
 For details: [**Check Typescript docs**](docs/general/typescript.md)
 
+How to deploy to s3 automatically: [**S3 deployment script**](docs/general/deployment-s3.md)
+
+
 ---
 
 ## Features

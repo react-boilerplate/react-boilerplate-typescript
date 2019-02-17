@@ -68,7 +68,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.0.0",
-    "chalk": "2.4.1",
+    "chalk": "^2.4.1",
     "compression": "1.7.3",
     "connected-react-router": "4.5.0",
     "cross-env": "5.2.0",
@@ -95,8 +95,8 @@
     "reselect": "4.0.0",
     "sanitize.css": "4.1.0",
     "styled-components": "4.0.2",
-    "warning": "4.0.2",
-    "typesafe-actions": "^2.0.4"
+    "typesafe-actions": "^2.0.4",
+    "warning": "4.0.2"
   },
   "devDependencies": {
     "@babel/cli": "7.1.2",
@@ -183,7 +183,7 @@
     "react-app-polyfill": "0.1.3",
     "react-test-renderer": "16.6.0",
     "rimraf": "2.6.2",
-    "shelljs": "0.8.2",
+    "shelljs": "^0.8.2",
     "style-loader": "0.23.1",
     "stylelint": "9.6.0",
     "stylelint-config-recommended": "2.1.0",

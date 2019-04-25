@@ -1,12 +1,12 @@
 module.exports = {
   preset: 'ts-jest/presets/js-with-babel',
   collectCoverageFrom: [
-    'app/**/*.{js,jsx}',
-    '!app/**/*.test.{js,jsx}',
-    '!app/*/RbGenerated*/*.{js,jsx}',
+    'app/**/*.{js,jsx,ts,tsx}',
+    '!app/**/*.test.{js,jsx,ts,tsx}',
+    '!app/*/RbGenerated*/*.{js,jsx,ts,tsx}',
     '!app/app.js',
     '!app/global-styles.js',
-    '!app/*/*/Loadable.{js,jsx}',
+    '!app/*/*/Loadable.{js,jsx,ts,tsx}',
   ],
   coverageThreshold: {
     global: {
@@ -30,6 +30,5 @@ module.exports = {
   },
   setupTestFrameworkScriptFile: '<rootDir>/internals/testing/test-bundler.js',
   setupFiles: ['raf/polyfill', '<rootDir>/internals/testing/enzyme-setup.js'],
-  // testRegex: 'tests/.*\\.test\\.js$',
   snapshotSerializers: ['enzyme-to-json/serializer'],
 };

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import hoistNonReactStatics from 'hoist-non-react-statics';
+import { ReactReduxContext } from 'react-redux';
 
 import getInjectors from './sagaInjectors';
-import { InjectSagaParams } from 'types';
+import { InjectSagaParams, LifeStore } from 'types';
 
 /**
  * Dynamically injects a saga, passes component's props as saga arguments
@@ -24,26 +24,25 @@ export default function hocWithSaga<P>({ key, saga, mode }: InjectSagaParams) {
     // dont wanna give access to HOC. Child only
     class InjectSaga extends React.Component<P> {
       public static WrappedComponent = WrappedComponent;
-      public static contextTypes = {
-        store: PropTypes.object.isRequired,
-      };
+
+      public static contextType = ReactReduxContext;
+      public injectors: any;
+
       public static displayName = `withSaga(${WrappedComponent.displayName ||
         WrappedComponent.name ||
         'Component'})`;
 
-      public componentWillMount() {
-        const { injectSaga } = this.injectors;
+      constructor(props: any, context: any) {
+        super(props, context);
 
-        injectSaga(key, { saga: saga, mode: mode }, this.props);
+        this.injectors = getInjectors(context.store);
+
+        this.injectors.injectSaga(key, { saga: saga, mode: mode }, this.props);
       }
 
       public componentWillUnmount() {
-        const { ejectSaga } = this.injectors;
-
-        ejectSaga(key);
+        this.injectors.ejectSaga(key);
       }
-
-      public injectors = getInjectors(this.context.store);
 
       public render() {
         return <WrappedComponent {...this.props} />;
@@ -54,3 +53,17 @@ export default function hocWithSaga<P>({ key, saga, mode }: InjectSagaParams) {
   }
   return wrap;
 }
+
+const useInjectSaga = ({ key, saga, mode }: InjectSagaParams) => {
+  const context = React.useContext(ReactReduxContext);
+  React.useEffect(() => {
+    const injectors = getInjectors(context.store as LifeStore);
+    injectors.injectSaga(key, { saga: saga, mode: mode });
+
+    return () => {
+      injectors.ejectSaga(key);
+    };
+  }, []);
+};
+
+export { useInjectSaga };

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import hoistNonReactStatics from 'hoist-non-react-statics';
+import { ReactReduxContext } from 'react-redux';
+
 import getInjectors from './reducerInjectors';
-import { InjectReducerParams } from 'types';
+import { InjectReducerParams, LifeStore } from 'types';
 
 /**
  * Dynamically injects a reducer
@@ -12,25 +13,25 @@ import { InjectReducerParams } from 'types';
  *
  */
 
-export default function hocWithReducer<P>({ key, reducer }: InjectReducerParams) {
-  function wrap(WrappedComponent: React.ComponentType<P>): React.ComponentType<P> {
+export default function hocWithReducer<P>({
+  key,
+  reducer,
+}: InjectReducerParams) {
+  function wrap(
+    WrappedComponent: React.ComponentType<P>,
+  ): React.ComponentType<P> {
     // dont wanna give access to HOC. Child only
     class ReducerInjector extends React.Component<P> {
       public static WrappedComponent = WrappedComponent;
-      public static contextTypes = {
-        store: PropTypes.object.isRequired,
-      };
       public static displayName = `withReducer(${WrappedComponent.displayName ||
         WrappedComponent.name ||
         'Component'})`;
 
-      public componentWillMount() {
-        const { injectReducer } = this.injectors;
+      constructor(props: any, context: any) {
+        super(props, context);
 
-        injectReducer(key, reducer);
+        getInjectors(context.store).injectReducer(key, reducer);
       }
-
-      public injectors = getInjectors(this.context.store);
 
       public render() {
         return <WrappedComponent {...this.props} />;
@@ -41,3 +42,12 @@ export default function hocWithReducer<P>({ key, reducer }: InjectReducerParams)
   }
   return wrap;
 }
+
+const useInjectReducer = ({ key, reducer }: InjectReducerParams) => {
+  const context = React.useContext(ReactReduxContext);
+  React.useEffect(() => {
+    getInjectors(context.store as LifeStore).injectReducer(key, reducer);
+  }, []);
+};
+
+export { useInjectReducer };

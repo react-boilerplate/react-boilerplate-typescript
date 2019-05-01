@@ -28,7 +28,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-const App: React.SFC<{}> = () => {
+export default function App() {
   return (
     <AppWrapper>
       <Helmet
@@ -47,6 +47,4 @@ const App: React.SFC<{}> = () => {
       <GlobalStyle />
     </AppWrapper>
   );
-};
-
-export default App;
+}

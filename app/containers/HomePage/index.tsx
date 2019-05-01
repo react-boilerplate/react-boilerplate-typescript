@@ -4,15 +4,15 @@
  * This is the first thing users see of our App, at the '/' route
  */
 
-import * as React from 'react';
+import React, { useEffect, memo } from 'react';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose, Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import injectReducer from 'utils/injectReducer';
-import injectSaga from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
 import {
   makeSelectRepos,
   makeSelectLoading,
@@ -50,67 +50,70 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps & OwnProps;
 
-export class HomePage extends React.PureComponent<Props> {
+const key = 'home';
+
+export function HomePage(props: Props) {
+  useInjectReducer({ key: key, reducer: reducer });
+  useInjectSaga({ key: key, saga: saga });
+
   /**
    * when initial state username is not null, submit the form to load repos
    */
-  public componentDidMount() {
-    if (this.props.username && this.props.username.trim().length > 0) {
-      this.props.onSubmitForm();
+  useEffect(() => {
+    // When initial state username is not null, submit the form to load repos
+    if (props.username && props.username.trim().length > 0) {
+      props.onSubmitForm();
     }
-  }
+  }, []);
 
-  public render() {
-    const { loading, error, repos } = this.props;
-    const reposListProps = {
-      loading: loading,
-      error: error,
-      repos: repos,
-    };
+  const reposListProps = {
+    loading: props.loading,
+    error: props.error,
+    repos: props.repos,
+  };
 
-    return (
-      <article>
-        <Helmet>
-          <title>Home Page</title>
-          <meta
-            name="description"
-            content="A React.js Boilerplate application homepage"
-          />
-        </Helmet>
-        <div>
-          <CenteredSection>
-            <H2>
-              <FormattedMessage {...messages.startProjectHeader} />
-            </H2>
-            <p>
-              <FormattedMessage {...messages.startProjectMessage} />
-            </p>
-          </CenteredSection>
-          <Section>
-            <H2>
-              <FormattedMessage {...messages.trymeHeader} />
-            </H2>
-            <Form onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
-                <FormattedMessage {...messages.trymeMessage} />
-                <AtPrefix>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </AtPrefix>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="mxstbr"
-                  value={this.props.username}
-                  onChange={this.props.onChangeUsername}
-                />
-              </label>
-            </Form>
-            <ReposList {...reposListProps} />
-          </Section>
-        </div>
-      </article>
-    );
-  }
+  return (
+    <article>
+      <Helmet>
+        <title>Home Page</title>
+        <meta
+          name="description"
+          content="A React.js Boilerplate application homepage"
+        />
+      </Helmet>
+      <div>
+        <CenteredSection>
+          <H2>
+            <FormattedMessage {...messages.startProjectHeader} />
+          </H2>
+          <p>
+            <FormattedMessage {...messages.startProjectMessage} />
+          </p>
+        </CenteredSection>
+        <Section>
+          <H2>
+            <FormattedMessage {...messages.trymeHeader} />
+          </H2>
+          <Form onSubmit={props.onSubmitForm}>
+            <label htmlFor="username">
+              <FormattedMessage {...messages.trymeMessage} />
+              <AtPrefix>
+                <FormattedMessage {...messages.trymeAtPrefix} />
+              </AtPrefix>
+              <Input
+                id="username"
+                type="text"
+                placeholder="mxstbr"
+                value={props.username}
+                onChange={props.onChangeUsername}
+              />
+            </label>
+          </Form>
+          <ReposList {...reposListProps} />
+        </Section>
+      </div>
+    </article>
+  );
 }
 
 // Map Disptach to your DispatchProps
@@ -142,11 +145,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer<OwnProps>({ key: 'home', reducer: reducer });
-const withSaga = injectSaga<OwnProps>({ key: 'home', saga: saga });
-
 export default compose(
-  withReducer,
-  withSaga,
   withConnect,
+  memo,
 )(HomePage);

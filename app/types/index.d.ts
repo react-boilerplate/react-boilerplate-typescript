@@ -4,10 +4,10 @@ import { ILanguageProviderProps } from 'containers/LanguageProvider';
 import { ContainerState as AppState } from 'containers/App/types';
 import { ContainerState as HomeState } from 'containers/HomePage/types';
 
-export interface LifeStore extends Store<{}> {
-  injectedReducers?: any;
-  injectedSagas?: any;
-  runSaga(saga: () => IterableIterator<any>, args: any): any;
+export interface LifeStore extends Store {
+  injectedReducers: any;
+  injectedSagas: any;
+  runSaga(saga: (() => IterableIterator<any>) | undefined, args: any | undefined): any;
 }
 
 export interface InjectReducerParams {

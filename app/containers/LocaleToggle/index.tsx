@@ -28,27 +28,27 @@ interface DispatchProps {
   onLocaleToggle(evt: any): void;
   dispatch: Dispatch;
 }
-
 type Props = StateProps & DispatchProps & OwnProps;
 
-export class LocaleToggle extends React.PureComponent<Props> {
-  // eslint-disable-line react/prefer-stateless-function
-  public render() {
-    return (
-      <Wrapper>
-        <Toggle
-          value={this.props.locale}
-          values={appLocales}
-          messages={messages}
-          onToggle={this.props.onLocaleToggle}
-        />
-      </Wrapper>
-    );
-  }
+export function LocaleToggle(props: Props) {
+  return (
+    <Wrapper>
+      <Toggle
+        value={props.locale}
+        values={appLocales}
+        messages={messages}
+        onToggle={props.onLocaleToggle}
+      />
+    </Wrapper>
+  );
 }
-const mapStateToProps = createSelector(makeSelectLocale(), locale => ({
-  locale: locale,
-}));
+
+const mapStateToProps = createSelector(
+  makeSelectLocale(),
+  locale => ({
+    locale: locale,
+  }),
+);
 
 export function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
   return {

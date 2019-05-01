@@ -3,21 +3,25 @@
  * LanguageProvider reducer
  *
  */
+import ActionTypes from './constants';
+import { ContainerState, ContainerActions } from './types';
+import { DEFAULT_LOCALE } from '../../i18n';
 
-import { CHANGE_LOCALE } from './constants';
-import { DEFAULT_LOCALE } from 'i18n';
-
-export const initialState = {
+export const initialState: ContainerState = {
   locale: DEFAULT_LOCALE,
 };
 
-function languageProviderReducer(state = initialState, action) {
+function languageProviderReducer(
+  state: ContainerState = initialState,
+  action: ContainerActions,
+): ContainerState {
   switch (action.type) {
-    case CHANGE_LOCALE:
-      return { locale: action.locale };
+    case ActionTypes.CHANGE_LOCALE:
+      return {
+        locale: action.payload,
+      };
     default:
       return state;
   }
 }
-
 export default languageProviderReducer;

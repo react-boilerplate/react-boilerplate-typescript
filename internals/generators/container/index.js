@@ -8,17 +8,6 @@ module.exports = {
   description: 'Add a container component',
   prompts: [
     {
-      type: 'list',
-      name: 'type',
-      message: 'Select the base component type:',
-      default: 'Stateless Function',
-      choices: () => [
-        'Stateless Function',
-        'React.PureComponent',
-        'React.Component',
-      ],
-    },
-    {
       type: 'input',
       name: 'name',
       message: 'What should it be called?',
@@ -32,6 +21,12 @@ module.exports = {
 
         return 'The name is required';
       },
+    },
+    {
+      type: 'confirm',
+      name: 'memo',
+      default: false,
+      message: 'Do you want to wrap your component in React.memo?',
     },
     {
       type: 'confirm',
@@ -60,36 +55,18 @@ module.exports = {
     },
     {
       type: 'confirm',
-      name: 'wantLoadable',
-      default: true,
-      message: 'Do you want to load resources asynchronously?',
-    },
-    {
-      type: 'confirm',
       name: 'wantTypes',
       default: true,
-      message: 'Do you want to have types.d.ts file',
+      message: 'Do you want to have types.d.ts file?',
     },
   ],
   actions: data => {
     // Generate index.js and index.test.js
-    var componentTemplate; // eslint-disable-line no-var
-
-    switch (data.type) {
-      case 'Stateless Function': {
-        componentTemplate = './container/stateless.js.hbs';
-        break;
-      }
-      default: {
-        componentTemplate = './container/class.js.hbs';
-      }
-    }
-
     const actions = [
       {
         type: 'add',
         path: '../../app/containers/{{properCase name}}/index.tsx',
-        templateFile: componentTemplate,
+        templateFile: './container/index.js.hbs',
         abortOnFail: true,
       },
       {

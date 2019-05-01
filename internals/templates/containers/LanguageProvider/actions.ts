@@ -4,11 +4,8 @@
  *
  */
 
-import { CHANGE_LOCALE } from './constants';
+import ActionTypes from './constants';
+import { action } from 'typesafe-actions';
 
-export function changeLocale(languageLocale) {
-  return {
-    type: CHANGE_LOCALE,
-    locale: languageLocale,
-  };
-}
+export const changeLocale = (languageLocale: string) =>
+  action(ActionTypes.CHANGE_LOCALE, languageLocale);

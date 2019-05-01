@@ -12,17 +12,6 @@ module.exports = {
   description: 'Add an unconnected component',
   prompts: [
     {
-      type: 'list',
-      name: 'type',
-      message: 'Select the type of component',
-      default: 'Stateless Function',
-      choices: () => [
-        'Stateless Function',
-        'React.PureComponent',
-        'React.Component',
-      ],
-    },
-    {
       type: 'input',
       name: 'name',
       message: 'What should it be called?',
@@ -39,6 +28,12 @@ module.exports = {
     },
     {
       type: 'confirm',
+      name: 'memo',
+      default: false,
+      message: 'Do you want to wrap your component in React.memo?',
+    },
+    {
+      type: 'confirm',
       name: 'wantMessages',
       default: true,
       message: 'Do you want i18n messages (i.e. will this component use text)?',
@@ -52,23 +47,11 @@ module.exports = {
   ],
   actions: data => {
     // Generate index.js and index.test.js
-    let componentTemplate;
-
-    switch (data.type) {
-      case 'Stateless Function': {
-        componentTemplate = './component/stateless.js.hbs';
-        break;
-      }
-      default: {
-        componentTemplate = './component/class.js.hbs';
-      }
-    }
-
     const actions = [
       {
         type: 'add',
         path: '../../app/components/{{properCase name}}/index.tsx',
-        templateFile: componentTemplate,
+        templateFile: './component/index.js.hbs',
         abortOnFail: true,
       },
       {

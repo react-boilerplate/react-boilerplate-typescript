@@ -4,8 +4,11 @@
  *
  */
 
+{{#if memo}}
+import React, { memo } from 'react';
+{{else}}
 import React from 'react';
-import PropTypes from 'prop-types';
+{{/if}}
 import { connect } from 'react-redux';
 {{#if wantHeaders}}
 import { Helmet } from 'react-helmet';
@@ -13,15 +16,43 @@ import { Helmet } from 'react-helmet';
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
 {{/if}}
+
+{{#if wantSaga}}
+import { useInjectSaga } from 'utils/injectSaga';
+{{/if}}
 {{#if wantActionsAndReducer}}
+import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import makeSelect{{properCase name}} from './selectors';
+import reducer from './reducer';
+import { compose, Dispatch } from 'redux';
+{{/if}}
+{{#if wantSaga}}
+import saga from './saga';
 {{/if}}
 {{#if wantMessages}}
 import messages from './messages';
 {{/if}}
 
-export class {{ properCase name }} extends React.{{{ component }}} {
+import { RootState } from './types';
+
+interface OwnProps {}
+
+interface StateProps {}
+
+interface DispatchProps {
+  dispatch: Dispatch;
+}
+
+type Props = StateProps & DispatchProps & OwnProps;
+
+export function {{ properCase name }}(props: Props) {
+  {{#if wantActionsAndReducer}}
+  useInjectReducer({ key: '{{ camelCase name }}', reducer: reducer });
+  {{/if}}
+  {{#if wantSaga}}
+  useInjectSaga({ key: '{{ camelCase name }}', saga: reducer });
+  {{/if}}
   render() {
     return (
       <div>
@@ -42,24 +73,33 @@ export class {{ properCase name }} extends React.{{{ component }}} {
   }
 }
 
-{{ properCase name }}.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
-
 {{#if wantActionsAndReducer}}
-const mapStateToProps = createStructuredSelector({
+// Map RootState to your StateProps
+const mapStateToProps = createStructuredSelector<RootState, StateProps>({
   {{camelCase name}}: makeSelect{{properCase name}}(),
 });
+
 {{/if}}
 
-function mapDispatchToProps(dispatch) {
+// Map Disptach to your DispatchProps
+function mapDispatchToProps(
+  dispatch: Dispatch,
+  ownProps: OwnProps,
+): DispatchProps {
   return {
-    dispatch,
+    dispatch: dispatch
   };
 }
 
 {{#if wantActionsAndReducer}}
-export default connect(mapStateToProps, mapDispatchToProps)({{ properCase name }});
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 {{else}}
-export default connect(null, mapDispatchToProps)({{ properCase name }});
+const withConnect = connect(null, mapDispatchToProps);
 {{/if}}
+
+export default compose(
+  withConnect,
+{{#if memo}}
+  memo,
+{{/if}}
+)({{ properCase name }});

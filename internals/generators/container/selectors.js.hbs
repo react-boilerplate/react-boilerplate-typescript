@@ -8,7 +8,7 @@ import { initialState } from './reducer';
  */
 
 const select{{ properCase name }}Domain = (state: ApplicationRootState) => {
-  return state ? state : initialState;
+  return state || initialState;
 };
 
 /**

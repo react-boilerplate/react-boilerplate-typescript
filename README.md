@@ -54,7 +54,7 @@
 
 This fork is the typescript implementation of this awesome boilerplate with `strict:true` flag.
 
-Boilerplate version: `3.7.0` (**UPDATING TO 4.0.0 SOON!**)
+Boilerplate version: `4.0.0`
 
 Based on the works of <a href="https://github.com/piotrwitek/react-redux-typescript-guide">react-typescript-guide</a> and <a href="https://github.com/StrikeForceZero/react-typescript-boilerplate"> typescript fork </a>(which was for previous versions)
 

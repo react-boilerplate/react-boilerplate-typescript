@@ -69,12 +69,12 @@ module.exports = {
         templateFile: './container/index.js.hbs',
         abortOnFail: true,
       },
-      {
-        type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/index.test.ts',
-        templateFile: './container/test.js.hbs',
-        abortOnFail: true,
-      },
+      // {
+      //   type: 'add',
+      //   path: '../../app/containers/{{properCase name}}/tests/index.test.ts',
+      //   templateFile: './container/test.js.hbs',
+      //   abortOnFail: true,
+      // },
     ];
 
     // If component wants messages

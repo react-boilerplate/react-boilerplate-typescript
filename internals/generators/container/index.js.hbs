@@ -16,7 +16,7 @@ import { Helmet } from 'react-helmet';
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
 {{/if}}
-
+import { compose, Dispatch } from 'redux';
 {{#if wantSaga}}
 import { useInjectSaga } from 'utils/injectSaga';
 {{/if}}
@@ -25,7 +25,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import makeSelect{{properCase name}} from './selectors';
 import reducer from './reducer';
-import { compose, Dispatch } from 'redux';
+import { RootState } from './types';
 {{/if}}
 {{#if wantSaga}}
 import saga from './saga';
@@ -34,7 +34,6 @@ import saga from './saga';
 import messages from './messages';
 {{/if}}
 
-import { RootState } from './types';
 
 interface OwnProps {}
 
@@ -51,26 +50,24 @@ export function {{ properCase name }}(props: Props) {
   useInjectReducer({ key: '{{ camelCase name }}', reducer: reducer });
   {{/if}}
   {{#if wantSaga}}
-  useInjectSaga({ key: '{{ camelCase name }}', saga: reducer });
+  useInjectSaga({ key: '{{ camelCase name }}', saga: saga });
   {{/if}}
-  render() {
-    return (
-      <div>
-      {{#if wantHeaders}}
-        <Helmet>
-          <title>{{properCase name}}</title>
-          <meta
-            name="description"
-            content="Description of {{properCase name}}"
-          />
-        </Helmet>
-      {{/if}}
-      {{#if wantMessages}}
-        <FormattedMessage {...messages.header} />
-      {{/if}}
-      </div>
-    );
-  }
+  return (
+    <div>
+    {{#if wantHeaders}}
+      <Helmet>
+        <title>{{properCase name}}</title>
+        <meta
+          name="description"
+          content="Description of {{properCase name}}"
+        />
+      </Helmet>
+    {{/if}}
+    {{#if wantMessages}}
+      <FormattedMessage {...messages.header} />
+    {{/if}}
+    </div>
+  );
 }
 
 {{#if wantActionsAndReducer}}

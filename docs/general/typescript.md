@@ -36,7 +36,7 @@ To tell webpack to ignore the generated css.d.ts files, add the following to the
 
 **Type-safety:** Follow [react-typescript-guide] rules and tips for maintaining type safety through out the layers
 
-**Webpack:** awesome-typescript-loader is used with babel. However, styled-components transformer is used with plug-in instead of [babel plugin] due to the [discussion]
+**Webpack:** `ts-loader` with parallel type checker is used to maximize the typescript transpiling speed. 
 
 > Most of the components are not explicitly typed, especially their props are marked as any. The type-safety logic is same across the whole project, so, I only restricted and declared types for HomePage container to set an example. You can apply the same logic to all the components etc...
 
@@ -45,8 +45,6 @@ To tell webpack to ignore the generated css.d.ts files, add the following to the
 ### Todo
 
 - Test configuration / test files generation
-- Setting `noImplicitAny` to `false`
-- Improve typings of sagas
 
 ## Code Examples with Typescript
 

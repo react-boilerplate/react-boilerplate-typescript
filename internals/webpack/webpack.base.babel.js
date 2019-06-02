@@ -5,6 +5,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 module.exports = options => ({
   mode: options.mode,
   entry: options.entry,
@@ -28,7 +30,7 @@ module.exports = options => ({
         },
       },
       {
-        test: /\.tsx?$/,
+        test: /\.ts(x?)$/,
         exclude: /node_modules/,
         use: options.tsLoaders,
       },
@@ -119,6 +121,7 @@ module.exports = options => ({
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
+    new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
   ]),
   resolve: {
     modules: ['node_modules', 'app'],

@@ -23,14 +23,12 @@ module.exports = require('./webpack.base.babel')({
   },
 
   tsLoaders: [
+    { loader: 'babel-loader' },
     {
-      loader: 'awesome-typescript-loader',
+      loader: 'ts-loader',
       options: {
-        useBabel: true,
-        babelOptions: {
-          babelrc: true,
-        },
-        useCache: false,
+        transpileOnly: true, // fork-ts-checker-webpack-plugin is used for type checking
+        logLevel: 'info',
       },
     },
   ],

@@ -47,7 +47,7 @@ export default function configureStore(initialState = {}, history) {
     createReducer(),
     initialState,
     composeEnhancers(...enhancers),
-  ) as LifeStore; // FIX: disable any
+  ) as LifeStore;
 
   // Extensions
   store.runSaga = sagaMiddleware.run;

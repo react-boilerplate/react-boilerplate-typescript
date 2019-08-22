@@ -1,8 +1,8 @@
 import * as React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { ReactReduxContext } from 'react-redux';
+import { useStore } from 'react-redux';
 
-import getInjectors from './reducerInjectors';
+import { getInjectors } from './reducerInjectors';
 import { InjectReducerParams, LifeStore } from 'types';
 
 /**
@@ -44,9 +44,9 @@ export default function hocWithReducer<P>({
 }
 
 const useInjectReducer = ({ key, reducer }: InjectReducerParams) => {
-  const context = React.useContext(ReactReduxContext);
+  const store = useStore() as LifeStore;
   React.useEffect(() => {
-    getInjectors(context.store as LifeStore).injectReducer(key, reducer);
+    getInjectors(store).injectReducer(key, reducer);
   }, []);
 };
 

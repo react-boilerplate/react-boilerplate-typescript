@@ -5,9 +5,13 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 
 import configureStore from '../../configureStore';
+import { getInjectors } from '../reducerInjectors';
+
+jest.mock('../reducerInjectors');
+
 import { useInjectReducer } from '../injectReducer';
 
 // Fixtures
@@ -21,15 +25,15 @@ const memoryHistory = createMemoryHistory();
 
 describe('injectReducer decorator', () => {
   let store;
-  let injectors;
   let ComponentWithReducer;
   let injectReducer;
+  let injectors;
 
   beforeAll(() => {
-    jest.mock('../reducerInjectors', () => ({
-      __esModule: true, // this property makes it work
-      default: jest.fn().mockImplementation(() => injectors),
-    }));
+    const mockedGetInjectors = (getInjectors as unknown) as jest.Mock<
+      typeof getInjectors
+    >; // compiler doesn't know that it's mocked. So manually cast it.
+    mockedGetInjectors.mockImplementation(() => injectors);
     injectReducer = require('../injectReducer').default;
   });
 
@@ -83,17 +87,15 @@ describe('useInjectReducer hook', () => {
   let store;
   let injectors;
   let ComponentWithReducer;
-  // let injectReducer;
 
   beforeAll(() => {
     injectors = {
       injectReducer: jest.fn(),
     };
-    jest.mock('../reducerInjectors', () => ({
-      __esModule: true, // this property makes it work
-      default: jest.fn().mockImplementation(() => injectors),
-    }));
-    // injectReducer = require('../injectReducer').default;
+    const mockedGetInjectors = (getInjectors as unknown) as jest.Mock<
+      typeof getInjectors
+    >; // compiler doesn't know that it's mocked. So manually cast it.
+    mockedGetInjectors.mockImplementation(() => injectors);
 
     store = configureStore({}, memoryHistory);
     ComponentWithReducer = () => {
@@ -104,7 +106,7 @@ describe('useInjectReducer hook', () => {
 
   it('should inject a given reducer', () => {
     render(
-      // tslint:disable-next-line:jsx-wrap-multiline
+      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <ComponentWithReducer />
       </Provider>,

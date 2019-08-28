@@ -2,15 +2,18 @@
  * Test injectors
  */
 
-import * as React from 'react';
-
 import { put } from 'redux-saga/effects';
-import { shallow } from 'enzyme';
-
+import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
+import React from 'react';
+import { Provider } from 'react-redux';
 
 import configureStore from '../../configureStore';
+import injectSaga, { useInjectSaga } from '../injectSaga';
+import { getInjectors } from '../sagaInjectors';
+
+
 import { createMemoryHistory } from 'history';
-import { DAEMON } from '../constants';
 
 const memoryHistory = createMemoryHistory();
 
@@ -21,19 +24,17 @@ function* testSaga() {
   yield put({ type: 'TEST', payload: 'yup' });
 }
 
+jest.mock('../sagaInjectors');
 describe('injectSaga decorator', () => {
   let store;
   let injectors;
   let ComponentWithSaga;
-  let injectSaga;
 
   beforeAll(() => {
-    jest.mock('../sagaInjectors', () => ({
-      __esModule: true,
-      default: jest.fn().mockImplementation(() => injectors),
-    }));
-
-    injectSaga = require('../injectSaga').default;
+    const mockedGetInjectors = (getInjectors as unknown) as jest.Mock<
+      typeof getInjectors
+    >; // compiler doesn't know that it's mocked. So manually cast it.
+    mockedGetInjectors.mockImplementation(() => injectors);
   });
 
   beforeEach(() => {
@@ -45,28 +46,35 @@ describe('injectSaga decorator', () => {
     ComponentWithSaga = injectSaga({
       key: 'test',
       saga: testSaga,
-      mode: DAEMON,
+      mode: 'testMode',
     })(Component);
-    jest.unmock('../sagaInjectors');
   });
 
   it('should inject given saga, mode, and props', () => {
     const props = { test: 'test' };
-    shallow(<ComponentWithSaga {...props} />, { context: { store: store } });
+    renderer.create(
+      // tslint:disable-next-line: jsx-wrap-multiline
+      <Provider store={store}>
+        <ComponentWithSaga {...props} />
+      </Provider>,
+    );
 
     expect(injectors.injectSaga).toHaveBeenCalledTimes(1);
     expect(injectors.injectSaga).toHaveBeenCalledWith(
       'test',
-      { saga: testSaga, mode: DAEMON },
+      { saga: testSaga, mode: 'testMode' },
       props,
     );
   });
 
   it('should eject on unmount with a correct saga key', () => {
     const props = { test: 'test' };
-    const renderedComponent = shallow(<ComponentWithSaga {...props} />, {
-      context: { store: store },
-    });
+    const renderedComponent = renderer.create(
+      // tslint:disable-next-line: jsx-wrap-multiline
+      <Provider store={store}>
+        <ComponentWithSaga {...props} />
+      </Provider>,
+    );
     renderedComponent.unmount();
 
     expect(injectors.ejectSaga).toHaveBeenCalledTimes(1);
@@ -82,10 +90,73 @@ describe('injectSaga decorator', () => {
 
   it('should propagate props', () => {
     const props = { testProp: 'test' };
-    const renderedComponent = shallow(<ComponentWithSaga {...props} />, {
-      context: { store: store },
-    });
+    const renderedComponent = renderer.create(
+      // tslint:disable-next-line: jsx-wrap-multiline
+      <Provider store={store}>
+        <ComponentWithSaga {...props} />
+      </Provider>,
+    );
+    const {
+      props: { children },
+    } = renderedComponent.getInstance();
+    expect(children.props).toEqual(props);
+  });
+});
 
-    expect(renderedComponent.prop('testProp')).toBe('test');
+describe('useInjectSaga hook', () => {
+  let store;
+  let injectors;
+  let ComponentWithSaga;
+
+  beforeAll(() => {
+    const mockedGetInjectors = (getInjectors as unknown) as jest.Mock<
+      typeof getInjectors
+    >; // compiler doesn't know that it's mocked. So manually cast it.
+    mockedGetInjectors.mockImplementation(() => injectors);  });
+
+  beforeEach(() => {
+    store = configureStore({}, memoryHistory);
+    injectors = {
+      injectSaga: jest.fn(),
+      ejectSaga: jest.fn(),
+    };
+    ComponentWithSaga = () => {
+      useInjectSaga({
+        key: 'test',
+        saga: testSaga,
+        mode: 'testMode',
+      });
+      return null;
+    };
+  });
+
+  it('should inject given saga and mode', () => {
+    const props = { test: 'test' };
+    render(
+      // tslint:disable-next-line: jsx-wrap-multiline
+      <Provider store={store}>
+        <ComponentWithSaga {...props} />
+      </Provider>,
+    );
+
+    expect(injectors.injectSaga).toHaveBeenCalledTimes(1);
+    expect(injectors.injectSaga).toHaveBeenCalledWith('test', {
+      saga: testSaga,
+      mode: 'testMode',
+    });
+  });
+
+  it('should eject on unmount with a correct saga key', () => {
+    const props = { test: 'test' };
+    const { unmount } = render(
+      // tslint:disable-next-line: jsx-wrap-multiline
+      <Provider store={store}>
+        <ComponentWithSaga {...props} />
+      </Provider>,
+    );
+    unmount();
+
+    expect(injectors.ejectSaga).toHaveBeenCalledTimes(1);
+    expect(injectors.ejectSaga).toHaveBeenCalledWith('test');
   });
 });

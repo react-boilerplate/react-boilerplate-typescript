@@ -8,7 +8,7 @@ import createReducer from '../reducers';
 import { LifeStore } from 'types';
 import { Reducer } from 'redux';
 
-export function injectReducerFactory(store: LifeStore, isValid: boolean) {
+export function injectReducerFactory(store: LifeStore, isValid: boolean = false) {
   return function injectReducer(key: string, reducer: Reducer<object>) {
     if (!isValid) {
       checkStore(store);
@@ -33,7 +33,7 @@ export function injectReducerFactory(store: LifeStore, isValid: boolean) {
   };
 }
 
-export default function getInjectors(store: LifeStore) {
+export function getInjectors(store: LifeStore) {
   checkStore(store);
 
   return {

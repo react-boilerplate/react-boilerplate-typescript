@@ -32,7 +32,7 @@ const checkDescriptor = (descriptor: SagaDescriptor) => {
   );
 };
 
-export function injectSagaFactory(store: LifeStore, isValid: boolean) {
+export function injectSagaFactory(store: LifeStore, isValid: boolean = false) {
   return function injectSaga(
     key: string,
     descriptor: SagaDescriptor = {},
@@ -76,7 +76,7 @@ export function injectSagaFactory(store: LifeStore, isValid: boolean) {
   };
 }
 
-export function ejectSagaFactory(store: LifeStore, isValid: boolean) {
+export function ejectSagaFactory(store: LifeStore, isValid: boolean = false) {
   return function ejectSaga(key: string) {
     if (!isValid) {
       checkStore(store);
@@ -98,7 +98,7 @@ export function ejectSagaFactory(store: LifeStore, isValid: boolean) {
   };
 }
 
-export default function getInjectors(store: LifeStore) {
+export function getInjectors(store: LifeStore) {
   checkStore(store);
 
   return {

@@ -3,7 +3,7 @@
   "rules": {
     "semicolon": [true, "always", "ignore-bound-class-methods"],
     "interface-name": false,
-    "object-literal-shorthand": [true, "never"],
+    "object-literal-shorthand": [false, "never"],
     "indent": [true, "spaces"],
     "quotemark": [true, "single", "jsx-double"],
     "no-var-requires": false,

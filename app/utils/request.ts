@@ -7,7 +7,6 @@ export class ResponseError extends Error {
     this.response = response;
   }
 }
-
 /**
  * Parses the JSON returned by a network request
  *
@@ -16,6 +15,9 @@ export class ResponseError extends Error {
  * @return {object}          The parsed JSON from the request
  */
 function parseJSON(response) {
+  if (response.status === 204 || response.status === 205) {
+    return null;
+  }
   return response.json();
 }
 
@@ -26,12 +28,14 @@ function parseJSON(response) {
  *
  * @return {object|undefined} Returns either the response, or throws an error
  */
-function checkStatus(response): Response {
+function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
 
-  throw new ResponseError(response);
+  const error = new ResponseError(response.statusText);
+  error.response = response;
+  throw error;
 }
 
 /**
@@ -40,12 +44,10 @@ function checkStatus(response): Response {
  * @param  {string} url       The URL we want to request
  * @param  {object} [options] The options we want to pass to "fetch"
  *
- * @return {object}           An object containing either "data" or "err"
+ * @return {object}           The response data
  */
-export default function request(url: string, options?: RequestInit): Promise<{ } | { err: ResponseError }> {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then((data) => (data))
-    .catch((err) => (err));
+export default async function request(url: string, options?: RequestInit): Promise<{ } | { err: ResponseError }> {
+  const fetchResponse = await fetch(url, options);
+  const response = await checkStatus(fetchResponse);
+  return parseJSON(response);
 }

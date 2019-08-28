@@ -9,6 +9,7 @@ import { LifeStore } from 'types';
 import { Reducer } from 'redux';
 
 export function injectReducerFactory(store: LifeStore, isValid: boolean = false) {
+  // tslint:disable-next-line: only-arrow-functions
   return function injectReducer(key: string, reducer: Reducer<object>) {
     if (!isValid) {
       checkStore(store);

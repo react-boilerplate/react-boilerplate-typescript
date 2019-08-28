@@ -33,6 +33,7 @@ const checkDescriptor = (descriptor: SagaDescriptor) => {
 };
 
 export function injectSagaFactory(store: LifeStore, isValid: boolean) {
+  // tslint:disable-next-line: only-arrow-functions
   return function injectSaga(
     key: string,
     descriptor: SagaDescriptor = {},
@@ -77,6 +78,7 @@ export function injectSagaFactory(store: LifeStore, isValid: boolean) {
 }
 
 export function ejectSagaFactory(store: LifeStore, isValid: boolean) {
+  // tslint:disable-next-line: only-arrow-functions
   return function ejectSaga(key: string) {
     if (!isValid) {
       checkStore(store);

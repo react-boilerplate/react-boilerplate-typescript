@@ -12,11 +12,11 @@ import A from './A';
 import StyledButton from './StyledButton';
 import Wrapper from './Wrapper';
 
-interface Props {
-  handleRoute();
-  href: string;
-  onClick();
-  children: ReactNode;
+export interface Props {
+  handleRoute?(): void;
+  href?: string;
+  onClick?(): void;
+  children?: ReactNode;
 }
 function Button(props: Props) {
   // Render an anchor tag

@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReposList /> should render the loading indicator when its loading 1`] = `
+<div
+  class="sc-bwzfXH bycCir"
+>
+  <ul
+    class="sc-bdVaJa kjaCOS"
+  >
+    <div
+      class="sc-ifAKCX jcAqoe"
+    >
+      <div
+        class="sc-iwsKbI dPWiyi"
+      />
+      <div
+        class="sc-gZMcBi ebtRmY"
+      />
+      <div
+        class="sc-gqjmRU cTErFR"
+      />
+      <div
+        class="sc-VigVT dFmMlF"
+      />
+      <div
+        class="sc-jTzLTM enuhco"
+      />
+      <div
+        class="sc-fjdhpX jNqnwR"
+      />
+      <div
+        class="sc-jzJRlG fEFjAE"
+      />
+      <div
+        class="sc-cSHVUG Hyerz"
+      />
+      <div
+        class="sc-kAzzGY hOJQGd"
+      />
+      <div
+        class="sc-chPdSV kNRVZc"
+      />
+      <div
+        class="sc-kgoBCf jBYbkL"
+      />
+      <div
+        class="sc-kGXeez klHZt"
+      />
+    </div>
+  </ul>
+</div>
+`;
+
+exports[`<ReposList /> should render the repositories if loading was successful 1`] = `
+<div
+  class="sc-bwzfXH bycCir"
+>
+  <ul
+    class="sc-bdVaJa kjaCOS"
+  >
+    <li
+      class="sc-bxivhb cHNIkg"
+    >
+      <div
+        class="sc-htpNat cdjzok"
+      >
+        <div
+          class="sc-dnqmqq hIJpCG"
+        >
+          <a
+            class="sc-bZQynM sc-htoDjs zeaOm"
+            href="https://github.com/react-boilerplate/react-boilerplate"
+            target="_blank"
+          >
+            react-boilerplate
+          </a>
+          <a
+            class="sc-bZQynM sc-gzVnrw XFJuy"
+            href="https://github.com/react-boilerplate/react-boilerplate/issues"
+            target="_blank"
+          >
+            <svg
+              class="sc-EHOje bDxpQi"
+              height="1em"
+              width="0.875em"
+            >
+              <path
+                d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7S10.14 13.7 7 13.7 1.3 11.14 1.3 8s2.56-5.7 5.7-5.7m0-1.3C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7S10.86 1 7 1z m1 3H6v5h2V4z m0 6H6v2h2V10z"
+              />
+            </svg>
+            <span>
+              20
+            </span>
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+`;

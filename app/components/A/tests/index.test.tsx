@@ -13,7 +13,7 @@ const renderComponent = (props = {}) => {
   const utils = render(
     <A href={href} {...props}>{children}</A>,
   );
-  const link = utils.container.querySelector('a');
+  const link = utils.container.querySelector('a')!;
   return { ...utils, link };
 };
 
@@ -30,7 +30,7 @@ describe('<A />', () => {
 
   it('should have children', () => {
     const { link } = renderComponent();
-    expect(link!.children).toHaveLength(1);
+    expect(link.children).toHaveLength(1);
   });
 
   it('should have a class attribute', () => {

@@ -23,6 +23,11 @@ exports[`<Footer /> should render and match the snapshot 1`] = `
         >
           en
         </option>
+        <option
+          value="de"
+        >
+          de
+        </option>
       </select>
     </div>
   </section>

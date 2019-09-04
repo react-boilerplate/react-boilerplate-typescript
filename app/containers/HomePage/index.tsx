@@ -7,7 +7,7 @@
 import React, { useEffect, memo } from 'react';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { compose, Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -31,45 +31,47 @@ import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { RootState } from './types';
-
-// tslint:disable-next-line:no-empty-interface
-interface OwnProps {}
-
-interface StateProps {
-  loading: boolean;
-  error: object | boolean;
-  repos: object[] | boolean;
-  username: string;
-}
-
-interface DispatchProps {
-  onChangeUsername(evt: any): void; // Not gonna declare event types here. No need. any is fine
-  onSubmitForm(evt?: any): void; // Not gonna declare event types here. No need. any is fine
-}
-
-type Props = StateProps & DispatchProps & OwnProps;
 
 const key = 'home';
 
-export function HomePage(props: Props) {
+const stateSelector = createStructuredSelector({
+  repos: makeSelectRepos(),
+  username: makeSelectUsername(),
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
+});
+
+export default function HomePage() {
+  const { repos, username, loading, error } = useSelector(stateSelector);
+
+  const dispatch = useDispatch();
+
+  // Not gonna declare event types here. No need. any is fine
+  const onChangeUsername = (evt: any) => dispatch(changeUsername(evt.target.value));
+  const onSubmitForm = (evt?: any) => {
+    if (evt !== undefined && evt.preventDefault) {
+      evt.preventDefault();
+    }
+    if (!username) {
+      return;
+    }
+    dispatch(loadRepos());
+  };
+
   useInjectReducer({ key: key, reducer: reducer });
   useInjectSaga({ key: key, saga: saga });
 
-  /**
-   * when initial state username is not null, submit the form to load repos
-   */
   useEffect(() => {
     // When initial state username is not null, submit the form to load repos
-    if (props.username && props.username.trim().length > 0) {
-      props.onSubmitForm();
+    if (username && username.trim().length > 0) {
+      onSubmitForm();
     }
   }, []);
 
   const reposListProps = {
-    loading: props.loading,
-    error: props.error,
-    repos: props.repos,
+    loading: loading,
+    error: error,
+    repos: repos,
   };
 
   return (
@@ -94,7 +96,7 @@ export function HomePage(props: Props) {
           <H2>
             <FormattedMessage {...messages.trymeHeader} />
           </H2>
-          <Form onSubmit={props.onSubmitForm}>
+          <Form onSubmit={onSubmitForm}>
             <label htmlFor="username">
               <FormattedMessage {...messages.trymeMessage} />
               <AtPrefix>
@@ -104,8 +106,8 @@ export function HomePage(props: Props) {
                 id="username"
                 type="text"
                 placeholder="mxstbr"
-                value={props.username}
-                onChange={props.onChangeUsername}
+                value={username}
+                onChange={onChangeUsername}
               />
             </label>
           </Form>
@@ -115,37 +117,3 @@ export function HomePage(props: Props) {
     </article>
   );
 }
-
-// Map Disptach to your DispatchProps
-export function mapDispatchToProps(
-  dispatch: Dispatch,
-  ownProps: OwnProps,
-): DispatchProps {
-  return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: evt => {
-      if (evt !== undefined && evt.preventDefault) {
-        evt.preventDefault();
-      }
-      dispatch(loadRepos());
-    },
-  };
-}
-
-// Map RootState to your StateProps
-const mapStateToProps = createStructuredSelector<RootState, StateProps>({
-  repos: makeSelectRepos(),
-  username: makeSelectUsername(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
-});
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(
-  withConnect,
-  memo,
-)(HomePage);

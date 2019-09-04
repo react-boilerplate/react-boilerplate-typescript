@@ -4,8 +4,8 @@
  * Lists the name and the issue count of a repository
  */
 
-import * as React from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { connect, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedNumber } from 'react-intl';
 
@@ -17,27 +17,25 @@ import RepoLink from './RepoLink';
 import Wrapper from './Wrapper';
 import { RootState } from 'containers/App/types';
 
-
 interface OwnProps {
   item: any; // Too many fields.
-}
-
-interface StateProps {
-  currentUser: string;
 }
 
 // tslint:disable-next-line:no-empty-interface
 interface DispatchProps {}
 
-type Props = StateProps & DispatchProps & OwnProps;
+type Props = DispatchProps & OwnProps;
+const stateSelector = createStructuredSelector({
+  currentUser: makeSelectCurrentUser(),
+});
 
-export function RepoListItem(props: Props) {
-  const { item } = props;
+export default function RepoListItem({ item }: Props) {
+  const { currentUser } = useSelector(stateSelector);
   let nameprefix = '';
 
   // If the repository is owned by a different person than we got the data for
   // it's a fork and we should show the name of the owner
-  if (item.owner.login !== props.currentUser) {
+  if (item.owner.login !== currentUser) {
     nameprefix = `${item.owner.login}/`;
   }
 
@@ -57,9 +55,3 @@ export function RepoListItem(props: Props) {
   // Render the content into a list item
   return <ListItem key={`repo-list-item-${item.full_name}`} item={content} />;
 }
-
-export default connect(
-  createStructuredSelector<RootState, StateProps>({
-    currentUser: makeSelectCurrentUser(),
-  }),
-)(RepoListItem);

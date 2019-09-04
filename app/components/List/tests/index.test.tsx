@@ -5,7 +5,7 @@ import List from '../index';
 
 describe('<List />', () => {
   it('should render the passed component if no items are passed', () => {
-    const component = () => <li>test</li>; // eslint-disable-line react/prop-types
+    const component = () => <li>test</li>;
     const { queryByText } = render(<List component={component} />);
     expect(queryByText('test')).toBeInTheDocument();
   });
@@ -13,7 +13,7 @@ describe('<List />', () => {
   it('should pass all items props to rendered component', () => {
     const items = [{ id: 1, name: 'Hello' }, { id: 2, name: 'World' }];
 
-    const component = ({ item }) => <li>{item.name}</li>; // eslint-disable-line react/prop-types
+    const component = ({ item }) => <li>{item.name}</li>;
 
     const { container, queryByText } = render(
       <List items={items} component={component} />,

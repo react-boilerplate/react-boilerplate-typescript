@@ -6,7 +6,6 @@ import {
   makeSelectRepos,
   makeSelectLocation,
 } from '../selectors';
-import { ApplicationRootState } from 'types';
 
 describe('selectGlobal', () => {
   it('should select the global state', () => {

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styles/styled-components';
 import NormalA from 'components/A';
 
 const A = styled(NormalA)`

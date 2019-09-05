@@ -4,7 +4,7 @@ import { ContainerState as LanguageProviderState } from 'containers/LanguageProv
 import { ContainerState as AppState } from 'containers/App/types';
 import { ContainerState as HomeState } from 'containers/HomePage/types';
 
-export interface LifeStore extends Store {
+export interface InjectedStore extends Store {
   injectedReducers: any;
   injectedSagas: any;
   runSaga(saga: (() => IterableIterator<any>) | undefined, args: any | undefined): any;

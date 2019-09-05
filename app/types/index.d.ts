@@ -7,7 +7,10 @@ import { ContainerState as HomeState } from 'containers/HomePage/types';
 export interface InjectedStore extends Store {
   injectedReducers: any;
   injectedSagas: any;
-  runSaga(saga: (() => IterableIterator<any>) | undefined, args: any | undefined): any;
+  runSaga(
+    saga: (() => IterableIterator<any>) | undefined,
+    args: any | undefined,
+  ): any;
 }
 
 export interface InjectReducerParams {

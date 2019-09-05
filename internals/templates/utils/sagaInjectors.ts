@@ -6,7 +6,7 @@ import isString from 'lodash/isString';
 
 import checkStore from './checkStore';
 import { DAEMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from './constants';
-import { LifeStore } from 'types';
+import { InjectedStore } from 'types';
 
 const allowedModes = [RESTART_ON_REMOUNT, DAEMON, ONCE_TILL_UNMOUNT];
 
@@ -32,7 +32,7 @@ const checkDescriptor = (descriptor: SagaDescriptor) => {
   );
 };
 
-export function injectSagaFactory(store: LifeStore, isValid: boolean) {
+export function injectSagaFactory(store: InjectedStore, isValid: boolean = false) {
   // tslint:disable-next-line: only-arrow-functions
   return function injectSaga(
     key: string,
@@ -77,7 +77,7 @@ export function injectSagaFactory(store: LifeStore, isValid: boolean) {
   };
 }
 
-export function ejectSagaFactory(store: LifeStore, isValid: boolean) {
+export function ejectSagaFactory(store: InjectedStore, isValid: boolean = false) {
   // tslint:disable-next-line: only-arrow-functions
   return function ejectSaga(key: string) {
     if (!isValid) {
@@ -100,7 +100,7 @@ export function ejectSagaFactory(store: LifeStore, isValid: boolean) {
   };
 }
 
-export default function getInjectors(store: LifeStore) {
+export function getInjectors(store: InjectedStore) {
   checkStore(store);
 
   return {

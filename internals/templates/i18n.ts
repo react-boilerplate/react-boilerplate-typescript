@@ -33,7 +33,7 @@ export const formatTranslationMessages = (locale, messages) => {
       !messages[key] && locale !== DEFAULT_LOCALE
         ? defaultFormattedMessages[key]
         : messages[key];
-    return {...formattedMessages,  [key]: formattedMessage};
+    return { ...formattedMessages, [key]: formattedMessage };
   };
   return Object.keys(messages).reduce(flattenFormattedMessages, {});
 };

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { ReactReduxContext } from 'react-redux';
+import { useStore } from 'react-redux';
 
-import getInjectors from './sagaInjectors';
-import { InjectSagaParams, LifeStore } from 'types';
+import { getInjectors } from './sagaInjectors';
+import { InjectSagaParams, InjectedStore } from 'types';
 
 /**
  * Dynamically injects a saga, passes component's props as saga arguments
@@ -25,7 +25,7 @@ export default function hocWithSaga<P>({ key, saga, mode }: InjectSagaParams) {
     class InjectSaga extends React.Component<P> {
       public static WrappedComponent = WrappedComponent;
 
-      public static contextType = ReactReduxContext;
+      // public static contextType = ReactReduxContext;
       public injectors: any;
 
       public static displayName = `withSaga(${WrappedComponent.displayName ||
@@ -55,9 +55,9 @@ export default function hocWithSaga<P>({ key, saga, mode }: InjectSagaParams) {
 }
 
 const useInjectSaga = ({ key, saga, mode }: InjectSagaParams) => {
-  const context = React.useContext(ReactReduxContext);
+  const store = useStore() as InjectedStore;
   React.useEffect(() => {
-    const injectors = getInjectors(context.store as LifeStore);
+    const injectors = getInjectors(store);
     injectors.injectSaga(key, { saga: saga, mode: mode });
 
     return () => {

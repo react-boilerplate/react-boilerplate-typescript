@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
-import { LifeStore } from 'types';
+import { InjectedStore } from 'types';
 
 declare interface IWindow extends Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any; // redux-dev-tools definitions not needed
@@ -47,7 +47,7 @@ export default function configureStore(initialState = {}, history) {
     createReducer(),
     initialState,
     composeEnhancers(...enhancers),
-  ) as LifeStore; // FIX: disable any
+  ) as InjectedStore;
 
   // Extensions
   store.runSaga = sagaMiddleware.run;

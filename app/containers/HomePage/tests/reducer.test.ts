@@ -2,7 +2,6 @@ import homeReducer from '../reducer';
 import { changeUsername } from '../actions';
 import { ContainerState } from '../types';
 
-/* eslint-disable default-case, no-param-reassign */
 describe('homeReducer', () => {
   let state: ContainerState;
   beforeEach(() => {

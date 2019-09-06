@@ -13,7 +13,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-/* eslint-disable react/prefer-stateless-function */
 export default function HomePage() {
   return (
     <h1>

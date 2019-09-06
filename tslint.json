@@ -1,6 +1,7 @@
 {
   "extends": ["tslint:latest", "tslint-react", "tslint-react-hooks"],
   "rules": {
+    "no-empty-interface": false,
     "jsx-no-lambda": false,
     "semicolon": [true, "always", "ignore-bound-class-methods"],
     "interface-name": false,

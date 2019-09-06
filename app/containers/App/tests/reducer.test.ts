@@ -2,7 +2,6 @@ import appReducer from '../reducer';
 import { loadRepos, reposLoaded, repoLoadingError } from '../actions';
 import { ContainerState } from '../types';
 
-/* eslint-disable default-case, no-param-reassign */
 describe('appReducer', () => {
   let state: ContainerState;
   beforeEach(() => {

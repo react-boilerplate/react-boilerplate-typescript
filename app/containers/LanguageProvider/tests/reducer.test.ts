@@ -1,7 +1,6 @@
 import languageProviderReducer from '../reducer';
 import ActionTypes from '../constants';
 
-/* eslint-disable default-case, no-param-reassign */
 describe('languageProviderReducer', () => {
   it('returns the initial state', () => {
     expect(languageProviderReducer(undefined, {} as any)).toEqual({

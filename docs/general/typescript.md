@@ -1,10 +1,17 @@
 ## Typescript
 
-Boilerplate in Typescript with `strict:true` flag on, for typescript lovers like me ;)
+**Fully-featured** `react-boilerplate` in Typescript, for typescript lovers like me ;)
 
-Based on the works of [react-typescript-guide] and <a href="https://github.com/StrikeForceZero/react-typescript-boilerplate"> typescript fork </a>(which was for previous versions)
+Most of the practices in here follows this great guide -> [react-typescript-guide]
 
-Check the [web application](https://github.com/International-Slackline-Association/Rankings-UI) to see the boilerplate in action and see how to use the typescript in this boilerplate in a more advanced way.
+**I highly suggest you to get familiar with it.**
+
+### Example Projects
+
+Check in-production examples built with this to see the boilerplate in action and see how to use typescript in a more advanced way
+
+- [Example 1 (in-production)](https://github.com/International-Slackline-Association/Rankings-UI) `(boilerplate version: 3)`
+- [Example 2 (in-production)](https://github.com/International-Slackline-Association/Web-Tools) `(boilerplate version: 4)`
 
 ### Key Notes
 
@@ -27,7 +34,6 @@ with
           },
         ],
 
-
 To tell webpack to ignore the generated css.d.ts files, add the following to the plugins section on line 132
 
         new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
@@ -36,15 +42,11 @@ To tell webpack to ignore the generated css.d.ts files, add the following to the
 
 **Type-safety:** Follow [react-typescript-guide] rules and tips for maintaining type safety through out the layers
 
-**Webpack:** `ts-loader` with parallel type checker is used to maximize the typescript transpiling speed. 
+**Webpack:** `ts-loader` with parallel type checker is used to maximize the typescript transpiling speed (also includes babel typescript plugin).
 
 > Most of the components are not explicitly typed, especially their props are marked as any. The type-safety logic is same across the whole project, so, I only restricted and declared types for HomePage container to set an example. You can apply the same logic to all the components etc...
 
-> All the test files are removed. Testing with jest is for now to-do
-
-### Todo
-
-- Test configuration / test files generation
+> Therefore, I suggest you to check the example projects
 
 ## Code Examples with Typescript
 
@@ -192,60 +194,22 @@ export default combineReducers<ContainerState, ContainerActions>({
 Declare types of all the props of this component
 
 ```typescript
-interface OwnProps {
+interface Props {
   a_internal_prop: string;
 }
 
-// Props that will be injected to this components from redux state
-interface StateProps {
-  username: string;
-}
-
-// Props that will be injected to this components from redux actions
-interface DispatchProps {
-  onSomeEvent();
-}
-
-// Component can access all of the injected props
-type Props = StateProps & DispatchProps & OwnProps;
 export function HomePage(props: Props) {
   // ...
 }
 ```
 
-Type-safe injectors
+Type-safe hooks are extremely straight forward and easy
 
 ```typescript
-// Map Disptach to your DispatchProps
-export function mapDispatchToProps(
-  dispatch: Dispatch,
-  ownProps: OwnProps,
-): DispatchProps {
-  return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: evt => dispatch(loadRepos()),
-  };
+export function HomePage(props: Props) {
+  const [someValue, setSomeValue] = useState<boolean>(true);
+  // ...
 }
-
-// Map RootState to your StateProps
-const mapStateToProps = createStructuredSelector<RootState, StateProps>({
-  // All the keys and values are type-safe
-  repos: makeSelectRepos(),
-  username: makeSelectUsername(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
-});
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-
-export default compose(
-  withConnect,
-  memo,
-)(HomePage);
 ```
 
 [react-typescript-guide]: https://github.com/piotrwitek/react-redux-typescript-guide

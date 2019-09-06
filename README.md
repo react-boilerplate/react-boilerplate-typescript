@@ -50,21 +50,23 @@
 </div>
 
 ---
-## Typescript
 
-This fork is the typescript implementation of this awesome boilerplate with `strict:true` flag.
+# Typescript
 
-Boilerplate version: `4.0.0`
+This fork is the **fully-featured** typescript implementation of [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate) with extra features and powers of `Typescript`
 
-Based on the works of <a href="https://github.com/piotrwitek/react-redux-typescript-guide">react-typescript-guide</a> and <a href="https://github.com/StrikeForceZero/react-typescript-boilerplate"> typescript fork </a>(which was for previous versions)
+Boilerplate version: `4.1`
 
-Project built with this, as an advanced example and guide: [Web Application](https://github.com/International-Slackline-Association/Rankings-UI)
+#### Brief Overview
 
+- Detailed documentation: [**Typescript docs**](docs/general/typescript.md)
 
-For details: [**Check Typescript docs**](docs/general/typescript.md)
+- Typescript practices heavily depends on the guide -> <a href="https://github.com/piotrwitek/react-redux-typescript-guide">react-typescript-guide</a>
 
-How to deploy to s3 automatically: [**S3 deployment script**](docs/general/deployment-s3.md)
-
+- My projects built with this boilerplate `(if you are looking for advanced examples)`:
+  - [Example 1 (in-production)](https://github.com/International-Slackline-Association/Rankings-UI) `(boilerplate version: 3)`
+  - [Example 2 (in-production)](https://github.com/International-Slackline-Association/Web-Tools) `(boilerplate version: 4)`
+- Want to deploy to AWS S3/CloudFront with a single script? -> [**S3 deployment script**](docs/general/deployment-s3.md)
 
 ---
 
@@ -152,7 +154,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
 
 ## Supporters
 

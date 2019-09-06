@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:latest", "tslint-react"],
+  "extends": ["tslint:latest", "tslint-react", "tslint-react-hooks"],
   "rules": {
     "jsx-no-lambda": false,
     "semicolon": [true, "always", "ignore-bound-class-methods"],

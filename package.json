@@ -198,6 +198,7 @@
     "tslint": "5.11.0",
     "tslint-loader": "3.5.4",
     "tslint-react": "4.0.0",
+    "tslint-react-hooks": "^2.2.1",
     "typescript": "3.5.1",
     "url-loader": "2.0.1",
     "webpack": "4.35.3",

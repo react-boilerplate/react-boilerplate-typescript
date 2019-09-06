@@ -16,7 +16,6 @@ type {{ properCase name }}Actions = ActionType<typeof actions>;
 {{/if}}
 
 /* --- EXPORTS --- */
-
 type RootState = ApplicationRootState;
 type ContainerState = {{ properCase name }}State;
 {{#if wantActionsAndReducer}}

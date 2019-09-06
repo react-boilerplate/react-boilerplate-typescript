@@ -19,10 +19,10 @@ const select{{ properCase name }}Domain = (state: ApplicationRootState) => {
  * Default selector used by {{ properCase name }}
  */
 
-const select{{ properCase name }} = () =>
+const makeSelect{{ properCase name }} = () =>
   createSelector(select{{ properCase name }}Domain, substate => {
     return substate;
   });
 
-export default select{{ properCase name }};
+export default makeSelect{{ properCase name }};
 export { select{{ properCase name }}Domain };

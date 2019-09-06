@@ -44,6 +44,12 @@ module.exports = {
       default: false,
       message: 'Do you want to load the component asynchronously?',
     },
+    {
+      type: 'confirm',
+      name: 'wantTests',
+      default: true,
+      message: 'Do you want tests?',
+    },
   ],
   actions: data => {
     // Generate index.js and index.test.js
@@ -51,23 +57,27 @@ module.exports = {
       {
         type: 'add',
         path: '../../app/components/{{properCase name}}/index.tsx',
-        templateFile: './component/index.js.hbs',
+        templateFile: './component/index.tsx.hbs',
         abortOnFail: true,
-      },
-      // {
-      //   type: 'add',
-      //   path: '../../app/components/{{properCase name}}/tests/index.test.ts',
-      //   templateFile: './component/test.js.hbs',
-      //   abortOnFail: true,
-      // },
+      }
     ];
+
+    // If they want tests
+    if (data.wantTests) {
+      actions.push({
+        type: 'add',
+        path: '../../app/components/{{properCase name}}/tests/index.test.tsx',
+        templateFile: './component/test.tsx.hbs',
+        abortOnFail: true,
+      });
+    }
 
     // If they want a i18n messages file
     if (data.wantMessages) {
       actions.push({
         type: 'add',
         path: '../../app/components/{{properCase name}}/messages.ts',
-        templateFile: './component/messages.js.hbs',
+        templateFile: './component/messages.ts.hbs',
         abortOnFail: true,
       });
     }
@@ -77,11 +87,12 @@ module.exports = {
       actions.push({
         type: 'add',
         path: '../../app/components/{{properCase name}}/Loadable.ts',
-        templateFile: './component/loadable.js.hbs',
+        templateFile: './component/loadable.ts.hbs',
         abortOnFail: true,
       });
     }
-
+    // If want Loadable.js to load the component asynchronously
+  
     actions.push({
       type: 'prettify',
       path: '/components/',

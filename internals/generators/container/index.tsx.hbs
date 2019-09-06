@@ -9,23 +9,24 @@ import React, { memo } from 'react';
 {{else}}
 import React from 'react';
 {{/if}}
-import { connect } from 'react-redux';
 {{#if wantHeaders}}
 import { Helmet } from 'react-helmet';
 {{/if}}
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
 {{/if}}
-import { compose, Dispatch } from 'redux';
+{{#if wantActionsAndReducer}}
+import { useSelector, useDispatch } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+{{/if}}
+
 {{#if wantSaga}}
 import { useInjectSaga } from 'utils/injectSaga';
 {{/if}}
 {{#if wantActionsAndReducer}}
 import { useInjectReducer } from 'utils/injectReducer';
-import { createStructuredSelector } from 'reselect';
 import makeSelect{{properCase name}} from './selectors';
 import reducer from './reducer';
-import { RootState } from './types';
 {{/if}}
 {{#if wantSaga}}
 import saga from './saga';
@@ -34,23 +35,26 @@ import saga from './saga';
 import messages from './messages';
 {{/if}}
 
+{{#if wantActionsAndReducer}}
+const stateSelector = createStructuredSelector({
+  {{camelCase name}}: makeSelect{{properCase name}}(),
+});
+{{/if}}
 
-interface OwnProps {}
+interface Props {}
 
-interface StateProps {}
-
-interface DispatchProps {
-  dispatch: Dispatch;
-}
-
-type Props = StateProps & DispatchProps & OwnProps;
-
-export function {{ properCase name }}(props: Props) {
+function {{ properCase name }}(props: Props) {
   {{#if wantActionsAndReducer}}
+  // Warning: Add your key to RootState in types/index.d.ts file
   useInjectReducer({ key: '{{ camelCase name }}', reducer: reducer });
   {{/if}}
   {{#if wantSaga}}
   useInjectSaga({ key: '{{ camelCase name }}', saga: saga });
+  {{/if}}
+
+  {{#if wantActionsAndReducer}}
+  const { {{camelCase name}} } = useSelector(stateSelector);
+  const dispatch = useDispatch();
   {{/if}}
   return (
     <div>
@@ -70,33 +74,8 @@ export function {{ properCase name }}(props: Props) {
   );
 }
 
-{{#if wantActionsAndReducer}}
-// Map RootState to your StateProps
-const mapStateToProps = createStructuredSelector<RootState, StateProps>({
-  {{camelCase name}}: makeSelect{{properCase name}}(),
-});
-
-{{/if}}
-
-// Map Disptach to your DispatchProps
-function mapDispatchToProps(
-  dispatch: Dispatch,
-  ownProps: OwnProps,
-): DispatchProps {
-  return {
-    dispatch: dispatch
-  };
-}
-
-{{#if wantActionsAndReducer}}
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-{{else}}
-const withConnect = connect(null, mapDispatchToProps);
-{{/if}}
-
-export default compose(
-  withConnect,
 {{#if memo}}
-  memo,
+export default memo({{ properCase name }});
+{{else}}
+export default {{ properCase name }};
 {{/if}}
-)({{ properCase name }});

@@ -7,11 +7,18 @@ module.exports = {
       },
     ],
     '@babel/preset-react',
+    '@babel/typescript',
   ],
   plugins: [
     'styled-components',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
+    [
+      '@babel/plugin-transform-typescript',
+      {
+        allowNamespaces: true,
+      },
+    ],
   ],
   env: {
     production: {

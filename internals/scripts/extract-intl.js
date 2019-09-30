@@ -1,164 +1,166 @@
-/* eslint-disable no-restricted-syntax */
-/**
- * This script will extract the internationalization messages from all components
- * and package them in the translation json files in the translations file.
- */
+// /* eslint-disable no-restricted-syntax */
+// /**
+//  * This script will extract the internationalization messages from all components
+//  * and package them in the translation json files in the translations file.
+//  */
 
-require('shelljs/global');
+// COMMENTED OUT - TODO
 
-const fs = require('fs');
-const nodeGlob = require('glob');
-const { transform } = require('@babel/core');
-const get = require('lodash/get');
+// require('shelljs/global');
 
-const animateProgress = require('./helpers/progress');
-const addCheckmark = require('./helpers/checkmark');
+// const fs = require('fs');
+// const nodeGlob = require('glob');
+// const { transform } = require('@babel/core');
+// const get = require('lodash/get');
 
-const { appLocales, DEFAULT_LOCALE } = require('../../app/i18n');
+// const animateProgress = require('./helpers/progress');
+// const addCheckmark = require('./helpers/checkmark');
 
-const babel = require('../../babel.config.js');
-const { presets } = babel;
-let plugins = babel.plugins || [];
+// const { appLocales, DEFAULT_LOCALE } = require('../../app/i18n.ts');
 
-plugins.push('react-intl');
+// const babel = require('../../babel.config.js');
+// const { presets } = babel;
+// let plugins = babel.plugins || [];
 
-// NOTE: styled-components plugin is filtered out as it creates errors when used with transform
-plugins = plugins.filter(p => p !== 'styled-components');
+// plugins.push('react-intl');
 
-// Glob to match all js files except test files
-const FILES_TO_PARSE = 'app/**/!(*.test).js';
+// // NOTE: styled-components plugin is filtered out as it creates errors when used with transform
+// plugins = plugins.filter(p => p !== 'styled-components');
 
-const newLine = () => process.stdout.write('\n');
+// // Glob to match all js files except test files
+// const FILES_TO_PARSE = 'app/**/!(*.test).ts*';
 
-// Progress Logger
-let progress;
-const task = message => {
-  progress = animateProgress(message);
-  process.stdout.write(message);
+// const newLine = () => process.stdout.write('\n');
 
-  return error => {
-    if (error) {
-      process.stderr.write(error);
-    }
-    clearTimeout(progress);
-    return addCheckmark(() => newLine());
-  };
-};
+// // Progress Logger
+// let progress;
+// const task = message => {
+//   progress = animateProgress(message);
+//   process.stdout.write(message);
 
-// Wrap async functions below into a promise
-const glob = pattern =>
-  new Promise((resolve, reject) => {
-    nodeGlob(
-      pattern,
-      (error, value) => (error ? reject(error) : resolve(value)),
-    );
-  });
+//   return error => {
+//     if (error) {
+//       process.stderr.write(error);
+//     }
+//     clearTimeout(progress);
+//     return addCheckmark(() => newLine());
+//   };
+// };
 
-const readFile = fileName =>
-  new Promise((resolve, reject) => {
-    fs.readFile(
-      fileName,
-      'utf8',
-      (error, value) => (error ? reject(error) : resolve(value)),
-    );
-  });
+// // Wrap async functions below into a promise
+// const glob = pattern =>
+//   new Promise((resolve, reject) => {
+//     nodeGlob(
+//       pattern,
+//       (error, value) => (error ? reject(error) : resolve(value)),
+//     );
+//   });
 
-// Store existing translations into memory
-const oldLocaleMappings = [];
-const localeMappings = [];
+// const readFile = fileName =>
+//   new Promise((resolve, reject) => {
+//     fs.readFile(
+//       fileName,
+//       'utf8',
+//       (error, value) => (error ? reject(error) : resolve(value)),
+//     );
+//   });
 
-// Loop to run once per locale
-for (const locale of appLocales) {
-  oldLocaleMappings[locale] = {};
-  localeMappings[locale] = {};
-  // File to store translation messages into
-  const translationFileName = `app/translations/${locale}.json`;
-  try {
-    // Parse the old translation message JSON files
-    const messages = JSON.parse(fs.readFileSync(translationFileName));
-    const messageKeys = Object.keys(messages);
-    for (const messageKey of messageKeys) {
-      oldLocaleMappings[locale][messageKey] = messages[messageKey];
-    }
-  } catch (error) {
-    if (error.code !== 'ENOENT') {
-      process.stderr.write(
-        `There was an error loading this translation file: ${translationFileName}
-        \n${error}`,
-      );
-    }
-  }
-}
+// // Store existing translations into memory
+// const oldLocaleMappings = [];
+// const localeMappings = [];
 
-const extractFromFile = async filename => {
-  try {
-    const code = await readFile(filename);
+// // Loop to run once per locale
+// for (const locale of appLocales) {
+//   oldLocaleMappings[locale] = {};
+//   localeMappings[locale] = {};
+//   // File to store translation messages into
+//   const translationFileName = `app/translations/${locale}.json`;
+//   try {
+//     // Parse the old translation message JSON files
+//     const messages = JSON.parse(fs.readFileSync(translationFileName));
+//     const messageKeys = Object.keys(messages);
+//     for (const messageKey of messageKeys) {
+//       oldLocaleMappings[locale][messageKey] = messages[messageKey];
+//     }
+//   } catch (error) {
+//     if (error.code !== 'ENOENT') {
+//       process.stderr.write(
+//         `There was an error loading this translation file: ${translationFileName}
+//         \n${error}`,
+//       );
+//     }
+//   }
+// }
 
-    const output = await transform(code, { filename, presets, plugins });
-    const messages = get(output, 'metadata.react-intl.messages', []);
+// const extractFromFile = async filename => {
+//   try {
+//     const code = await readFile(filename);
 
-    for (const message of messages) {
-      for (const locale of appLocales) {
-        const oldLocaleMapping = oldLocaleMappings[locale][message.id];
-        // Merge old translations into the babel extracted instances where react-intl is used
-        const newMsg = locale === DEFAULT_LOCALE ? message.defaultMessage : '';
-        localeMappings[locale][message.id] = oldLocaleMapping || newMsg;
-      }
-    }
-  } catch (error) {
-    process.stderr.write(`\nError transforming file: ${filename}\n${error}\n`);
-  }
-};
+//     const output = await transform(code, { filename, presets, plugins });
+//     const messages = get(output, 'metadata.react-intl.messages', []);
 
-const memoryTask = glob(FILES_TO_PARSE);
-const memoryTaskDone = task('Storing language files in memory');
+//     for (const message of messages) {
+//       for (const locale of appLocales) {
+//         const oldLocaleMapping = oldLocaleMappings[locale][message.id];
+//         // Merge old translations into the babel extracted instances where react-intl is used
+//         const newMsg = locale === DEFAULT_LOCALE ? message.defaultMessage : '';
+//         localeMappings[locale][message.id] = oldLocaleMapping || newMsg;
+//       }
+//     }
+//   } catch (error) {
+//     process.stderr.write(`\nError transforming file: ${filename}\n${error}\n`);
+//   }
+// };
 
-memoryTask.then(files => {
-  memoryTaskDone();
+// const memoryTask = glob(FILES_TO_PARSE);
+// const memoryTaskDone = task('Storing language files in memory');
 
-  const extractTask = Promise.all(
-    files.map(fileName => extractFromFile(fileName)),
-  );
-  const extractTaskDone = task('Run extraction on all files');
-  // Run extraction on all files that match the glob on line 16
-  extractTask.then(() => {
-    extractTaskDone();
+// memoryTask.then(files => {
+//   memoryTaskDone();
 
-    // Make the directory if it doesn't exist, especially for first run
-    mkdir('-p', 'app/translations'); // eslint-disable-line
+//   const extractTask = Promise.all(
+//     files.map(fileName => extractFromFile(fileName)),
+//   );
+//   const extractTaskDone = task('Run extraction on all files');
+//   // Run extraction on all files that match the glob on line 16
+//   extractTask.then(() => {
+//     extractTaskDone();
 
-    let localeTaskDone;
-    let translationFileName;
+//     // Make the directory if it doesn't exist, especially for first run
+//     mkdir('-p', 'app/translations'); // eslint-disable-line
 
-    for (const locale of appLocales) {
-      translationFileName = `app/translations/${locale}.json`;
-      localeTaskDone = task(
-        `Writing translation messages for ${locale} to: ${translationFileName}`,
-      );
+//     let localeTaskDone;
+//     let translationFileName;
 
-      // Sort the translation JSON file so that git diffing is easier
-      // Otherwise the translation messages will jump around every time we extract
-      const messages = {};
-      Object.keys(localeMappings[locale])
-        .sort()
-        .forEach(key => {
-          messages[key] = localeMappings[locale][key];
-        });
+//     for (const locale of appLocales) {
+//       translationFileName = `app/translations/${locale}.json`;
+//       localeTaskDone = task(
+//         `Writing translation messages for ${locale} to: ${translationFileName}`,
+//       );
 
-      // Write to file the JSON representation of the translation messages
-      const prettified = `${JSON.stringify(messages, null, 2)}\n`;
+//       // Sort the translation JSON file so that git diffing is easier
+//       // Otherwise the translation messages will jump around every time we extract
+//       const messages = {};
+//       Object.keys(localeMappings[locale])
+//         .sort()
+//         .forEach(key => {
+//           messages[key] = localeMappings[locale][key];
+//         });
 
-      try {
-        fs.writeFileSync(translationFileName, prettified);
-        localeTaskDone();
-      } catch (error) {
-        localeTaskDone(
-          `There was an error saving this translation file: ${translationFileName}
-          \n${error}`,
-        );
-      }
-    }
+//       // Write to file the JSON representation of the translation messages
+//       const prettified = `${JSON.stringify(messages, null, 2)}\n`;
 
-    process.exit();
-  });
-});
+//       try {
+//         fs.writeFileSync(translationFileName, prettified);
+//         localeTaskDone();
+//       } catch (error) {
+//         localeTaskDone(
+//           `There was an error saving this translation file: ${translationFileName}
+//           \n${error}`,
+//         );
+//       }
+//     }
+
+//     process.exit();
+//   });
+// });

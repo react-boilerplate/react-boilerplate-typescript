@@ -54,31 +54,31 @@ module.exports = {
 
     actions.push({
       type: 'modify',
-      path: '../../app/i18n.js',
+      path: '../../app/i18n.ts',
       pattern: /(const ..LocaleData = require\('react-intl\/locale-data\/..'\);\n)+/g,
       templateFile: './language/intl-locale-data.hbs',
     });
     actions.push({
       type: 'modify',
-      path: '../../app/i18n.js',
+      path: '../../app/i18n.ts',
       pattern: /(\s+'[a-z]+',\n)(?!.*\s+'[a-z]+',)/g,
       templateFile: './language/app-locale.hbs',
     });
     actions.push({
       type: 'modify',
-      path: '../../app/i18n.js',
+      path: '../../app/i18n.ts',
       pattern: /(const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)(?!const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)/g,
       templateFile: './language/translation-messages.hbs',
     });
     actions.push({
       type: 'modify',
-      path: '../../app/i18n.js',
+      path: '../../app/i18n.ts',
       pattern: /(addLocaleData\([a-z]+LocaleData\);\n)(?!.*addLocaleData\([a-z]+LocaleData\);)/g,
       templateFile: './language/add-locale-data.hbs',
     });
     actions.push({
       type: 'modify',
-      path: '../../app/i18n.js',
+      path: '../../app/i18n.ts',
       pattern: /([a-z]+:\sformatTranslationMessages\('[a-z]+',\s[a-z]+TranslationMessages\),\n)(?!.*[a-z]+:\sformatTranslationMessages\('[a-z]+',\s[a-z]+TranslationMessages\),)/g,
       templateFile: './language/format-translation-messages.hbs',
     });
@@ -90,7 +90,7 @@ module.exports = {
     });
     actions.push({
       type: 'modify',
-      path: '../../app/app.js',
+      path: '../../app/app.tsx',
       pattern: /(import\('intl\/locale-data\/jsonp\/[a-z]+\.js'\),\n)(?!.*import\('intl\/locale-data\/jsonp\/[a-z]+\.js'\),)/g,
       templateFile: './language/polyfill-intl-locale.hbs',
     });

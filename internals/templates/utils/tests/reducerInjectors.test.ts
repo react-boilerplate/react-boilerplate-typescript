@@ -8,10 +8,12 @@ import identity from 'lodash/identity';
 import configureStore from '../../configureStore';
 
 import { getInjectors, injectReducerFactory } from '../reducerInjectors';
+import { InjectedStore } from '../../../../app/types';
+import { AnyAction, Reducer } from 'redux';
 
 const initialState = { reduced: 'soon' };
 
-const reducer = (state = initialState, action) => {
+const reducer: Reducer<object, AnyAction> = (state = initialState, action) => {
   switch (action.type) {
     case 'TEST':
       return { ...state, reduced: action.payload };
@@ -21,8 +23,8 @@ const reducer = (state = initialState, action) => {
 };
 
 describe('reducer injectors', () => {
-  let store;
-  let injectReducer;
+  let store: InjectedStore;
+  let injectReducer: ReturnType<typeof injectReducerFactory>;
 
   describe('getInjectors', () => {
     beforeEach(() => {

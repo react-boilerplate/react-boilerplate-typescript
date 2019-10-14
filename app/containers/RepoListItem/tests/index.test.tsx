@@ -12,7 +12,18 @@ import RepoListItem from '../index';
 import configureStore from '../../../configureStore';
 
 const renderComponent = (item, currentUser) => {
-  const store = configureStore({ global: { currentUser } }, browserHistory);
+  const initialState = {
+    global: {
+      currentUser,
+      error: false,
+      loading: false,
+      userData: {
+        repositories: false,
+      },
+    },
+  };
+  const store = configureStore(
+    initialState, browserHistory);
 
   return render(
     // tslint:disable-next-line: jsx-wrap-multiline

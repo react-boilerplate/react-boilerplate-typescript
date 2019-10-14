@@ -14,6 +14,7 @@ import { getInjectors } from '../sagaInjectors';
 
 
 import { createMemoryHistory } from 'history';
+import { InjectedStore } from '../../../../app/types';
 
 const memoryHistory = createMemoryHistory();
 
@@ -26,9 +27,9 @@ function* testSaga() {
 
 jest.mock('../sagaInjectors');
 describe('injectSaga decorator', () => {
-  let store;
-  let injectors;
-  let ComponentWithSaga;
+  let store: InjectedStore;
+  let injectors/*: ReturnType<typeof getInjectors>*/;
+  let ComponentWithSaga/*: ComponentType<unknown>*/;
 
   beforeAll(() => {
     const mockedGetInjectors = (getInjectors as unknown) as jest.Mock<
@@ -104,7 +105,7 @@ describe('injectSaga decorator', () => {
 });
 
 describe('useInjectSaga hook', () => {
-  let store;
+  let store: InjectedStore;
   let injectors;
   let ComponentWithSaga;
 

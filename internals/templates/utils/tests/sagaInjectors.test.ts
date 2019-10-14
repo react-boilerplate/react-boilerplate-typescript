@@ -21,9 +21,9 @@ function* testSaga() {
 
 describe('injectors', () => {
   const originalNodeEnv = process.env.NODE_ENV;
-  let store;
-  let injectSaga;
-  let ejectSaga;
+  let store: InjectedStore;
+  let injectSaga: ReturnType<typeof injectSagaFactory>;
+  let ejectSaga: ReturnType<typeof ejectSagaFactory>;
 
   describe('getInjectors', () => {
     beforeEach(() => {

@@ -24,8 +24,19 @@ describe('<ReposList />', () => {
   });
 
   it('should render the repositories if loading was successful', () => {
+
+    const initialState = {
+      global: {
+        currentUser: 'mxstbr',
+        error: false,
+        loading: false,
+        userData: {
+          repositories: false,
+        },
+      },
+    };
     const store = configureStore(
-      { global: { currentUser: 'mxstbr' } },
+      initialState,
       browserHistory,
     );
     const repos = [

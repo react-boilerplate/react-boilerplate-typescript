@@ -4,9 +4,10 @@
 
 import { browserHistory } from 'react-router-dom';
 import configureStore from '../configureStore';
+import { InjectedStore } from '../types';
 
 describe('configureStore', () => {
-  let store;
+  let store: InjectedStore;
 
   beforeAll(() => {
     store = configureStore({}, browserHistory);

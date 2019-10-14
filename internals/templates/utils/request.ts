@@ -14,7 +14,7 @@ export class ResponseError extends Error {
  *
  * @return {object}          The parsed JSON from the request
  */
-function parseJSON(response) {
+function parseJSON(response: Response) {
   if (response.status === 204 || response.status === 205) {
     return null;
   }
@@ -28,12 +28,12 @@ function parseJSON(response) {
  *
  * @return {object|undefined} Returns either the response, or throws an error
  */
-function checkStatus(response) {
+function checkStatus(response: Response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
 
-  const error = new ResponseError(response.statusText);
+  const error = new ResponseError(response);
   error.response = response;
   throw error;
 }

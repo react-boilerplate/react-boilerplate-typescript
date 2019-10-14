@@ -1,11 +1,11 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
 import ReposList from '../index';
 import configureStore from '../../../configureStore';
+import history from '../../../utils/history';
 
 describe('<ReposList />', () => {
   it('should render the loading indicator when its loading', () => {
@@ -24,9 +24,20 @@ describe('<ReposList />', () => {
   });
 
   it('should render the repositories if loading was successful', () => {
+
+    const initialState = {
+      global: {
+        currentUser: 'mxstbr',
+        error: false,
+        loading: false,
+        userData: {
+          repositories: false,
+        },
+      },
+    };
     const store = configureStore(
-      { global: { currentUser: 'mxstbr' } },
-      browserHistory,
+      initialState,
+      history,
     );
     const repos = [
       {

@@ -1,15 +1,15 @@
 /**
  * Test store addons
  */
+import history from '../utils/history';
 
-import { browserHistory } from 'react-router-dom';
 import configureStore from '../configureStore';
 
 describe('configureStore', () => {
   let store;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore({}, history);
   });
 
   describe('injectedReducers', () => {
@@ -35,7 +35,7 @@ describe('configureStore params', () => {
   it('should call window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__', () => {
     const compose = jest.fn();
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = () => compose;
-    configureStore(undefined, browserHistory);
+    configureStore(undefined, history);
     expect(compose).toHaveBeenCalled();
   });
 });

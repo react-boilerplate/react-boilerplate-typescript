@@ -74,10 +74,12 @@ describe('injectReducer decorator', () => {
       <Provider store={store}>
         <ComponentWithReducer {...props} />
       </Provider>,
-    );
+    )
+      .getInstance()!;
+
     const {
       props: { children },
-    } = renderedComponent.getInstance();
+    } = renderedComponent;
 
     expect(children.props).toEqual(props);
   });

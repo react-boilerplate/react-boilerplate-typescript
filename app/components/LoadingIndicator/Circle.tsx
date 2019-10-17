@@ -13,7 +13,12 @@ const circleFadeDelay = keyframes`
   }
 `;
 
-const Circle = props => {
+interface Props {
+  rotate?: number;
+  delay?: number;
+  id?: string;
+}
+const Circle = (props: Props) => {
   const CirclePrimitive = styled.div`
     width: 100%;
     height: 100%;

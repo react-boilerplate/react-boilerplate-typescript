@@ -70,6 +70,9 @@
     "babel-core": "7.0.0-bridge.0"
   },
   "dependencies": {
+    "@types/history": "^4.7.3",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/react-test-renderer": "^16.9.0",
     "chalk": "2.4.2",
     "compression": "1.7.4",
     "connected-react-router": "6.5.0",

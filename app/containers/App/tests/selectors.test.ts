@@ -59,7 +59,7 @@ describe('makeSelectError', () => {
 describe('makeSelectRepos', () => {
   it('should select the repos', () => {
     const reposSelector = makeSelectRepos();
-    const repositories = [];
+    const repositories: any[] = [];
     const mockedState: any = {
       global: {
         userData: {

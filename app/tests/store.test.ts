@@ -4,9 +4,10 @@
 import history from '../utils/history';
 
 import configureStore from '../configureStore';
+import { InjectedStore } from '../types';
 
 describe('configureStore', () => {
-  let store;
+  let store: InjectedStore;
 
   beforeAll(() => {
     store = configureStore({}, history);

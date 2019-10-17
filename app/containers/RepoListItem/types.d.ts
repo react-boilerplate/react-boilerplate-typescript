@@ -1,4 +1,7 @@
-import { ReposListForksResponseItem, SearchReposResponseItemsItemOwner } from '@octokit/rest';
+import {
+  ReposListForksResponseItem,
+  SearchReposResponseItemsItemOwner,
+} from '@octokit/rest';
 
 interface Owner extends SearchReposResponseItemsItemOwner {
   html_url: string;
@@ -11,12 +14,11 @@ interface Owner extends SearchReposResponseItemsItemOwner {
   repos_url: string;
   events_url: string;
   site_admin: boolean;
-
 }
 
 export interface Repo extends Partial<ReposListForksResponseItem> {
-  owner: Owner
+  owner: Owner;
   forks: number;
-  open_issues: number
-  watchers: number
+  open_issues: number;
+  watchers: number;
 }

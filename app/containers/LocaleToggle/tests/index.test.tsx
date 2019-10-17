@@ -1,6 +1,5 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 
 import LocaleToggle from '../index';
@@ -10,6 +9,7 @@ import LanguageProvider from '../../LanguageProvider';
 import configureStore from '../../../configureStore';
 import { translationMessages } from '../../../i18n';
 import { action } from 'typesafe-actions';
+import history from '../../../utils/history';
 
 jest.mock('../../LanguageProvider/actions');
 
@@ -22,7 +22,7 @@ describe('<LocaleToggle />', () => {
     mockedChangeLocale.mockImplementation(
       () => action('test', undefined) as any,
     );
-    store = configureStore({}, browserHistory);
+    store = configureStore({}, history);
   });
 
   it('should match the snapshot', () => {

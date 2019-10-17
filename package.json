@@ -111,6 +111,7 @@
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/register": "7.4.4",
+    "@octokit/rest": "^16.33.1",
     "@testing-library/jest-dom": "4.0.0",
     "@testing-library/react": "8.0.4",
     "@types/chai": "4.2.0",

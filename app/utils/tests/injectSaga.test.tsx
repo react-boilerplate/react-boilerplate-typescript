@@ -96,10 +96,12 @@ describe('injectSaga decorator', () => {
       <Provider store={store}>
         <ComponentWithSaga {...props} />
       </Provider>,
-    );
+    )
+      .getInstance()!;
+
     const {
       props: { children },
-    } = renderedComponent.getInstance();
+    } = renderedComponent;
     expect(children.props).toEqual(props);
   });
 });

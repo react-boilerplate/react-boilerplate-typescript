@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedNumber } from 'react-intl';
 
@@ -15,10 +15,10 @@ import IssueIcon from './IssueIcon';
 import IssueLink from './IssueLink';
 import RepoLink from './RepoLink';
 import Wrapper from './Wrapper';
-import { RootState } from 'containers/App/types';
+import { Repo } from '../../types/GitHubResponse';
 
 interface OwnProps {
-  item: any; // Too many fields.
+  item: Repo;
 }
 
 // tslint:disable-next-line:no-empty-interface

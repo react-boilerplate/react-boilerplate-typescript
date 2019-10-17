@@ -6,10 +6,10 @@ import React from 'react';
 import { getByText, render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router-dom';
 
 import RepoListItem from '../index';
 import configureStore from '../../../configureStore';
+import history from '../../../utils/history';
 
 const renderComponent = (item, currentUser) => {
   const initialState = {
@@ -23,7 +23,7 @@ const renderComponent = (item, currentUser) => {
     },
   };
   const store = configureStore(
-    initialState, browserHistory);
+    initialState, history);
 
   return render(
     // tslint:disable-next-line: jsx-wrap-multiline

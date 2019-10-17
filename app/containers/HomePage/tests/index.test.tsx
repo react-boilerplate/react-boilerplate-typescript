@@ -6,13 +6,13 @@ import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router-dom';
 
 import * as appActions from 'containers/App/actions';
 import configureStore from '../../../configureStore';
 import HomePage from '../index';
 import { initialState } from '../reducer';
 import { changeUsername } from '../actions';
+import history from '../../../utils/history';
 
 jest.mock('containers/App/actions');
 
@@ -36,7 +36,7 @@ describe('<HomePage />', () => {
   });
 
   beforeEach(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore({}, history);
     mockedLoadRepos.mockClear();
   });
 

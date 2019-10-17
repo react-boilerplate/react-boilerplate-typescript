@@ -1,11 +1,11 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
 import ReposList from '../index';
 import configureStore from '../../../configureStore';
+import history from '../../../utils/history';
 
 describe('<ReposList />', () => {
   it('should render the loading indicator when its loading', () => {
@@ -37,7 +37,7 @@ describe('<ReposList />', () => {
     };
     const store = configureStore(
       initialState,
-      browserHistory,
+      history,
     );
     const repos = [
       {

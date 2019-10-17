@@ -2,12 +2,12 @@
  * Test injectors
  */
 
-import { memoryHistory } from 'react-router-dom';
 import identity from 'lodash/identity';
 
 import configureStore from '../../configureStore';
 
 import { getInjectors, injectReducerFactory } from '../reducerInjectors';
+import history from '../history';
 
 const initialState = { reduced: 'soon' };
 
@@ -26,7 +26,7 @@ describe('reducer injectors', () => {
 
   describe('getInjectors', () => {
     beforeEach(() => {
-      store = configureStore({}, memoryHistory);
+      store = configureStore({}, history);
     });
 
     it('should return injectors', () => {
@@ -46,13 +46,14 @@ describe('reducer injectors', () => {
 
   describe('injectReducer helper', () => {
     beforeEach(() => {
-      store = configureStore({}, memoryHistory);
+      store = configureStore({}, history);
       injectReducer = injectReducerFactory(store, true);
     });
 
     it('should check a store if the second argument is falsy', () => {
       const inject = injectReducerFactory({} as any);
 
+      // @ts-ignore
       expect(() => inject('test', reducer)).toThrow();
     });
 

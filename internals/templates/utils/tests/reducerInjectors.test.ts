@@ -2,8 +2,8 @@
  * Test injectors
  */
 
-import { memoryHistory } from 'react-router-dom';
 import identity from 'lodash/identity';
+import history from '../../../../app/utils/history';
 
 import configureStore from '../../configureStore';
 
@@ -28,7 +28,7 @@ describe('reducer injectors', () => {
 
   describe('getInjectors', () => {
     beforeEach(() => {
-      store = configureStore({}, memoryHistory);
+      store = configureStore({}, history);
     });
 
     it('should return injectors', () => {
@@ -48,7 +48,7 @@ describe('reducer injectors', () => {
 
   describe('injectReducer helper', () => {
     beforeEach(() => {
-      store = configureStore({}, memoryHistory);
+      store = configureStore({}, history);
       injectReducer = injectReducerFactory(store, true);
     });
 
@@ -66,7 +66,9 @@ describe('reducer injectors', () => {
 
     it('should validate a reducer and reducer`s key', () => {
       expect(() => injectReducer('', reducer)).toThrow();
+      // @ts-ignore
       expect(() => injectReducer(1, reducer)).toThrow();
+      // @ts-ignore
       expect(() => injectReducer(1, 1)).toThrow();
     });
 

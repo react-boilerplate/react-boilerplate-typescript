@@ -5,7 +5,6 @@
     "module": "esnext", //commonjs destroys 'dynamic imports' which is used for code splitting
     "noImplicitAny": false,
     "preserveConstEnums": true,
-    "typeRoots": ["node_modules/@types"],
     "baseUrl": "./app",
     "jsx": "react", // process JSX
     "lib": ["dom", "es5", "es6", "es7", "es2017"],
@@ -16,9 +15,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    // "importHelpers": true, // importing helper functions from tslib
-    // "noEmitHelpers": true, // disable emitting inline helper functions
-    "types": ["jest", "node"],
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,

@@ -2,10 +2,12 @@ import * as React from 'react';
 
 import Ul from './Ul';
 import Wrapper from './Wrapper';
+import { Repo } from '../../containers/RepoListItem/types';
+import { UserData } from '../../containers/App/types';
 
 interface Props {
-  component: any;
-  items?: any[];
+  component: React.ComponentType<any>;
+  items?: UserData['repos'];
 }
 
 function List(props: Props) {
@@ -29,4 +31,5 @@ function List(props: Props) {
   );
 }
 
+const items: UserData['repos'] = [];
 export default List;

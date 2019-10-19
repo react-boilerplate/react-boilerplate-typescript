@@ -18,7 +18,7 @@ const renderComponent = (item, currentUser) => {
       error: false,
       loading: false,
       userData: {
-        repositories: false,
+        repos: false,
       },
     },
   };

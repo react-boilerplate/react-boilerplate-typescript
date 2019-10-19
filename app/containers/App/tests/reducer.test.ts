@@ -11,7 +11,7 @@ describe('appReducer', () => {
       error: false,
       currentUser: '',
       userData: {
-        repositories: [],
+        repos: [],
       },
     };
   });
@@ -27,7 +27,7 @@ describe('appReducer', () => {
       loading: true,
       error: false,
       userData: {
-        repositories: [],
+        repos: [],
       },
     };
     expect(appReducer(state, loadRepos())).toEqual(expectedResult);
@@ -45,7 +45,7 @@ describe('appReducer', () => {
       loading: false,
       error: false,
       userData: {
-        repositories: fixture,
+        repos: fixture,
       },
     };
     expect(appReducer(state, reposLoaded(fixture, username))).toEqual(
@@ -63,7 +63,7 @@ describe('appReducer', () => {
       error: fixture,
       loading: false,
       userData: {
-        repositories: [],
+        repos: [],
       },
     };
 

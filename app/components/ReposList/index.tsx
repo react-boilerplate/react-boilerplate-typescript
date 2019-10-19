@@ -4,16 +4,15 @@ import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 import RepoListItem from 'containers/RepoListItem';
+import { ContainerState, UserData } from '../../containers/App/types';
 
-function ReposList({
-  loading,
-  error,
-  repos,
-}: {
-  loading?: boolean;
-  error?: any;
-  repos?: any;
-}) {
+interface Props {
+  loading?: ContainerState['loading'];
+  error?: ContainerState['error'];
+  repos?: UserData['repos'];
+}
+
+function ReposList({ loading, error, repos }: Props) {
   if (loading) {
     return <List component={LoadingIndicator} />;
   }
@@ -24,7 +23,7 @@ function ReposList({
     );
     return <List component={ErrorComponent} />;
   }
-  if (repos !== false) {
+  if (repos !== undefined) {
     return <List items={repos} component={RepoListItem} />;
   }
 

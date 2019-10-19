@@ -7,7 +7,7 @@ export const initialState: ContainerState = {
   error: false,
   currentUser: '',
   userData: {
-    repositories: [],
+    repos: [],
   },
 };
 
@@ -23,7 +23,7 @@ function appReducer(
         loading: true,
         error: false,
         userData: {
-          repositories: [],
+          repos: [],
         },
       };
     case ActionTypes.LOAD_REPOS_SUCCESS:
@@ -32,7 +32,7 @@ function appReducer(
         loading: false,
         error: state.error,
         userData: {
-          repositories: action.payload.repos,
+          repos: action.payload.repos,
         },
       };
     case ActionTypes.LOAD_REPOS_ERROR:

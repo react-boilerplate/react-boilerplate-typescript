@@ -2,6 +2,7 @@ import ActionTypes from '../constants';
 
 import { loadRepos, reposLoaded, repoLoadingError } from '../actions';
 import { action } from 'typesafe-actions';
+import { Repo } from '../../RepoListItem/types';
 
 describe('App Actions', () => {
   describe('loadRepos', () => {
@@ -16,7 +17,7 @@ describe('App Actions', () => {
 
   describe('reposLoaded', () => {
     it('should return the correct type and the passed repos', () => {
-      const fixture = ['Test'];
+      const fixture = [{}] as Repo[];
       const username = 'test';
       const expectedResult = action(
         ActionTypes.LOAD_REPOS_SUCCESS,

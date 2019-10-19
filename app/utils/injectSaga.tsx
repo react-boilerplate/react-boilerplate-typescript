@@ -26,7 +26,7 @@ export default function hocWithSaga<P>({ key, saga, mode }: InjectSagaParams) {
       public static WrappedComponent = WrappedComponent;
 
       // public static contextType = ReactReduxContext;
-      public injectors: any;
+      public injectors: ReturnType<typeof getInjectors>;
 
       public static displayName = `withSaga(${WrappedComponent.displayName ||
         WrappedComponent.name ||

@@ -8,6 +8,7 @@ import ActionTypes from 'containers/App/constants';
 import { reposLoaded, repoLoadingError } from 'containers/App/actions';
 
 import githubData, { getRepos } from '../saga';
+import { Repo } from '../../RepoListItem/types';
 
 const username = 'mxstbr';
 
@@ -34,7 +35,7 @@ describe('getRepos Saga', () => {
       {
         name: 'Second repo',
       },
-    ];
+    ] as Repo[];
     const putDescriptor = getReposGenerator.next(response).value;
     expect(putDescriptor).toEqual(put(reposLoaded(response, username)));
   });

@@ -1,6 +1,7 @@
 import appReducer from '../reducer';
 import { loadRepos, reposLoaded, repoLoadingError } from '../actions';
 import { ContainerState } from '../types';
+import { Repo } from '../../RepoListItem/types';
 
 describe('appReducer', () => {
   let state: ContainerState;
@@ -37,7 +38,7 @@ describe('appReducer', () => {
       {
         name: 'My Repo',
       },
-    ];
+    ] as Repo[];
     const username = 'test';
     const expectedResult = {
       currentUser: username,

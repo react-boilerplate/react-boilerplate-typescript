@@ -23,7 +23,7 @@ export default function configureStore(initialState: RootState | {} = {}, histor
   // If Redux Dev Tools and Saga Dev Tools Extensions are installed, enable them
   /* istanbul ignore next */
   if (process.env.NODE_ENV !== 'production' && typeof window === 'object') {
-    enhancer = composeWithDevTools(enhancer)
+    enhancer = composeWithDevTools(enhancer);
     }
 
     // NOTE: Uncomment the code below to restore support for Redux Saga

@@ -6,13 +6,9 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import RepoListItem from 'containers/RepoListItem';
 import { ContainerState, UserData } from '../../containers/App/types';
 
-interface Props {
-  loading?: ContainerState['loading'];
-  error?: ContainerState['error'];
-  repos?: UserData['repos'];
-}
+export type ReposListProps = Pick<ContainerState, 'loading' | 'error'> & Pick<UserData, 'repos'>;
 
-function ReposList({ loading, error, repos }: Props) {
+function ReposList({ loading, error, repos }: ReposListProps) {
   if (loading) {
     return <List component={LoadingIndicator} />;
   }

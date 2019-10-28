@@ -55,7 +55,7 @@ describe('<ReposList />', () => {
       // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <IntlProvider locale="en">
-          <ReposList repos={repos} error={false} />
+          <ReposList repos={repos} error={false} loading={false}/>
         </IntlProvider>
       </Provider>,
     );

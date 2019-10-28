@@ -3,11 +3,10 @@ import * as React from 'react';
 import Ul from './Ul';
 import Wrapper from './Wrapper';
 import { Repo } from '../../containers/RepoListItem/types';
-import { UserData } from '../../containers/App/types';
 
 interface Props {
   component: React.ComponentType<any>;
-  items?: UserData['repos'];
+  items?: Repo[];
 }
 
 function List(props: Props) {
@@ -31,5 +30,4 @@ function List(props: Props) {
   );
 }
 
-const items: UserData['repos'] = [];
 export default List;

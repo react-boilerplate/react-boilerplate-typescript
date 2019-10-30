@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import Ul from './Ul';
 import Wrapper from './Wrapper';
+import { Repo } from '../../containers/RepoListItem/types';
 
 interface Props {
-  component: any;
-  items?: any[];
+  component: React.ComponentType<any>;
+  items?: Repo[];
 }
 
 function List(props: Props) {

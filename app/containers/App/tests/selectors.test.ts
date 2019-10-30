@@ -6,13 +6,16 @@ import {
   makeSelectRepos,
   makeSelectLocation,
 } from '../selectors';
+import { ApplicationRootState } from '../../../types';
+import { Repo } from '../../RepoListItem/types';
 
 describe('selectGlobal', () => {
   it('should select the global state', () => {
-    const globalState = {} as any;
-    const mockedState: any = {
+    const globalState = {};
+    // tslint:disable-next-line:no-object-literal-type-assertion
+    const mockedState = {
       global: globalState,
-    };
+    } as ApplicationRootState;
     expect(selectGlobal(mockedState)).toEqual(globalState);
   });
 });
@@ -21,11 +24,12 @@ describe('makeSelectCurrentUser', () => {
   it('should select the current user', () => {
     const currentUserSelector = makeSelectCurrentUser();
     const username = 'mxstbr';
-    const mockedState: any = {
+    // tslint:disable-next-line:no-object-literal-type-assertion
+    const mockedState = {
       global: {
         currentUser: username,
       },
-    };
+    } as ApplicationRootState;
     expect(currentUserSelector(mockedState)).toEqual(username);
   });
 });
@@ -59,15 +63,16 @@ describe('makeSelectError', () => {
 describe('makeSelectRepos', () => {
   it('should select the repos', () => {
     const reposSelector = makeSelectRepos();
-    const repositories: any[] = [];
-    const mockedState: any = {
+    const repos: Repo[] = [];
+    // tslint:disable-next-line:no-object-literal-type-assertion
+    const mockedState = {
       global: {
         userData: {
-          repositories,
+          repos: repos,
         },
       },
-    };
-    expect(reposSelector(mockedState)).toEqual(repositories);
+    } as ApplicationRootState;
+    expect(reposSelector(mockedState)).toEqual(repos);
   });
 });
 

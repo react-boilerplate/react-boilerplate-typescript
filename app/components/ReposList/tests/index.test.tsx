@@ -6,6 +6,7 @@ import { render } from '@testing-library/react';
 import ReposList from '../index';
 import configureStore from '../../../configureStore';
 import history from '../../../utils/history';
+import { Repo } from '../../../containers/RepoListItem/types';
 
 describe('<ReposList />', () => {
   it('should render the loading indicator when its loading', () => {
@@ -31,7 +32,7 @@ describe('<ReposList />', () => {
         error: false,
         loading: false,
         userData: {
-          repositories: false,
+          repos: false,
         },
       },
     };
@@ -49,12 +50,12 @@ describe('<ReposList />', () => {
         open_issues_count: 20,
         full_name: 'react-boilerplate/react-boilerplate',
       },
-    ];
+    ] as Repo[];
     const { container } = render(
       // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <IntlProvider locale="en">
-          <ReposList repos={repos} error={false} />
+          <ReposList repos={repos} error={false} loading={false}/>
         </IntlProvider>
       </Provider>,
     );
@@ -64,7 +65,7 @@ describe('<ReposList />', () => {
 
   it('should not render anything if nothing interesting is provided', () => {
     const { container } = render(
-      <ReposList repos={false} error={false} loading={false} />,
+      <ReposList repos={undefined} error={false} loading={false} />,
     );
 
     expect(container).toBeEmpty();

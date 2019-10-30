@@ -7,6 +7,7 @@ import isString from 'lodash/isString';
 import checkStore from './checkStore';
 import { DAEMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from './constants';
 import { InjectedStore } from 'types';
+import React from 'react';
 
 const allowedModes = [RESTART_ON_REMOUNT, DAEMON, ONCE_TILL_UNMOUNT];
 
@@ -37,7 +38,7 @@ export function injectSagaFactory(store: InjectedStore, isValid: boolean = false
   return function injectSaga(
     key: string,
     descriptor: SagaDescriptor = {},
-    args?: any,
+    args?: React.ComponentProps<any>,
   ) {
     if (!isValid) {
       checkStore(store);

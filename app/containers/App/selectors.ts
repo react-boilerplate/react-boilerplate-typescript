@@ -24,7 +24,7 @@ const makeSelectError = () =>
 
 const makeSelectRepos = () =>
   createSelector(selectGlobal, globalState =>
-    globalState.userData.repositories);
+    globalState.userData.repos);
 
 const makeSelectLocation = () =>
   createSelector(selectRoute, routeState => routeState.location);

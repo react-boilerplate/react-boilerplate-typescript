@@ -17,12 +17,12 @@
     <img src="https://david-dm.org/react-boilerplate/react-boilerplate/dev-status.svg" alt="devDependency Status" />
   </a>
   <!-- Build Status -->
-  <a href="https://travis-ci.org/react-boilerplate/react-boilerplate">
-    <img src="https://travis-ci.org/react-boilerplate/react-boilerplate.svg" alt="Build Status" />
+  <a href="https://api.travis-ci.org/Can-Sahin/react-boilerplate-typescript">
+    <img src="https://api.travis-ci.org/Can-Sahin/react-boilerplate-typescript.svg" alt="Build Status" />
   </a>
   <!-- Test Coverage -->
-  <a href="https://coveralls.io/r/react-boilerplate/react-boilerplate">
-    <img src="https://coveralls.io/repos/github/react-boilerplate/react-boilerplate/badge.svg" alt="Test Coverage" />
+  <a href="https://coveralls.io/r/Can-Sahin/react-boilerplate-typescript">
+    <img src="https://coveralls.io/repos/github/Can-Sahin/react-boilerplate-typescript/badge.svg" alt="Test Coverage" />
   </a>
   <a href="https://spectrum.chat/react-boilerplate">
   <img alt="Chat with us on Spectrum" src="https://withspectrum.github.io/badge/badge.svg" />

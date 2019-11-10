@@ -14,7 +14,7 @@ import {
   ejectSagaFactory,
 } from '../sagaInjectors';
 import { DAEMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from '../constants';
-import { InjectedStore } from '../../../../app/types';
+import { InjectedStore } from '../../types';
 
 function* testSaga() {
   yield put({ type: 'TEST', payload: 'yup' });

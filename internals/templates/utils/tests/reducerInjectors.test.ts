@@ -3,12 +3,12 @@
  */
 
 import identity from 'lodash/identity';
-import history from '../../../../app/utils/history';
+import history from '../../utils/history';
 
 import configureStore from '../../configureStore';
 
 import { getInjectors, injectReducerFactory } from '../reducerInjectors';
-import { InjectedStore } from '../../../../app/types';
+import { InjectedStore } from '../../types';
 import { AnyAction, Reducer } from 'redux';
 
 const initialState = { reduced: 'soon' };

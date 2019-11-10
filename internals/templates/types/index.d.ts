@@ -2,7 +2,7 @@ import { Reducer, Store } from 'redux';
 import { RouterState } from 'connected-react-router';
 import { ContainerState as LanguageProviderState } from 'containers/LanguageProvider/types';
 
-export interface LifeStore extends Store {
+export interface InjectedStore extends Store {
   injectedReducers: any;
   injectedSagas: any;
   runSaga(saga: (() => IterableIterator<any>) | undefined, args: any | undefined): any;

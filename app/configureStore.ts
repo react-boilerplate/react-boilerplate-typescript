@@ -6,12 +6,11 @@ import { applyMiddleware, createStore } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
-import { InjectedStore } from 'types';
+import { InjectedStore, ApplicationRootState } from 'types';
 import { History } from 'history';
-import { RootState } from './containers/App/types';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-export default function configureStore(initialState: RootState | {} = {}, history: History) {
+export default function configureStore(initialState: ApplicationRootState | {} = {}, history: History) {
   const reduxSagaMonitorOptions = {};
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 

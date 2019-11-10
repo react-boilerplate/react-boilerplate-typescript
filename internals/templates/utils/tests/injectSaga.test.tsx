@@ -14,7 +14,7 @@ import { getInjectors } from '../sagaInjectors';
 
 
 import { createMemoryHistory } from 'history';
-import { InjectedStore } from '../../../../app/types';
+import { InjectedStore } from '../../types';
 
 const memoryHistory = createMemoryHistory();
 

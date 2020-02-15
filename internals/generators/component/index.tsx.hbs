@@ -1,0 +1,37 @@
+/**
+*
+* {{ properCase name }}
+*
+*/
+{{#if memo}}
+import React, { memo } from 'react';
+{{else}}
+import React from 'react';
+
+{{/if}}
+
+
+// import styled from 'styles/styled-components';
+
+{{#if wantMessages}}
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+{{/if}}
+
+interface Props {}
+
+function {{ properCase name }}(props: Props) {
+  return (
+  <div>
+    {{#if wantMessages}}
+    <FormattedMessage {...messages.header} />
+    {{/if}}
+  </div>
+  );
+};
+
+{{#if memo}}
+export default memo({{ properCase name }});
+{{else}}
+export default {{ properCase name }};
+{{/if}}

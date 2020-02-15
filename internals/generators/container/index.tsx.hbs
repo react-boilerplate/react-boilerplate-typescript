@@ -1,0 +1,81 @@
+/*
+ *
+ * {{properCase name }}
+ *
+ */
+
+{{#if memo}}
+import React, { memo } from 'react';
+{{else}}
+import React from 'react';
+{{/if}}
+{{#if wantHeaders}}
+import { Helmet } from 'react-helmet';
+{{/if}}
+{{#if wantMessages}}
+import { FormattedMessage } from 'react-intl';
+{{/if}}
+{{#if wantActionsAndReducer}}
+import { useSelector, useDispatch } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+{{/if}}
+
+{{#if wantSaga}}
+import { useInjectSaga } from 'utils/injectSaga';
+{{/if}}
+{{#if wantActionsAndReducer}}
+import { useInjectReducer } from 'utils/injectReducer';
+import makeSelect{{properCase name}} from './selectors';
+import reducer from './reducer';
+{{/if}}
+{{#if wantSaga}}
+import saga from './saga';
+{{/if}}
+{{#if wantMessages}}
+import messages from './messages';
+{{/if}}
+
+{{#if wantActionsAndReducer}}
+const stateSelector = createStructuredSelector({
+  {{camelCase name}}: makeSelect{{properCase name}}(),
+});
+{{/if}}
+
+interface Props {}
+
+function {{ properCase name }}(props: Props) {
+  {{#if wantActionsAndReducer}}
+  // Warning: Add your key to RootState in types/index.d.ts file
+  useInjectReducer({ key: '{{ camelCase name }}', reducer: reducer });
+  {{/if}}
+  {{#if wantSaga}}
+  useInjectSaga({ key: '{{ camelCase name }}', saga: saga });
+  {{/if}}
+
+  {{#if wantActionsAndReducer}}
+  const { {{camelCase name}} } = useSelector(stateSelector);
+  const dispatch = useDispatch();
+  {{/if}}
+  return (
+    <div>
+    {{#if wantHeaders}}
+      <Helmet>
+        <title>{{properCase name}}</title>
+        <meta
+          name="description"
+          content="Description of {{properCase name}}"
+        />
+      </Helmet>
+    {{/if}}
+    {{#if wantMessages}}
+      <FormattedMessage {...messages.header} />
+    {{/if}}
+    </div>
+  );
+}
+
+{{#if memo}}
+export default memo({{ properCase name }});
+{{else}}
+export default {{ properCase name }};
+{{/if}}

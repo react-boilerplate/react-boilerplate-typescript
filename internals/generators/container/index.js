@@ -67,7 +67,7 @@ module.exports = {
     },
   ],
   actions: data => {
-    // Generate index.js and index.test.js
+    // Generate index.ts and index.test.tsx
     const actions = [
       {
         type: 'add',
@@ -81,7 +81,7 @@ module.exports = {
     if (data.wantMessages) {
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/index.test.ts',
+        path: '../../app/containers/{{properCase name}}/tests/index.test.tsx',
         templateFile: './container/test.tsx.hbs',
         abortOnFail: true,
       });
@@ -97,8 +97,8 @@ module.exports = {
       });
     }
 
-    // If they want actions and a reducer, generate actions.js, constants.js,
-    // reducer.js and the corresponding tests for actions and the reducer
+    // If they want actions and a reducer, generate actions.ts, constants.ts,
+    // reducer.ts and the corresponding tests for actions and the reducer
     if (data.wantActionsAndReducer) {
       // Actions
       actions.push({

@@ -12,7 +12,6 @@ describe('<NotFound />', () => {
     const {
       container: { firstChild },
     } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <IntlProvider locale="en">
         <NotFound />
       </IntlProvider>,

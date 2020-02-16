@@ -16,7 +16,6 @@ describe('<ReposList />', () => {
 
   it('should render an error if loading failed', () => {
     const { queryByText } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <IntlProvider locale="en">
         <ReposList loading={false} error={{ message: 'Loading failed!' }} />
       </IntlProvider>,
@@ -52,7 +51,6 @@ describe('<ReposList />', () => {
       },
     ] as Repo[];
     const { container } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <IntlProvider locale="en">
           <ReposList repos={repos} error={false} loading={false}/>

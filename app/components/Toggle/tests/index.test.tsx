@@ -19,7 +19,6 @@ describe('<Toggle />', () => {
       },
     });
     const { container } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <IntlProvider locale="en">
         <Toggle values={['en', 'de']} messages={messages} />
       </IntlProvider>,

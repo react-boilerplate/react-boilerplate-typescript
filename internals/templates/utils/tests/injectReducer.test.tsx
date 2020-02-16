@@ -111,7 +111,6 @@ describe('useInjectReducer hook', () => {
 
   it('should inject a given reducer', () => {
     render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <ComponentWithReducer />
       </Provider>,

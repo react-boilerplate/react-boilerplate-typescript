@@ -14,7 +14,6 @@ describe('<ToggleOption />', () => {
       },
     });
     const { container } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <IntlProvider locale="en">
         <ToggleOption value="en" message={message.enMessage} />
       </IntlProvider>,
@@ -24,7 +23,6 @@ describe('<ToggleOption />', () => {
 
   it('should display `value`(two letter language code) when `message` is absent', () => {
     const { queryByText } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <IntlProvider locale="de">
         <ToggleOption value="de" />
       </IntlProvider>,

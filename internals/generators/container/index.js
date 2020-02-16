@@ -187,14 +187,14 @@ module.exports = {
       actions.push({
         type: 'modify',
         path: '../../app/types/index.d.ts',
-        pattern: new RegExp(/.*\/\/.*\[IMPORT NEW CONTAINERSTATE ABOVE\].+\n\n*/),
+        pattern: new RegExp(/.*\/\/.*\[IMPORT NEW CONTAINERSTATE ABOVE\].+\n/),
         templateFile: './container/importContainerState.hbs',
         abortOnFail: true,
       });
       actions.push({
         type: 'modify',
         path: '../../app/types/index.d.ts',
-        pattern: new RegExp(/.*\/\/.*\[INSERT NEW REDUCER KEY ABOVE\].+\n\n*/),
+        pattern: new RegExp(/.*\/\/.*\[INSERT NEW REDUCER KEY ABOVE\].+\n/),
         templateFile: './container/appendApplicationRootState.hbs',
         abortOnFail: true,
       });

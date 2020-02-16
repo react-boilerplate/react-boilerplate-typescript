@@ -14,7 +14,6 @@ describe('<Header />', () => {
 
   it('should render a div', () => {
     const { container } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <IntlProvider locale="en">
           <ConnectedRouter history={history}>

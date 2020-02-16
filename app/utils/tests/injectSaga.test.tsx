@@ -54,7 +54,6 @@ describe('injectSaga decorator', () => {
   it('should inject given saga, mode, and props', () => {
     const props = { test: 'test' };
     renderer.create(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <ComponentWithSaga {...props} />
       </Provider>,
@@ -71,7 +70,6 @@ describe('injectSaga decorator', () => {
   it('should eject on unmount with a correct saga key', () => {
     const props = { test: 'test' };
     const renderedComponent = renderer.create(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <ComponentWithSaga {...props} />
       </Provider>,
@@ -92,7 +90,6 @@ describe('injectSaga decorator', () => {
   it('should propagate props', () => {
     const props = { testProp: 'test' };
     const renderedComponent = renderer.create(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <ComponentWithSaga {...props} />
       </Provider>,
@@ -136,7 +133,6 @@ describe('useInjectSaga hook', () => {
   it('should inject given saga and mode', () => {
     const props = { test: 'test' };
     render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <ComponentWithSaga {...props} />
       </Provider>,
@@ -152,7 +148,6 @@ describe('useInjectSaga hook', () => {
   it('should eject on unmount with a correct saga key', () => {
     const props = { test: 'test' };
     const { unmount } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <ComponentWithSaga {...props} />
       </Provider>,

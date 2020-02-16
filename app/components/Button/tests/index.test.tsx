@@ -12,7 +12,6 @@ const href = 'http://mxstbr.com';
 const children = <h1>Test</h1>;
 const renderComponent = (props: Props & { type?: any } = {}) => {
   const utils = render(
-    // tslint:disable-next-line: jsx-wrap-multiline
     <Button href={href} {...props}>
       {children}
     </Button>,

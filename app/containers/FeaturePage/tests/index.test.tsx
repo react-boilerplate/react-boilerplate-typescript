@@ -9,7 +9,6 @@ describe('<FeaturePage />', () => {
     const {
       container: { firstChild },
     } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <IntlProvider locale="en">
         <FeaturePage />
       </IntlProvider>,

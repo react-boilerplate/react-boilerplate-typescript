@@ -45,7 +45,6 @@ interface Props {}
 
 function {{ properCase name }}(props: Props) {
   {{#if wantActionsAndReducer}}
-  // Warning: Add your key to RootState in types/index.d.ts file
   useInjectReducer({ key: '{{ camelCase name }}', reducer: reducer });
   {{/if}}
   {{#if wantSaga}}

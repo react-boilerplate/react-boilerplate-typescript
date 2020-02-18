@@ -12,17 +12,6 @@ module.exports = {
   description: 'Add an unconnected component',
   prompts: [
     {
-      type: 'list',
-      name: 'type',
-      message: 'Select the type of component',
-      default: 'Stateless Function',
-      choices: () => [
-        'Stateless Function',
-        'React.PureComponent',
-        'React.Component',
-      ],
-    },
-    {
       type: 'input',
       name: 'name',
       message: 'What should it be called?',
@@ -39,6 +28,12 @@ module.exports = {
     },
     {
       type: 'confirm',
+      name: 'memo',
+      default: false,
+      message: 'Do you want to wrap your component in React.memo?',
+    },
+    {
+      type: 'confirm',
       name: 'wantMessages',
       default: true,
       message: 'Do you want i18n messages (i.e. will this component use text)?',
@@ -49,42 +44,40 @@ module.exports = {
       default: false,
       message: 'Do you want to load the component asynchronously?',
     },
+    {
+      type: 'confirm',
+      name: 'wantTests',
+      default: true,
+      message: 'Do you want tests?',
+    },
   ],
   actions: data => {
     // Generate index.js and index.test.js
-    let componentTemplate;
-
-    switch (data.type) {
-      case 'Stateless Function': {
-        componentTemplate = './component/stateless.js.hbs';
-        break;
-      }
-      default: {
-        componentTemplate = './component/class.js.hbs';
-      }
-    }
-
     const actions = [
       {
         type: 'add',
-        path: '../../app/components/{{properCase name}}/index.js',
-        templateFile: componentTemplate,
+        path: '../../app/components/{{properCase name}}/index.tsx',
+        templateFile: './component/index.tsx.hbs',
         abortOnFail: true,
-      },
-      {
-        type: 'add',
-        path: '../../app/components/{{properCase name}}/tests/index.test.js',
-        templateFile: './component/test.js.hbs',
-        abortOnFail: true,
-      },
+      }
     ];
+
+    // If they want tests
+    if (data.wantTests) {
+      actions.push({
+        type: 'add',
+        path: '../../app/components/{{properCase name}}/tests/index.test.tsx',
+        templateFile: './component/test.tsx.hbs',
+        abortOnFail: true,
+      });
+    }
 
     // If they want a i18n messages file
     if (data.wantMessages) {
       actions.push({
         type: 'add',
-        path: '../../app/components/{{properCase name}}/messages.js',
-        templateFile: './component/messages.js.hbs',
+        path: '../../app/components/{{properCase name}}/messages.ts',
+        templateFile: './component/messages.ts.hbs',
         abortOnFail: true,
       });
     }
@@ -93,12 +86,13 @@ module.exports = {
     if (data.wantLoadable) {
       actions.push({
         type: 'add',
-        path: '../../app/components/{{properCase name}}/Loadable.js',
-        templateFile: './component/loadable.js.hbs',
+        path: '../../app/components/{{properCase name}}/Loadable.ts',
+        templateFile: './component/loadable.ts.hbs',
         abortOnFail: true,
       });
     }
-
+    // If want Loadable.js to load the component asynchronously
+  
     actions.push({
       type: 'prettify',
       path: '/components/',

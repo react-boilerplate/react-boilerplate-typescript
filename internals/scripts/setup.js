@@ -34,11 +34,7 @@ cleanRepo(() => {
 function cleanRepo(callback) {
   fs.readFile('.git/config', 'utf8', (err, data) => {
     if (!err) {
-      const isClonedRepo =
-        typeof data === 'string' &&
-        (data.match(/url\s*=/g) || []).length === 1 &&
-        /react-boilerplate\/react-boilerplate\.git/.test(data);
-      if (isClonedRepo) {
+      if (isClonedRepo(data)) {
         process.stdout.write('\nDo you want to clear old repository? [Y/n] ');
         process.stdin.resume();
         process.stdin.on('data', pData => {
@@ -58,6 +54,17 @@ function cleanRepo(callback) {
       callback();
     }
   });
+}
+
+function isClonedRepo(gitConfig) {
+  if (typeof gitConfig !== 'string')
+    return false;
+
+  // Validate there is only one URL clause in the configuration
+  if ((gitConfig.match(/url\s*=/g) || []).length !== 1)
+    return false;
+
+  return /\/react-boilerplate-typescript\b/.test(gitConfig);
 }
 
 /**
@@ -95,7 +102,7 @@ function deleteFileInCurrentDir(file, callback) {
  */
 function installDeps() {
   exec('node --version', (err, stdout) => {
-    const nodeVersion = stdout.replace(/(\r\n\t|\n|\r\t)/gm, '');
+    const nodeVersion = stdout.trim();
     if (err || compareVersions(nodeVersion, '8.10.0') === -1) {
       installDepsCallback(
         err ||
@@ -103,7 +110,7 @@ function installDeps() {
       );
     } else {
       exec('npm --version', (err2, stdout2) => {
-        const npmVersion = stdout2.replace(/(\r\n\t|\n|\r\t)/gm, '');
+        const npmVersion = stdout2.trim();
         if (err2 || compareVersions(npmVersion, '5.0.0') === -1) {
           installDepsCallback(
             err2 ||

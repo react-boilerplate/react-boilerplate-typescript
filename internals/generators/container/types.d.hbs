@@ -1,0 +1,29 @@
+import { ActionType } from 'typesafe-actions';
+{{#if wantActionsAndReducer}}
+import * as actions from './actions';
+{{/if}}
+import { ApplicationRootState } from 'types';
+
+/* --- STATE --- */
+interface {{ properCase name }}State {
+  readonly default: any;
+}
+
+
+/* --- ACTIONS --- */
+{{#if wantActionsAndReducer}}
+type {{ properCase name }}Actions = ActionType<typeof actions>;
+{{/if}}
+
+/* --- EXPORTS --- */
+type RootState = ApplicationRootState;
+type ContainerState = {{ properCase name }}State;
+{{#if wantActionsAndReducer}}
+type ContainerActions = {{ properCase name }}Actions;
+{{/if}}
+
+{{#if wantActionsAndReducer}}
+export { RootState, ContainerState, ContainerActions };
+{{else}}
+export { RootState, ContainerState };
+{{/if}}

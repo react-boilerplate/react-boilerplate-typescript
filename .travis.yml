@@ -9,6 +9,7 @@ services:
 
 script:
   - node ./internals/scripts/generate-templates-for-linting
+  - git checkout -- .
   - npm test -- --maxWorkers=4
   - npm run build
 

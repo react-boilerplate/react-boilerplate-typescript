@@ -8,7 +8,7 @@ services:
   - xvfb
 
 script:
-  # - node ./internals/scripts/generate-templates-for-linting
+  - node ./internals/scripts/generate-templates-for-linting
   - npm test -- --maxWorkers=4
   - npm run build
 

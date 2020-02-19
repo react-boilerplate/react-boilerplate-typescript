@@ -78,7 +78,7 @@ module.exports = {
     ];
 
     // If component wants tests
-    if (data.wantMessages) {
+    if (data.wantTests) {
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/tests/index.test.tsx',

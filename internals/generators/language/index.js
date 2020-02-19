@@ -42,13 +42,13 @@ module.exports = {
       actions.push({
         type: 'backup',
         path: '../../app',
-        file: 'i18n.js',
+        file: 'i18n.ts',
       });
 
       actions.push({
         type: 'backup',
         path: '../../app',
-        file: 'app.js',
+        file: 'app.tsx',
       });
     }
 

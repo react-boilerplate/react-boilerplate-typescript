@@ -36,8 +36,9 @@
     "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:eslint:fix": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts --fix",
     "lint:js": "npm run lint:eslint -- . ",
-    "lint:ts": "npm run lint:tslint",
-    "lint:tslint": "tslint --config ./tslint.json --project ./tsconfig.json --fix && npm run typecheck",
+    "lint:ts": "npm run lint:tslint && npm run typecheck",
+    "lint:tslint": "tslint --config ./tslint.json --project ./tsconfig.json --fix",
+    "lint:tslint:noTypeCheck": "tslint --config ./tslint.json --project ./tsconfig.json --fix",
     "typecheck": "tsc --noEmit",
     "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
@@ -59,12 +60,12 @@
       "prettier --write",
       "git add --force"
     ],
-    "*.ts": "npm run lint:tslint",
-    "*.tsx": "npm run lint:tslint"
+    "*.ts": "npm run lint:ts",
+    "*.tsx": "npm run lint:ts"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:tslint"
+      "pre-commit": "npm run lint:ts"
     }
   },
   "resolutions": {
@@ -178,7 +179,7 @@
     "jest-watch-typeahead": "0.3.1",
     "lint-staged": "9.2.0",
     "ngrok": "3.2.1",
-    "node-plop": "0.19.0",
+    "node-plop": "0.23.0",
     "null-loader": "3.0.0",
     "offline-plugin": "5.0.7",
     "plop": "2.4.0",

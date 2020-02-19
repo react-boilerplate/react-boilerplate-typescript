@@ -103,7 +103,8 @@ function reportErrors(reason) {
 function runLintingOnDirectory(relativePath) {
   return new Promise((resolve, reject) => {
     shell.exec(
-      `npm run lint:eslint "app/${relativePath}/**/**.js"`,
+      // dont run typescript typechecking here because CLI doesn't support glob pattern
+      `npm run lint:tslint "app/${relativePath}/**/**.ts*"`,
       {
         silent: true,
       },

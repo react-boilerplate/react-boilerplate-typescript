@@ -38,7 +38,6 @@
     "lint:js": "npm run lint:eslint -- . ",
     "lint:ts": "npm run lint:tslint && npm run typecheck",
     "lint:tslint": "tslint --config ./tslint.json --project ./tsconfig.json --fix",
-    "lint:tslint:noTypeCheck": "tslint --config ./tslint.json --project ./tsconfig.json --fix",
     "typecheck": "tsc --noEmit",
     "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",

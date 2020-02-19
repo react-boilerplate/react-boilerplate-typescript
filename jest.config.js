@@ -1,6 +1,5 @@
 module.exports = {
   preset: 'ts-jest/presets/js-with-babel',
-  testPathIgnorePatterns: ['RbGen*'],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
     '!app/**/*.test.{js,jsx,ts,tsx}',

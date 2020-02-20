@@ -28,7 +28,6 @@ describe('<LanguageProvider />', () => {
     const text = 'Test';
     const children = <h1>{text}</h1>;
     const { queryByText } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <LanguageProvider messages={messages}>
           {children}
@@ -40,7 +39,6 @@ describe('<LanguageProvider />', () => {
 
   it('should render the default language messages', () => {
     const { queryByText } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <LanguageProvider messages={translationMessages}>
           <FormattedMessage {...messages.someMessage} />

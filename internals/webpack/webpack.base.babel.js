@@ -10,14 +10,12 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = options => ({
   mode: options.mode,
   entry: options.entry,
-  output: Object.assign(
-    {
-      // Compile into js/build.js
-      path: path.resolve(process.cwd(), 'build'),
-      publicPath: '/',
-    },
-    options.output,
-  ), // Merge with env dependent settings
+  output: {
+    // Compile into js/build.js
+    path: path.resolve(process.cwd(), 'build'),
+    publicPath: '/',
+    ...options.output,
+  }, // Merge with env dependent settings
   optimization: options.optimization,
   module: {
     rules: [

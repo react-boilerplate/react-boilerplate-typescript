@@ -18,7 +18,6 @@ jest.mock('containers/App/actions');
 
 const renderHomePage = store =>
   render(
-    // tslint:disable-next-line: jsx-wrap-multiline
     <Provider store={store}>
       <IntlProvider locale="en">
         <HomePage />

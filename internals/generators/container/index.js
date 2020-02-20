@@ -67,7 +67,7 @@ module.exports = {
     },
   ],
   actions: data => {
-    // Generate index.js and index.test.js
+    // Generate index.ts and index.test.tsx
     const actions = [
       {
         type: 'add',
@@ -97,8 +97,8 @@ module.exports = {
       });
     }
 
-    // If they want actions and a reducer, generate actions.js, constants.js,
-    // reducer.js and the corresponding tests for actions and the reducer
+    // If they want actions and a reducer, generate actions.ts, constants.ts,
+    // reducer.ts and the corresponding tests for actions and the reducer
     if (data.wantActionsAndReducer) {
       // Actions
       actions.push({
@@ -182,6 +182,20 @@ module.exports = {
         type: 'add',
         path: '../../app/containers/{{properCase name}}/types.d.ts',
         templateFile: './container/types.d.hbs',
+        abortOnFail: true,
+      });
+      actions.push({
+        type: 'modify',
+        path: '../../app/types/index.d.ts',
+        pattern: new RegExp(/.*\/\/.*\[IMPORT NEW CONTAINERSTATE ABOVE\].+\n/),
+        templateFile: './container/importContainerState.hbs',
+        abortOnFail: true,
+      });
+      actions.push({
+        type: 'modify',
+        path: '../../app/types/index.d.ts',
+        pattern: new RegExp(/.*\/\/.*\[INSERT NEW REDUCER KEY ABOVE\].+\n/),
+        templateFile: './container/appendApplicationRootState.hbs',
         abortOnFail: true,
       });
     }

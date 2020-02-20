@@ -27,7 +27,6 @@ describe('<LocaleToggle />', () => {
 
   it('should match the snapshot', () => {
     const { container } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <LanguageProvider messages={translationMessages}>
           <LocaleToggle />
@@ -39,7 +38,6 @@ describe('<LocaleToggle />', () => {
 
   it('should present the default `en` english language option', () => {
     const { queryByDisplayValue } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <LanguageProvider messages={translationMessages}>
           <LocaleToggle />
@@ -51,7 +49,6 @@ describe('<LocaleToggle />', () => {
 
   it('should dispatch changeLocale when user selects a new option', () => {
     const { container } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <LanguageProvider messages={translationMessages}>
           <LocaleToggle />

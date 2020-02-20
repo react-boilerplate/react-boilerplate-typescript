@@ -26,7 +26,6 @@ const renderComponent = (item, currentUser) => {
     initialState, history);
 
   return render(
-    // tslint:disable-next-line: jsx-wrap-multiline
     <Provider store={store}>
       <IntlProvider locale="en">
         <RepoListItem item={item} />

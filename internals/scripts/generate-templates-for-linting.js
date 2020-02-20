@@ -176,6 +176,29 @@ function removeFile(filePath) {
 }
 
 /**
+ * Copy file
+ * @param {string} filePath
+ * @param {string} [backupFileExtension=BACKUPFILE_EXTENSION]
+ * @returns {Promise<*>}
+ */
+async function backupFile(
+  filePath,
+  backupFileExtension = BACKUPFILE_EXTENSION,
+) {
+  return new Promise((resolve, reject) => {
+    const targetFile = filePath.concat(`.${backupFileExtension}`)
+    try {
+      fs.copyFile(filePath, targetFile, err => {
+        if (err) throw err;
+      });
+      resolve(targetFile);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+/**
  * Overwrite file from copy
  * @param {string} filePath
  * @param {string} [backupFileExtension=BACKUPFILE_EXTENSION]
@@ -230,6 +253,7 @@ async function generateComponent({ name, memo }) {
   return component;
 }
 
+
 /**
  * Test the container generator and rollback when successful
  * @param {string} name - Container name
@@ -271,6 +295,8 @@ async function generateContainer({ name, memo }) {
  * @returns {Promise<[string]>}
  */
 async function generateComponents(components) {
+  const typesPath = '../../app/types/index.d.ts'
+
   const promises = components.map(async component => {
     let result;
 
@@ -283,7 +309,19 @@ async function generateComponents(components) {
     return result;
   });
 
+  const backupTypes = await backupFile(typesPath)
+    .then(feedbackToUser("Generated 'types/index.ds.ts.rbgen'"))
+    .catch(reason => reportErrors(reason));
+
   const results = await Promise.all(promises);
+
+  await restoreModifiedFile(backupTypes)
+    .then(feedbackToUser(`Restored: ${typesPath}`))
+    .catch(reason => reportErrors(reason));
+
+  await removeFile(backupTypes)
+    .then(feedbackToUser(`Removed: ${backupTypes}`))
+    .catch(reason => reportErrors(reason));
 
   return results;
 }

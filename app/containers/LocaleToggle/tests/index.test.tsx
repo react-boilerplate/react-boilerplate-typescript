@@ -2,13 +2,13 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
 
+import { action } from 'typesafe-actions';
 import LocaleToggle from '../index';
 import * as actions from '../../LanguageProvider/actions';
 import LanguageProvider from '../../LanguageProvider';
 
 import configureStore from '../../../configureStore';
 import { translationMessages } from '../../../i18n';
-import { action } from 'typesafe-actions';
 import history from '../../../utils/history';
 
 jest.mock('../../LanguageProvider/actions');

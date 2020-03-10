@@ -4,10 +4,10 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 
-import checkStore from './checkStore';
-import { DAEMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from './constants';
 import { InjectedStore } from 'types';
 import React from 'react';
+import checkStore from './checkStore';
+import { DAEMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from './constants';
 
 const allowedModes = [RESTART_ON_REMOUNT, DAEMON, ONCE_TILL_UNMOUNT];
 
@@ -33,8 +33,7 @@ const checkDescriptor = (descriptor: SagaDescriptor) => {
   );
 };
 
-export function injectSagaFactory(store: InjectedStore, isValid: boolean = false) {
-  // tslint:disable-next-line: only-arrow-functions
+export function injectSagaFactory(store: InjectedStore, isValid = false) {
   return function injectSaga(
     key: string,
     descriptor: SagaDescriptor = {},
@@ -76,8 +75,7 @@ export function injectSagaFactory(store: InjectedStore, isValid: boolean = false
   };
 }
 
-export function ejectSagaFactory(store: InjectedStore, isValid: boolean = false) {
-  // tslint:disable-next-line: only-arrow-functions
+export function ejectSagaFactory(store: InjectedStore, isValid = false) {
   return function ejectSaga(key: string) {
     if (!isValid) {
       checkStore(store);

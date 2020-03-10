@@ -22,8 +22,7 @@ const renderComponent = (item, currentUser) => {
       },
     },
   };
-  const store = configureStore(
-    initialState, history);
+  const store = configureStore(initialState, history);
 
   return render(
     <Provider store={store}>

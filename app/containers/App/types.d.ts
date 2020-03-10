@@ -16,10 +16,8 @@ interface UserData {
   readonly repos?: Repo[];
 }
 
-
 /* --- ACTIONS --- */
 type AppActions = ActionType<typeof actions>;
-
 
 /* --- EXPORTS --- */
 

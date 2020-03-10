@@ -27,10 +27,10 @@ import LanguageProvider from 'containers/LanguageProvider';
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess';
 
+import { translationMessages } from 'i18n';
 import configureStore from './configureStore';
 
 // Import i18n messages
-import { translationMessages } from 'i18n';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -48,7 +48,6 @@ const MOUNT_NODE = document.getElementById('app') as HTMLElement;
 
 const render = (messages: any, Component = App) => {
   ReactDOM.render(
-    // tslint:disable-next-line:jsx-wrap-multiline
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
@@ -63,7 +62,7 @@ const render = (messages: any, Component = App) => {
 if (module.hot) {
   module.hot.accept(['./i18n', './containers/App'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    // tslint:disable-next-line:max-line-length
+    // eslint-disable-next-line
     const App = require('./containers/App').default; // https://github.com/webpack/webpack-dev-server/issues/100
     render(translationMessages, App);
   });
@@ -91,5 +90,6 @@ if (!(window as any).Intl) {
 // it's not most important operation and if main code fails,
 // we do not want it installed
 if (process.env.NODE_ENV === 'production') {
+  // eslint-disable-next-line global-require
   require('offline-plugin/runtime').install();
 }

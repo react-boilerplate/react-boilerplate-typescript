@@ -5,12 +5,15 @@
 import { applyMiddleware, createStore } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
-import createReducer from './reducers';
 import { InjectedStore, ApplicationRootState } from 'types';
 import { History } from 'history';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import createReducer from './reducers';
 
-export default function configureStore(initialState: ApplicationRootState | {} = {}, history: History) {
+export default function configureStore(
+  initialState: ApplicationRootState | {} = {},
+  history: History,
+) {
   const reduxSagaMonitorOptions = {};
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
@@ -30,7 +33,6 @@ export default function configureStore(initialState: ApplicationRootState | {} =
   //   reduxSagaMonitorOptions = {
   //     sagaMonitor: window.__SAGA_MONITOR_EXTENSION__,
   //   };
-
 
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
@@ -57,4 +59,3 @@ export default function configureStore(initialState: ApplicationRootState | {} =
 
   return store;
 }
-

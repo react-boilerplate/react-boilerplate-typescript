@@ -48,7 +48,6 @@ const MOUNT_NODE = document.getElementById('app') as HTMLElement;
 
 const render = (messages: any, Component = App) => {
   ReactDOM.render(
-    // tslint:disable-next-line:jsx-wrap-multiline
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
@@ -63,7 +62,6 @@ const render = (messages: any, Component = App) => {
 if (module.hot) {
   module.hot.accept(['./i18n', './containers/App'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    // tslint:disable-next-line:max-line-length
     const App = require('./containers/App').default; // https://github.com/webpack/webpack-dev-server/issues/100
     render(translationMessages, App);
   });

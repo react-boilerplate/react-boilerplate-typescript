@@ -21,7 +21,6 @@ interface OwnProps {
   item: Repo;
 }
 
-// tslint:disable-next-line:no-empty-interface
 interface DispatchProps {}
 
 type Props = DispatchProps & OwnProps;

@@ -104,7 +104,7 @@ function runLintingOnDirectory(relativePath) {
   return new Promise((resolve, reject) => {
     shell.exec(
       // dont run typescript typechecking here because CLI doesn't support glob pattern
-      `npm run lint:tslint "app/${relativePath}/**/**.ts*"`,
+      `npm run lint`,
       {
         silent: true,
       },

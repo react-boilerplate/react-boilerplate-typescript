@@ -52,6 +52,8 @@ describe('githubDataSaga Saga', () => {
 
   it('should start task to watch for LOAD_REPOS action', () => {
     const takeLatestDescriptor = githubDataSaga.next().value;
-    expect(takeLatestDescriptor).toEqual(takeLatest(ActionTypes.LOAD_REPOS, getRepos));
+    expect(takeLatestDescriptor).toEqual(
+      takeLatest(ActionTypes.LOAD_REPOS, getRepos),
+    );
   });
 });

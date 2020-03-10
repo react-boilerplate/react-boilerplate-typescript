@@ -36,14 +36,14 @@ export default function FeaturePage() {
           </p>
         </ListItem>
 
-          <ListItem>
-            <ListItemTitle>
-              <FormattedMessage {...messages.feedbackHeader} />
-            </ListItemTitle>
-            <p>
-              <FormattedMessage {...messages.feedbackMessage} />
-            </p>
-          </ListItem>
+        <ListItem>
+          <ListItemTitle>
+            <FormattedMessage {...messages.feedbackHeader} />
+          </ListItemTitle>
+          <p>
+            <FormattedMessage {...messages.feedbackMessage} />
+          </p>
+        </ListItem>
         <ListItem>
           <ListItemTitle>
             <FormattedMessage {...messages.feedbackHeader} />

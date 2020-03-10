@@ -2,15 +2,14 @@
  * Test injectors
  */
 
+import { Action, Dispatch } from 'redux';
 import checkStore from '../checkStore';
 import { InjectedStore } from '../../types';
-import { Action, Dispatch } from 'redux';
 
 const action: Action<number> = {
   type: 10,
 };
-const disp: Dispatch<typeof action> = (param) => param;
-
+const disp: Dispatch<typeof action> = param => param;
 
 describe('checkStore', () => {
   let store: Omit<InjectedStore, 'Symbol[Observable'>;
@@ -18,7 +17,7 @@ describe('checkStore', () => {
   beforeEach(() => {
     store = {
       dispatch: disp,
-      subscribe: (listener) => () => {},
+      subscribe: () => () => {},
       getState: () => {},
       replaceReducer: () => {},
       runSaga: () => {},

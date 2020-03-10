@@ -12,16 +12,15 @@ import { getInjectors } from '../reducerInjectors';
 
 import { createMemoryHistory } from 'history';
 
+import { useInjectReducer } from '../injectReducer';
+
 const memoryHistory = createMemoryHistory();
 jest.mock('../reducerInjectors');
-
-import { useInjectReducer } from '../injectReducer';
 
 // Fixtures
 const Component = () => null;
 
 const reducer = s => s;
-
 
 describe('injectReducer decorator', () => {
   let store;
@@ -50,7 +49,6 @@ describe('injectReducer decorator', () => {
 
   it('should inject a given reducer', () => {
     renderer.create(
-      // tslint:disable-next-line:jsx-wrap-multiline
       <Provider store={store}>
         <ComponentWithReducer />
       </Provider>,
@@ -69,12 +67,12 @@ describe('injectReducer decorator', () => {
 
   it('should propagate props', () => {
     const props = { testProp: 'test' };
-    const renderedComponent = renderer.create(
-      // tslint:disable-next-line:jsx-wrap-multiline
-      <Provider store={store}>
-        <ComponentWithReducer {...props} />
-      </Provider>,
-    )
+    const renderedComponent = renderer
+      .create(
+        <Provider store={store}>
+          <ComponentWithReducer {...props} />
+        </Provider>,
+      )
       .getInstance();
     if (!renderedComponent) {
       throw new Error();

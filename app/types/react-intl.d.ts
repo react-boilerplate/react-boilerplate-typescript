@@ -4,5 +4,4 @@ declare module 'react-intl' {
   export const defineMessages: any;
   export const FormattedNumber: any;
   export const injectIntl: any;
-
 }

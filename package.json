@@ -31,11 +31,11 @@
     "clean": "shjs ./internals/scripts/clean.js",
     "clean:all": "npm run analyze:clean && npm run test:clean && npm run build:clean",
     "generate": "plop --plopfile internals/generators/index.js",
-    "lint": "npm run lint:css && npm run lint:eslint:quiet",
+    "lint": "npm run lint:css && npm run lint:eslint:quiet app/**",
     "lint:css": "stylelint './app/**/*.{js,ts}'",
-    "lint:eslint:quiet": "eslint app/** --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern --quiet",
-    "lint:eslint": "eslint app/** --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern",
-    "lint:eslint:fix": "eslint app/** --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern --quiet --fix",
+    "lint:eslint:quiet": "eslint --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern --quiet",
+    "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern",
+    "lint:eslint:fix": "eslint --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern --quiet --fix",
     "typecheck": "tsc --noEmit",
     "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
@@ -45,8 +45,8 @@
     "prettify": "prettier --write"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix --quiet",
+    "*.{ts,tsx,js,jsx}": [
+      "npm run lint:eslint:fix",
       "git add --force"
     ],
     "*.{md,json}": [
@@ -56,7 +56,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npx lint-staged && npm run typecheck"
     }
   },
   "resolutions": {

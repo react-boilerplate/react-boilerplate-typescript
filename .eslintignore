@@ -1,3 +1,5 @@
 internals/scripts
+internals/generators
+server/
 **/types.d.ts
 *.html

@@ -3,13 +3,12 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 
-import checkStore from './checkStore';
-import createReducer from '../reducers';
 import { InjectedStore } from 'types';
 import { Reducer } from 'redux';
+import checkStore from './checkStore';
+import createReducer from '../reducers';
 
-export function injectReducerFactory(store: InjectedStore, isValid: boolean = false) {
-  // tslint:disable-next-line: only-arrow-functions
+export function injectReducerFactory(store: InjectedStore, isValid = false) {
   return function injectReducer(key: string, reducer: Reducer<object>) {
     if (!isValid) {
       checkStore(store);
@@ -20,7 +19,6 @@ export function injectReducerFactory(store: InjectedStore, isValid: boolean = fa
       '(app/utils...) injectReducer: Expected `reducer` to be a reducer function',
     );
 
-    // tslint:disable-next-line:max-line-length
     // Check `store.injectedReducers[key] === reducer` for hot reloading when a key is the same but a reducer is different
     if (
       Reflect.has(store.injectedReducers, key) &&

@@ -12,7 +12,11 @@ import { createStructuredSelector } from 'reselect';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import { makeSelectError, makeSelectLoading, makeSelectRepos } from 'containers/App/selectors';
+import {
+  makeSelectError,
+  makeSelectLoading,
+  makeSelectRepos,
+} from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
 import AtPrefix from './AtPrefix';
@@ -42,7 +46,8 @@ export default function HomePage() {
   const dispatch = useDispatch();
 
   // Not gonna declare event types here. No need. any is fine
-  const onChangeUsername = (evt: any) => dispatch(changeUsername(evt.target.value));
+  const onChangeUsername = (evt: any) =>
+    dispatch(changeUsername(evt.target.value));
   const onSubmitForm = (evt?: any) => {
     if (evt !== undefined && evt.preventDefault) {
       evt.preventDefault();

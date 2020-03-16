@@ -2,8 +2,8 @@ import * as React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { useStore, ReactReduxContext } from 'react-redux';
 
-import { getInjectors } from './reducerInjectors';
 import { InjectReducerParams, InjectedStore } from 'types';
+import { getInjectors } from './reducerInjectors';
 
 /**
  * Dynamically injects a reducer
@@ -22,8 +22,11 @@ export default function hocWithReducer<P>({
   ): React.ComponentType<P> {
     // dont wanna give access to HOC. Child only
     class ReducerInjector extends React.Component<P> {
-      public static contextType = ReactReduxContext;
+      public static contextType = ReactReduxContext; // eslint-disable-line react/static-property-placement
+
       public static WrappedComponent = WrappedComponent;
+
+      // eslint-disable-next-line react/static-property-placement
       public static displayName = `withReducer(${WrappedComponent.displayName ||
         WrappedComponent.name ||
         'Component'})`;

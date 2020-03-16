@@ -1,10 +1,10 @@
 /**
  * Test store addons
  */
+import { composeWithDevTools } from 'redux-devtools-extension';
 import history from '../utils/history';
 import configureStore from '../configureStore';
 import { InjectedStore } from '../types';
-import { composeWithDevTools } from 'redux-devtools-extension';
 
 describe('configureStore', () => {
   let store: InjectedStore;
@@ -31,7 +31,6 @@ describe('configureStore', () => {
     });
   });
 });
-
 
 jest.mock('redux-devtools-extension', () => ({
   composeWithDevTools: jest.fn(),

@@ -2,8 +2,8 @@ import * as React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { useStore } from 'react-redux';
 
-import { getInjectors } from './sagaInjectors';
 import { InjectSagaParams, InjectedStore } from 'types';
+import { getInjectors } from './sagaInjectors';
 
 /**
  * Dynamically injects a saga, passes component's props as saga arguments
@@ -28,6 +28,7 @@ export default function hocWithSaga<P>({ key, saga, mode }: InjectSagaParams) {
       // public static contextType = ReactReduxContext;
       public injectors: ReturnType<typeof getInjectors>;
 
+      // eslint-disable-next-line react/static-property-placement
       public static displayName = `withSaga(${WrappedComponent.displayName ||
         WrappedComponent.name ||
         'Component'})`;

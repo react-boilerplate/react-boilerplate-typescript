@@ -6,7 +6,6 @@ export const initialState: ContainerState = {
   username: '',
 };
 
-
 // Take this container's state (as a slice of root state), this container's actions and return new state
 function homeReducer(
   state: ContainerState = initialState,

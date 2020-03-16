@@ -136,14 +136,22 @@ about the bundle size.
 
 ## Linting
 
+To lint all source files js, ts & css files run
+
 ```Shell
 npm run lint
 ```
 
-Lints your JavaScript and your CSS.
+To lint individual js, ts, jsx, tsx file run
 
 ```Shell
-npm run lint:eslint:fix -- .
+npm run lint:eslint <file-path>
+```
+
+To lint & fix staged files run
+
+```Shell
+npx lint-staged
 ```
 
 Lints your code and tries to fix any errors it finds.

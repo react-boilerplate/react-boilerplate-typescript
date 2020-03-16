@@ -12,7 +12,6 @@ import { Repo } from '../../RepoListItem/types';
 describe('selectGlobal', () => {
   it('should select the global state', () => {
     const globalState = {};
-    // tslint:disable-next-line:no-object-literal-type-assertion
     const mockedState = {
       global: globalState,
     } as ApplicationRootState;
@@ -24,7 +23,6 @@ describe('makeSelectCurrentUser', () => {
   it('should select the current user', () => {
     const currentUserSelector = makeSelectCurrentUser();
     const username = 'mxstbr';
-    // tslint:disable-next-line:no-object-literal-type-assertion
     const mockedState = {
       global: {
         currentUser: username,
@@ -64,7 +62,6 @@ describe('makeSelectRepos', () => {
   it('should select the repos', () => {
     const reposSelector = makeSelectRepos();
     const repos: Repo[] = [];
-    // tslint:disable-next-line:no-object-literal-type-assertion
     const mockedState = {
       global: {
         userData: {

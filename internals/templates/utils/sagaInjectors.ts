@@ -32,8 +32,7 @@ const checkDescriptor = (descriptor: SagaDescriptor) => {
   );
 };
 
-export function injectSagaFactory(store: InjectedStore, isValid: boolean = false) {
-  // tslint:disable-next-line: only-arrow-functions
+export function injectSagaFactory(store: InjectedStore, isValid = false) {
   return function injectSaga(
     key: string,
     descriptor: SagaDescriptor = {},
@@ -75,8 +74,7 @@ export function injectSagaFactory(store: InjectedStore, isValid: boolean = false
   };
 }
 
-export function ejectSagaFactory(store: InjectedStore, isValid: boolean = false) {
-  // tslint:disable-next-line: only-arrow-functions
+export function ejectSagaFactory(store: InjectedStore, isValid = false) {
   return function ejectSaga(key: string) {
     if (!isValid) {
       checkStore(store);

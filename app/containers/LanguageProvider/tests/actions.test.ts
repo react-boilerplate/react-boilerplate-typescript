@@ -1,7 +1,7 @@
+import { action } from 'typesafe-actions';
 import { changeLocale } from '../actions';
 
 import ActionTypes from '../constants';
-import { action } from 'typesafe-actions';
 
 describe('LanguageProvider actions', () => {
   describe('Change Local Action', () => {

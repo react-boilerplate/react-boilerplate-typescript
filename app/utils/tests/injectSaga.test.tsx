@@ -8,12 +8,11 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 
+import { createMemoryHistory } from 'history';
 import configureStore from '../../configureStore';
 import injectSaga, { useInjectSaga } from '../injectSaga';
 import { getInjectors } from '../sagaInjectors';
 
-
-import { createMemoryHistory } from 'history';
 import { InjectedStore } from '../../types';
 
 const memoryHistory = createMemoryHistory();
@@ -28,7 +27,7 @@ function* testSaga() {
 jest.mock('../sagaInjectors');
 describe('injectSaga decorator', () => {
   let store: InjectedStore;
-  let injectors: /*typeof getInjectors*/ any;
+  let injectors: /* typeof getInjectors */ any;
   let ComponentWithSaga;
 
   beforeAll(() => {
@@ -89,11 +88,12 @@ describe('injectSaga decorator', () => {
 
   it('should propagate props', () => {
     const props = { testProp: 'test' };
-    const renderedComponent = renderer.create(
-      <Provider store={store}>
-        <ComponentWithSaga {...props} />
-      </Provider>,
-    )
+    const renderedComponent = renderer
+      .create(
+        <Provider store={store}>
+          <ComponentWithSaga {...props} />
+        </Provider>,
+      )
       .getInstance()!;
 
     const {
@@ -112,7 +112,8 @@ describe('useInjectSaga hook', () => {
     const mockedGetInjectors = (getInjectors as unknown) as jest.Mock<
       typeof getInjectors
     >; // compiler doesn't know that it's mocked. So manually cast it.
-    mockedGetInjectors.mockImplementation(() => injectors);  });
+    mockedGetInjectors.mockImplementation(() => injectors);
+  });
 
   beforeEach(() => {
     store = configureStore({}, memoryHistory);

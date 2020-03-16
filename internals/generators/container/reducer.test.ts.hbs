@@ -12,7 +12,10 @@ describe('{{ camelCase name }}Reducer', () => {
 
   it('returns the initial state', () => {
     const expectedResult = state;
-    expect({{ camelCase name }}Reducer(undefined, {} as any)).toEqual(expectedResult);
+    // eslint-disable-next-line prettier/prettier
+    expect(
+      {{ camelCase name }}Reducer(undefined, {} as any),
+    ).toEqual(expectedResult);
   });
 
   /**

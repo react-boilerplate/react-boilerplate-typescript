@@ -5,8 +5,6 @@ import { put } from 'redux-saga/effects';
 
 import { createMemoryHistory } from 'history';
 
-const memoryHistory = createMemoryHistory();
-
 import configureStore from '../../configureStore';
 import {
   getInjectors,
@@ -14,6 +12,8 @@ import {
   ejectSagaFactory,
 } from '../sagaInjectors';
 import { DAEMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from '../constants';
+
+const memoryHistory = createMemoryHistory();
 
 function* testSaga() {
   yield put({ type: 'TEST', payload: 'yup' });

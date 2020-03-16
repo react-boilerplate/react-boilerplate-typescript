@@ -11,7 +11,9 @@ const href = 'http://mxstbr.com/';
 const children = <h1>Test</h1>;
 const renderComponent = (props = {}) => {
   const utils = render(
-    <A href={href} {...props}>{children}</A>,
+    <A href={href} {...props}>
+      {children}
+    </A>,
   );
   const link = utils.container.querySelector('a')!;
   return { ...utils, link };

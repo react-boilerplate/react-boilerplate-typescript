@@ -29,9 +29,7 @@ describe('<LanguageProvider />', () => {
     const children = <h1>{text}</h1>;
     const { queryByText } = render(
       <Provider store={store}>
-        <LanguageProvider messages={messages}>
-          {children}
-        </LanguageProvider>
+        <LanguageProvider messages={messages}>{children}</LanguageProvider>
       </Provider>,
     );
     expect(queryByText(text)).toBeInTheDocument();

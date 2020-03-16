@@ -43,6 +43,7 @@ const stateSelector = createStructuredSelector({
 
 interface Props {}
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function {{ properCase name }}(props: Props) {
   {{#if wantActionsAndReducer}}
   useInjectReducer({ key: '{{ camelCase name }}', reducer: reducer });
@@ -52,8 +53,9 @@ function {{ properCase name }}(props: Props) {
   {{/if}}
 
   {{#if wantActionsAndReducer}}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { {{camelCase name}} } = useSelector(stateSelector);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // eslint-disable-line @typescript-eslint/no-unused-vars
   {{/if}}
   return (
     <div>

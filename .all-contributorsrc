@@ -168,7 +168,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "rajatkantinandi",
+      "name": "Rajat Kanti Nandi",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/17743895?v=4",
+      "profile": "https://twitter.com/rajatkantinandi",
+      "contributions": [
+        "tool"
+      ]
     }
   ],
-  "contributorsPerLine": 8
+  "contributorsPerLine": 8,
+  "commitConvention": "none"
 }

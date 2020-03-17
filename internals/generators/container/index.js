@@ -57,7 +57,7 @@ module.exports = {
       type: 'confirm',
       name: 'wantTypes',
       default: true,
-      message: 'Do you want to have types.d.ts file?',
+      message: 'Do you want to have types.ts file?',
     },
     {
       type: 'confirm',
@@ -180,8 +180,8 @@ module.exports = {
     if (data.wantTypes || data.wantActionsAndReducer) {
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/types.d.ts',
-        templateFile: './container/types.d.hbs',
+        path: '../../app/containers/{{properCase name}}/types.ts',
+        templateFile: './container/types.ts.hbs',
         abortOnFail: true,
       });
       actions.push({

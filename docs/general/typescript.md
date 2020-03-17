@@ -59,7 +59,6 @@ Create a type definition file and declare all the types/interfaces that your con
 ```typescript
 import { ActionType } from 'typesafe-actions';
 import * as actions from './actions';
-import { ApplicationRootState } from 'types'; // This is where your define the types your root state of redux
 
 /* --- STATE --- */
 // Container is only responsible for managing this state
@@ -73,12 +72,11 @@ type AppActions = ActionType<typeof actions>;
 
 /* --- EXPORTS --- */
 // Standardize your export names so that in other files you can refer them with standardized names
-type RootState = ApplicationRootState;
 type ContainerState = HomeState;
 type ContainerActions = AppActions;
 
 // Export only the types this container manages
-export { RootState, ContainerState, ContainerActions };
+export { ContainerState, ContainerActions };
 ```
 
 ---

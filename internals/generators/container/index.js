@@ -186,14 +186,14 @@ module.exports = {
       });
       actions.push({
         type: 'modify',
-        path: '../../app/types/index.d.ts',
+        path: '../../app/types/index.ts',
         pattern: new RegExp(/.*\/\/.*\[IMPORT NEW CONTAINERSTATE ABOVE\].+\n/),
         templateFile: './container/importContainerState.hbs',
         abortOnFail: true,
       });
       actions.push({
         type: 'modify',
-        path: '../../app/types/index.d.ts',
+        path: '../../app/types/index.ts',
         pattern: new RegExp(/.*\/\/.*\[INSERT NEW REDUCER KEY ABOVE\].+\n/),
         templateFile: './container/appendApplicationRootState.hbs',
         abortOnFail: true,

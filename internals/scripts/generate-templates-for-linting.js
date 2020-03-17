@@ -295,7 +295,7 @@ async function generateContainer({ name, memo }) {
  * @returns {Promise<[string]>}
  */
 async function generateComponents(components) {
-  const typesPath = '../../app/types/index.d.ts'
+  const typesPath = '../../app/types/index.ts'
 
   const promises = components.map(async component => {
     let result;

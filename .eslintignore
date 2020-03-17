@@ -2,7 +2,6 @@ internals/scripts
 internals/generators
 internals/templates
 server/
-**/types.d.ts
 *.html
 node_modules
 coverage

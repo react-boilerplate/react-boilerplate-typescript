@@ -12,7 +12,6 @@ import configureStore from '../../configureStore';
 import injectSaga, { useInjectSaga } from '../injectSaga';
 import { getInjectors } from '../sagaInjectors';
 
-
 import { createMemoryHistory } from 'history';
 import { InjectedStore } from '../../types';
 
@@ -28,8 +27,8 @@ function* testSaga() {
 jest.mock('../sagaInjectors');
 describe('injectSaga decorator', () => {
   let store: InjectedStore;
-  let injectors/*: ReturnType<typeof getInjectors>*/;
-  let ComponentWithSaga/*: ComponentType<unknown>*/;
+  let injectors /*: ReturnType<typeof getInjectors>*/;
+  let ComponentWithSaga /*: ComponentType<unknown>*/;
 
   beforeAll(() => {
     const mockedGetInjectors = (getInjectors as unknown) as jest.Mock<
@@ -93,8 +92,7 @@ describe('injectSaga decorator', () => {
       <Provider store={store}>
         <ComponentWithSaga {...props} />
       </Provider>,
-    )
-      .getInstance()!;
+    ).root;
     const {
       props: { children },
     } = renderedComponent;
@@ -111,7 +109,8 @@ describe('useInjectSaga hook', () => {
     const mockedGetInjectors = (getInjectors as unknown) as jest.Mock<
       typeof getInjectors
     >; // compiler doesn't know that it's mocked. So manually cast it.
-    mockedGetInjectors.mockImplementation(() => injectors);  });
+    mockedGetInjectors.mockImplementation(() => injectors);
+  });
 
   beforeEach(() => {
     store = configureStore({}, memoryHistory);

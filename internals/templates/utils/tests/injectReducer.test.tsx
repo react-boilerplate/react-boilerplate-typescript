@@ -73,7 +73,7 @@ describe('injectReducer decorator', () => {
           <ComponentWithReducer {...props} />
         </Provider>,
       )
-      .getInstance();
+      .root;
     if (!renderedComponent) {
       throw new Error();
     }

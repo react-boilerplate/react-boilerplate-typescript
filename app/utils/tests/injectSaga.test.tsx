@@ -88,13 +88,11 @@ describe('injectSaga decorator', () => {
 
   it('should propagate props', () => {
     const props = { testProp: 'test' };
-    const renderedComponent = renderer
-      .create(
-        <Provider store={store}>
-          <ComponentWithSaga {...props} />
-        </Provider>,
-      )
-      .getInstance()!;
+    const renderedComponent = renderer.create(
+      <Provider store={store}>
+        <ComponentWithSaga {...props} />
+      </Provider>,
+    ).root;
 
     const {
       props: { children },

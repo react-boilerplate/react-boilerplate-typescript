@@ -7,7 +7,7 @@
  */
 
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import styled from 'styles/styled-components';
 import { Switch, Route } from 'react-router-dom';
 

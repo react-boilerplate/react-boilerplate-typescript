@@ -27,6 +27,8 @@ import LanguageProvider from 'containers/LanguageProvider';
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess';
 
+import { HelmetProvider } from 'react-helmet-async';
+
 import { translationMessages } from 'i18n';
 import configureStore from './configureStore';
 
@@ -51,7 +53,9 @@ const render = (messages: any, Component = App) => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <Component />
+          <HelmetProvider>
+            <Component />
+          </HelmetProvider>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

@@ -4,31 +4,18 @@
 import { composeWithDevTools } from 'redux-devtools-extension';
 import history from '../utils/history';
 import configureStore from '../configureStore';
-import { InjectedStore } from '../types';
 
 describe('configureStore', () => {
-  let store: InjectedStore;
-
-  beforeAll(() => {
-    store = configureStore({}, history);
-  });
-
-  describe('injectedReducers', () => {
-    it('should contain an object for reducers', () => {
-      expect(typeof store.injectedReducers).toBe('object');
-    });
-  });
-
-  describe('injectedSagas', () => {
-    it('should contain an object for sagas', () => {
-      expect(typeof store.injectedSagas).toBe('object');
-    });
-  });
-
-  describe('runSaga', () => {
-    it('should contain a hook for `sagaMiddleware.run`', () => {
-      expect(typeof store.runSaga).toBe('function');
-    });
+  it('should return a redux store', () => {
+    const store = configureStore({}, history);
+    expect(store).toEqual(
+      expect.objectContaining({
+        dispatch: expect.any(Function),
+        subscribe: expect.any(Function),
+        getState: expect.any(Function),
+        replaceReducer: expect.any(Function),
+      }),
+    );
   });
 });
 

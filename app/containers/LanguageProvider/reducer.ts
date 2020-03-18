@@ -5,7 +5,7 @@
  */
 import ActionTypes from './constants';
 import { ContainerState, ContainerActions } from './types';
-import { DEFAULT_LOCALE } from '../../i18n';
+import { DEFAULT_LOCALE } from '../../locales';
 
 export const initialState: ContainerState = {
   locale: DEFAULT_LOCALE,

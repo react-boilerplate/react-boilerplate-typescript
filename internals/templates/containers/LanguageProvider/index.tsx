@@ -31,7 +31,6 @@ export default function LanguageProvider(props: Props) {
   return (
     <IntlProvider
       locale={locale}
-      key={locale}
       messages={props.messages[locale]}
     >
       {React.Children.only(props.children)}

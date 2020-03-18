@@ -63,6 +63,7 @@
     "babel-core": "7.0.0-bridge.0"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "16.13.0",
     "connected-react-router": "6.8.0",
     "fontfaceobserver": "2.1.0",
     "history": "4.10.1",
@@ -75,6 +76,7 @@
     "react-app-polyfill": "1.0.6",
     "react-dom": "16.13.0",
     "react-helmet-async": "1.0.4",
+    "react-hot-loader": "4.12.20",
     "react-intl": "2.9.0",
     "react-redux": "7.2.0",
     "react-router-dom": "5.1.2",

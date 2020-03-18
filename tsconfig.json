@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "incremental": true,
     "noEmit": true,
     "target": "es5",
     "module": "esnext", //commonjs destroys 'dynamic imports' which is used for code splitting

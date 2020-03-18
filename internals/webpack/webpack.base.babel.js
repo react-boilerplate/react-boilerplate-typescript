@@ -125,6 +125,9 @@ module.exports = options => ({
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js', '.ts', '.tsx'],
     mainFields: ['browser', 'jsnext:main', 'main'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window

@@ -21,7 +21,7 @@ module.exports = require('./webpack.base.babel')({
 
   // Add hot reloading in development
   entry: [
-    require.resolve('react-app-polyfill/ie11'),
+    'react-hot-loader/patch',
     'webpack-hot-middleware/client?reload=true',
     path.join(process.cwd(), 'app/app.tsx'), // Start with js/app.js
   ],
@@ -53,8 +53,6 @@ module.exports = require('./webpack.base.babel')({
   ],
 
   tsLoaders: [
-    // Babel also have typescript transpiler. Uncomment this if you prefer and comment-out ts-loader
-    // { loader: 'babel-loader' },
     {
       loader: 'ts-loader',
       options: {

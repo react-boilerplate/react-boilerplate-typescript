@@ -27,6 +27,8 @@ import LanguageProvider from 'containers/LanguageProvider';
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess';
 
+import { HelmetProvider } from 'react-helmet-async';
+
 import { translationMessages } from 'i18n';
 import configureStore from './configureStore';
 
@@ -46,27 +48,31 @@ const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app') as HTMLElement;
 
-const render = (messages: any, Component = App) => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <Component />
-        </ConnectedRouter>
-      </LanguageProvider>
-    </Provider>,
-    MOUNT_NODE,
-  );
+const ConnectedApp = (props: { messages: any }) => (
+  <Provider store={store}>
+    <LanguageProvider messages={props.messages}>
+      <ConnectedRouter history={history}>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </ConnectedRouter>
+    </LanguageProvider>
+  </Provider>
+);
+const render = (messages: any) => {
+  ReactDOM.render(<ConnectedApp messages={messages} />, MOUNT_NODE);
 };
 
 if (module.hot) {
-  module.hot.accept(['./i18n', './containers/App'], () => {
+  // Hot reloadable translation json files
+  // modules.hot.accept does not accept dynamic dependencies,
+  // have to be constants at compile-time
+  module.hot.accept(['./i18n'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    // eslint-disable-next-line
-    const App = require('./containers/App').default; // https://github.com/webpack/webpack-dev-server/issues/100
-    render(translationMessages, App);
+    render(translationMessages);
   });
 }
+
 // Chunked polyfill for browsers without Intl support
 if (!(window as any).Intl) {
   new Promise(resolve => {

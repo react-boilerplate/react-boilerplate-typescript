@@ -96,22 +96,20 @@ function reportErrors(reason) {
 }
 
 /**
- * Run eslint on all js files in the given directory
- * @param {string} relativePath
- * @returns {Promise<string>}
+ * Run eslint on all files
+ * @returns {Promise<void>}
  */
-function runLintingOnDirectory(relativePath) {
+function runLinting() {
   return new Promise((resolve, reject) => {
     shell.exec(
-      // dont run typescript typechecking here because CLI doesn't support glob pattern
       `npm run lint`,
       {
-        silent: true,
+        silent: false, // so thats we can see the errors in the console
       },
       code =>
         code
-          ? reject(new Error(`Linting error(s) in ${relativePath}`))
-          : resolve(relativePath),
+          ? reject(new Error(`Linting failed!`))
+          : resolve(),
     );
   });
 }
@@ -243,23 +241,15 @@ async function generateComponent({ name, memo }) {
     .then(handleResult)
     .then(feedbackToUser(`Generated '${component}'`))
     .catch(reason => reportErrors(reason));
-  await runLintingOnDirectory(relativePath)
-    .then(reportSuccess(`Linting test passed for '${component}'`))
-    .catch(reason => reportErrors(reason));
-  await removeDir(relativePath)
+    
+  // return a cleanup function
+  return async () => {
+    await removeDir(relativePath)
     .then(feedbackToUser(`Cleanup '${component}'`))
     .catch(reason => reportErrors(reason));
-
-  return component;
+  }
 }
 
-
-/**
- * Test the container generator and rollback when successful
- * @param {string} name - Container name
- * @param {string} type - Plop Action type
- * @returns {Promise<string>} - Relative path to the generated container
- */
 async function generateContainer({ name, memo }) {
   const targetFolder = 'containers';
   const componentName = `${NAMESPACE}Container${name}`;
@@ -279,14 +269,13 @@ async function generateContainer({ name, memo }) {
     .then(handleResult)
     .then(feedbackToUser(`Generated '${container}'`))
     .catch(reason => reportErrors(reason));
-  await runLintingOnDirectory(relativePath)
-    .then(reportSuccess(`Linting test passed for '${container}'`))
-    .catch(reason => reportErrors(reason));
-  await removeDir(relativePath)
-    .then(feedbackToUser(`Cleanup '${container}'`))
-    .catch(reason => reportErrors(reason));
 
-  return container;
+  // return a cleanup function
+  return async () => {
+    await removeDir(relativePath)
+      .then(feedbackToUser(`Cleanup '${container}'`))
+      .catch(reason => reportErrors(reason));
+  }
 }
 
 /**
@@ -297,24 +286,28 @@ async function generateContainer({ name, memo }) {
 async function generateComponents(components) {
   const typesPath = '../../app/types/index.ts'
 
-  const promises = components.map(async component => {
-    let result;
-
-    if (component.kind === 'component') {
-      result = await generateComponent(component);
-    } else if (component.kind === 'container') {
-      result = await generateContainer(component);
-    }
-
-    return result;
-  });
-
   const backupTypes = await backupFile(typesPath)
     .then(feedbackToUser("Generated 'types/index.ds.ts.rbgen'"))
     .catch(reason => reportErrors(reason));
 
-  const results = await Promise.all(promises);
+  const cleanups = [];
+  for (const component of components) {
+    if (component.kind === 'component') {
+      cleanup = await generateComponent(component);
+    } else if (component.kind === 'container') {
+      cleanup = await generateContainer(component);
+    }
+    cleanups.push(cleanup);
+  }
 
+  // Run lint when all the components are generated to see if they have any linting erros
+  await runLinting()
+    .then(reportSuccess(`Linting test passed`))
+    .catch(reason => reportErrors(reason));
+
+  // Everything is done, so run the cleanups
+  await Promise.all(cleanups.map(async cleanup => await cleanup()))
+  
   await restoreModifiedFile(backupTypes)
     .then(feedbackToUser(`Restored: ${typesPath}`))
     .catch(reason => reportErrors(reason));
@@ -323,7 +316,6 @@ async function generateComponents(components) {
     .then(feedbackToUser(`Removed: ${backupTypes}`))
     .catch(reason => reportErrors(reason));
 
-  return results;
 }
 
 /**

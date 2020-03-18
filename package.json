@@ -97,7 +97,6 @@
     "@babel/plugin-transform-react-inline-elements": "7.2.0",
     "@babel/preset-env": "7.5.4",
     "@babel/preset-react": "7.0.0",
-    "@babel/preset-typescript": "7.3.3",
     "@babel/register": "7.4.4",
     "@octokit/rest": "16.33.1",
     "@testing-library/jest-dom": "4.0.0",

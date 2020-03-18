@@ -53,8 +53,6 @@ module.exports = require('./webpack.base.babel')({
   ],
 
   tsLoaders: [
-    // Babel also have typescript transpiler. Uncomment this if you prefer and comment-out ts-loader
-    // { loader: 'babel-loader' },
     {
       loader: 'ts-loader',
       options: {

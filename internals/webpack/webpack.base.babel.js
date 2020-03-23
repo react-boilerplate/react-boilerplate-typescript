@@ -124,7 +124,6 @@ module.exports = options => ({
   resolve: {
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js', '.ts', '.tsx'],
-    mainFields: ['browser', 'jsnext:main', 'main'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
     },

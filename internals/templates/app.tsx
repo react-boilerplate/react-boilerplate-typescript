@@ -16,6 +16,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
 // Import root app
 import App from 'containers/App';
@@ -96,5 +97,5 @@ if (!(window as any).Intl) {
 // it's not most important operation and if main code fails,
 // we do not want it installed
 if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install();
+  OfflinePluginRuntime.install();
 }

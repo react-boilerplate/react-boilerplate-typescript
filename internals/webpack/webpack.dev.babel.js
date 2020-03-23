@@ -7,12 +7,9 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
-// 1. import default from the plugin module
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
   .default;
 
-// 2. create a transformer;
-// the factory additionally accepts an options object which described below
 const styledComponentsTransformer = createStyledComponentsTransformer();
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 

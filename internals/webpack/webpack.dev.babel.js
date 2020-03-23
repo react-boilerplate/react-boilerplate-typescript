@@ -53,6 +53,7 @@ module.exports = require('./webpack.base.babel')({
   ],
 
   tsLoaders: [
+    { loader: 'babel-loader' }, // using babel after typescript transpiles to target es6
     {
       loader: 'ts-loader',
       options: {

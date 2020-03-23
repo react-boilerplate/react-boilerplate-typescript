@@ -6,14 +6,12 @@ import { InjectReducerParams, InjectSagaParams } from 'types';
 
 // export them with stricter type definitions
 
-const useInjectReducer = ({ key, reducer }: InjectReducerParams) => {
+const useInjectReducer = ({ key, reducer }: InjectReducerParams) =>
   useReducer({ key, reducer });
-};
 
 export { useInjectReducer };
 
-const useInjectSaga = ({ key, saga, mode }: InjectSagaParams) => {
+const useInjectSaga = ({ key, saga, mode }: InjectSagaParams) =>
   useSaga({ key, saga, mode });
-};
 
 export { useInjectSaga };

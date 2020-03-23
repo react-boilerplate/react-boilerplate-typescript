@@ -94,7 +94,7 @@ Boilerplate version: **`4.1`**
 
 ## Overview
 
-- For the detailed documentation: [**Typescript Docs**](docs/readme.md)
+- For the detailed documentation: [**Typescript Docs**](docs/README.md)
 
 - Example projects built with this boilerplate `(if you are looking for advanced examples)`:
 
@@ -110,7 +110,7 @@ Boilerplate version: **`4.1`**
 
 You can find all the documentation in the original [**react-boilerplate**](https://github.com/react-boilerplate/react-boilerplate)
 
-For the typescript related documentation: [**Typescript Docs**](docs/readme.md)
+For the typescript related documentation: [**Typescript Docs**](docs/README.md)
 
 ---
 

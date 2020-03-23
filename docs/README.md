@@ -20,6 +20,6 @@ Main goal is to enhance the original boilerplate by utilizing all the powerfull 
 
 And thats it :) The rest of the procedure is as same as the original boilerplate. Go ahead and check the docs :)
 
-Take a look at the [Key Notes & Differences](general/typescript.md) to see how `typescript` version differs from the original
+Take a look at the [Key Notes & Differences](general/key-notes.md) to see how `typescript` version differs from the original
 
 Also, there are [Code Samples](general/code-samples.md) to illustrate how to code with the typescript way

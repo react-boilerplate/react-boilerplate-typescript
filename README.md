@@ -114,6 +114,15 @@ For the typescript related documentation: [**Typescript Docs**](docs/README.md)
 
 ---
 
+## Ongoing Work
+
+In between [releases](https://github.com/react-boilerplate/react-boilerplate-typescript/releases), we work on the `dev` branch and rarely ever update `master`. For that reason, it sometimes look like the repo isn't actively maintained. This isn't the case, React Boilerplate is alive and kicking.
+
+Please feel free to check out:
+
+- our [`dev` branch](https://github.com/react-boilerplate/react-boilerplate-typescript/tree/dev) for the latest updates. You are always welcome to use it as the basis for your project. We only merge to `dev` projects which are fully ready.
+- our open [issues](https://github.com/react-boilerplate/react-boilerplate/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) and [pull requests](https://github.com/react-boilerplate/react-boilerplate/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc) to see what we are currently working on. Suggestions and contributions are always welcome!
+
 <sub><i>Keywords: React Boilerplate, Typescript, React.js, Redux, Hot Reloading, ESNext, Babel, react-router, Offline First, ServiceWorker, `styled-components`, redux-saga, FontFaceObserver</i></sub>
 
 ## Contributors

@@ -12,7 +12,7 @@
 
 This is a fork of the original boilerplate. It has been developed and maintained since 2018. It provides the exact same functionalities and features, however, it comes with some differences(benefits) due to the typescript nature.
 
-Main goal is to enhance the original boilerplate by utilizing all the powerfull features of the typescript and to bring type-safety and scalability to the all core concepts (React, Redux, Sagas, Styled-Components, etc...).
+Main goal is to enhance the original boilerplate by utilizing all the powerfull features of the typescript and to bring type-safety and scalability to all of the core building blocks (React, Redux, Sagas, Styled-Components, etc...).
 
 # Getting Started
 

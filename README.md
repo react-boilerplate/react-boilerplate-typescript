@@ -84,19 +84,17 @@
 
 </div>
 
-This is the **TYPESCRIPT** implementation of the original [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate) with extra features and powers of `Typescript`
+This is the **TYPESCRIPT** implementation of the original [**react-boilerplate**](https://github.com/react-boilerplate/react-boilerplate) with extra features and powers of `Typescript`
 
 > ⚠️ Please refer to the [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate) for the details and the documentation
 
 ---
 
-Boilerplate version: `4.1`
+Boilerplate version: **`4.1`**
 
-#### Brief overview of the typescript version
+## Overview
 
-- Detailed documentation: [**Typescript docs**](docs/general/typescript.md)
-
-* Typescript practices heavily depends on the guide -> <a  href="https://github.com/piotrwitek/react-redux-typescript-guide">react-typescript-guide</a>
+- For the detailed documentation: [**Typescript Docs**](docs/readme.md)
 
 - Example projects built with this boilerplate `(if you are looking for advanced examples)`:
 
@@ -110,8 +108,9 @@ Boilerplate version: `4.1`
 
 ## Getting Started & Features & Documentations and More...
 
-⚠️
-Refer to the [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate)
+You can find all the documentation in the original [**react-boilerplate**](https://github.com/react-boilerplate/react-boilerplate)
+
+For the typescript related documentation: [**Typescript Docs**](docs/readme.md)
 
 ---
 

@@ -11,7 +11,7 @@ interface Props {
 
 function List(props: Props) {
   const ComponentToRender = props.component;
-  let content = <div /> as JSX.Element | JSX.Element[];
+  let content = (<div />) as JSX.Element | JSX.Element[];
 
   // If we have items, render them
   if (props.items) {

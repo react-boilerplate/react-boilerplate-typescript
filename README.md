@@ -90,7 +90,7 @@ This is the **TYPESCRIPT** implementation of the original [**react-boilerplate**
 
 ---
 
-Boilerplate version: **`4.1`**
+Boilerplate version: [**`4.1`**](https://github.com/react-boilerplate/react-boilerplate-typescript/releases)
 
 ## Overview
 

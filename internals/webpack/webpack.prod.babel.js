@@ -20,6 +20,7 @@ module.exports = require('./webpack.base.babel')({
   },
 
   tsLoaders: [
+    { loader: 'babel-loader' }, // using babel after typescript transpiles to target es6
     {
       loader: 'ts-loader',
       options: {
@@ -45,8 +46,6 @@ module.exports = require('./webpack.base.babel')({
             ascii_only: true,
           },
         },
-        parallel: true,
-        cache: true,
         sourceMap: true,
       }),
     ],

@@ -18,12 +18,9 @@ export interface Props {
   children?: React.ReactNode;
 }
 
-const stateSelector = createSelector(
-  makeSelectLocale(),
-  locale => ({
-    locale,
-  }),
-);
+const stateSelector = createSelector(makeSelectLocale(), locale => ({
+  locale,
+}));
 
 export default function LanguageProvider(props: Props) {
   const { locale } = useSelector(stateSelector);

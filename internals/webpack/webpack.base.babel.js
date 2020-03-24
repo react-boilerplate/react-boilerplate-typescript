@@ -14,8 +14,10 @@ module.exports = options => ({
     // Compile into js/build.js
     path: path.resolve(process.cwd(), 'build'),
     publicPath: '/',
+
+    // Merge with env dependent settings
     ...options.output,
-  }, // Merge with env dependent settings
+  },
   optimization: options.optimization,
   module: {
     rules: [
@@ -28,7 +30,7 @@ module.exports = options => ({
         },
       },
       {
-        test: /\.ts(x?)$/,
+        test: /\.ts(x?)$/, // Transform typescript files with ts-loader
         exclude: /node_modules/,
         use: options.tsLoaders,
       },
@@ -119,12 +121,12 @@ module.exports = options => ({
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
+    // Run typescript checker
     new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
   ]),
   resolve: {
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js', '.ts', '.tsx'],
-    mainFields: ['browser', 'jsnext:main', 'main'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
     },

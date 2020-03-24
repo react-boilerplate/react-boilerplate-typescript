@@ -10,7 +10,6 @@ interface LanguageProviderState {
 /* --- ACTIONS --- */
 type AppActions = ActionType<typeof actions>;
 
-
 /* --- EXPORTS --- */
 
 type ContainerState = LanguageProviderState;

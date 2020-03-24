@@ -9,9 +9,6 @@ import { initialState } from './reducer';
 const selectHome = (state: ApplicationRootState) => state.home || initialState;
 
 const makeSelectUsername = () =>
-  createSelector(
-    selectHome,
-    substate => substate.username,
-  );
+  createSelector(selectHome, substate => substate.username);
 
 export { selectHome, makeSelectUsername };

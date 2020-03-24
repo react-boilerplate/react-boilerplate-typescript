@@ -27,4 +27,3 @@ function App() {
   );
 }
 export default hot(App);
-

@@ -1,128 +1,25 @@
 # Documentation
 
+### ⚠️ This contains only the `Typescript` related documentation specific to this repo. Please check the [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate) documentation for more.
+
 ## Table of Contents
 
-- [General](general)
-  - [**CLI Commands**](general/commands.md)
-  - [Introduction ](general/introduction.md)
-  - [Tool Configuration](general/files.md)
-  - [Server Configurations](general/server-configs.md)
-  - [Deployment](general/deployment.md) _(currently Heroku and AWS S3 specific)_
-  - [Debugging](general/debugging.md)
-  - [FAQ](general/faq.md)
-  - [Gotchas](general/gotchas.md)
-  - [Remove](general/remove.md)
-  - [Extracting components](general/components.md)
-- [Testing](testing)
-  - [Unit Testing](testing/unit-testing.md)
-  - [Component Testing](testing/component-testing.md)
-  - [Remote Testing](testing/remote-testing.md)
-- [Styling (CSS)](css/README.md)
-  - [Next Generation CSS](css/README.md#next-generation-css)
-  - [CSS Support](css/README.md#css-we-support)
-  - [styled-components](css/README.md#styled-components)
-  - [Stylesheet](css/README.md#stylesheet)
-  - [CSS Modules](css/README.md#css-modules)
-  - [Sass](css/README.md#sass)
-  - [LESS](css/README.md#less)
-- [JS](js)
-  - [Redux](js/redux.md)
-  - [Immer](js/immer.md)
-  - [reselect](js/reselect.md)
-  - [redux-saga](js/redux-saga.md)
-  - [i18n](js/i18n.md)
-  - [routing](js/routing.md)
-- [Maintenance](maintenance)
-  - [Dependency Update](maintenance/dependency.md)
-- [Forks](forks)
+- General
+  - [Key Notes & Differences](general/key-notes.md)
+  - [Code Samples](general/code-samples.md)
 
-## Overview
+## Introduction to `Typescript` version
 
-### Quickstart
+This is a fork of the original boilerplate. It has been developed and maintained since 2018. It provides the exact same functionalities and features, however, it comes with some differences(benefits) due to the typescript nature.
 
-1.  First, let's kick the tyres by launching the sample _Repospective_ app
-    bundled with this project to demo some of its best features:
+Main goal is to enhance the original boilerplate by utilizing all the powerfull features of the typescript and to bring type-safety and scalability to all of the core building blocks (React, Redux, Sagas, Styled-Components, etc...).
 
-    ```Shell
-    npm run setup && npm start
-    ```
+# Getting Started
 
-1.  Open [localhost:3000](http://localhost:3000) to see it in action.
+**IMPORTANT⚠️:** The typescript concepts and practices depends on this great [react-redux-typescript](https://github.com/piotrwitek/react-redux-typescript-guide) guide. You **MUST** be familiar with it in order to completely understand the structure.
 
-    - Add a Github username to see Redux and Redux Sagas in action: effortless
-      async state updates and side effects are now yours :)
-    - Edit the file at `./app/components/Header/index.js` so that the text of
-      the `<Button>` component reads "Features!!!"... [Hot Module Reloading](https://webpack.js.org/guides/hot-module-replacement/) gives
-      you a feedback loop with your UI so smooth it's almost conversational!
-    - Click your (newly emphatic) Features button to see React Router in action...
-      Now you can share a direct link to that content privately over your LAN or
-      globally addressable to any device, anywhere. Not bad for a locally-running
-      Single Page App.
+And thats it :) The rest of the procedure is as same as the original boilerplate. Go ahead and check the docs :)
 
-1.  Time to build your own app: run
+Take a look at the [Key Notes & Differences](general/key-notes.md) to see how `typescript` version differs from the original
 
-    ```shell
-    npm run clean
-    ```
-
-    ...and use the built-in generators to start your first feature.
-
-### Development
-
-Run `npm start` to see your app at `localhost:3000`
-
-### Building & Deploying
-
-1.  Run `npm run build`, which will compile all the necessary files to the
-    `build` folder.
-
-2.  Upload the contents of the `build` folder to your web server's root folder.
-
-### Structure
-
-The [`app/`](../../../tree/master/app) directory contains your entire application code, including CSS,
-JavaScript, HTML and tests.
-
-The rest of the folders and files only exist to make your life easier, and
-should not need to be touched.
-
-_(If they do have to be changed, please [submit an issue](https://github.com/react-boilerplate/react-boilerplate/issues)!)_
-
-### CSS
-
-Using [tagged template literals](https://www.styled-components.com/docs/advanced#tagged-template-literals)
-(a recent addition to JavaScript) and the [power of CSS](https://github.com/styled-components/styled-components/blob/master/docs/css-we-support.md),
-`styled-components` allows you to write actual CSS code to style your components.
-It also removes the mapping between components and styles – using components as a
-low-level styling construct could not be easier!
-
-See the [CSS documentation](./css/README.md) for more information.
-
-### JS
-
-We bundle all your clientside scripts and chunk them into several files using
-code splitting where possible. We then automatically optimize your code when
-building for production so you don't have to worry about that.
-
-See the [JS documentation](./js/README.md) for more information about the
-JavaScript side of things.
-
-### SEO
-
-We use [react-helmet-async](https://github.com/staylor/react-helmet-async) for managing document head tags. Examples on how to
-write head tags can be found [here](https://github.com/staylor/react-helmet-async#usage).
-
-### Testing
-
-For a thorough explanation of the testing procedure, see the
-[testing documentation](./testing/README.md)!
-
-#### Browser testing
-
-`npm run start:tunnel` makes your locally-running app globally available on the web
-via a temporary URL: great for testing on different devices, client demos, etc!
-
-#### Unit testing
-
-Unit tests live in `test/` directories right next to the components being tested
-and are run with `npm run test`.
+Also, there are [Code Samples](general/code-samples.md) to illustrate how to code with the typescript way

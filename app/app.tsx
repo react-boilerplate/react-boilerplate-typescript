@@ -16,6 +16,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
 // Import root app
 import App from 'containers/App';
@@ -29,10 +30,10 @@ import 'file-loader?name=.htaccess!./.htaccess';
 
 import { HelmetProvider } from 'react-helmet-async';
 
-import { translationMessages } from 'i18n';
 import configureStore from './configureStore';
 
 // Import i18n messages
+import { translationMessages } from 'i18n';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -83,7 +84,7 @@ if (!(window as any).Intl) {
         import('intl/locale-data/jsonp/en.js'),
         import('intl/locale-data/jsonp/de.js'),
       ]),
-    ) // eslint-disable-line prettier/prettier
+    )
     .then(() => render(translationMessages))
     .catch(err => {
       throw err;
@@ -96,6 +97,5 @@ if (!(window as any).Intl) {
 // it's not most important operation and if main code fails,
 // we do not want it installed
 if (process.env.NODE_ENV === 'production') {
-  // eslint-disable-next-line global-require
-  require('offline-plugin/runtime').install();
+  OfflinePluginRuntime.install();
 }

@@ -10,7 +10,7 @@ module.exports = {
   ],
   plugins: [
     'react-hot-loader/babel',
-    'styled-components',
+    'babel-plugin-styled-components',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
   ],

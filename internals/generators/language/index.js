@@ -59,13 +59,13 @@ module.exports = {
 
     actions.push({
       type: 'modify',
-      path: '../../app/locales.ts',
+      path: '../../app/i18n.ts',
       pattern: /(const ..LocaleData = require\('react-intl\/locale-data\/..'\);\n)+/g,
       templateFile: './language/intl-locale-data.hbs',
     });
     actions.push({
       type: 'modify',
-      path: '../../app/i18n.ts',
+      path: '../../app/locales.ts',
       pattern: /(\s+'[a-z]+',\n)(?!.*\s+'[a-z]+',)/g,
       templateFile: './language/app-locale.hbs',
     });

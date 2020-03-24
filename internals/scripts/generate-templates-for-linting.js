@@ -89,10 +89,12 @@ function reportSuccess(message) {
  * @param {string} reason
  * @returns {Function}
  */
-function reportErrors(reason) {
+function reportErrors(reason, shouldExist = true) {
   // TODO Replace with our own helpers/log that is guaranteed to be blocking?
   xmark(() => console.error(chalk.red(` ${reason}`)));
-  process.exit(1);
+  if(shouldExist) {
+    process.exit(1);
+  }
 }
 
 /**
@@ -124,7 +126,7 @@ function runLintingOnFile(filePath) {
     shell.exec(
       `npm run lint:eslint "${filePath}"`,
       {
-        silent: true,
+        silent: false,
       },
       code => {
         if (code) {
@@ -147,8 +149,8 @@ function removeDir(relativePath) {
     try {
       rimraf(path.join(__dirname, '/../../app/', relativePath), err => {
         if (err) throw err;
+        resolve(relativePath);
       });
-      resolve(relativePath);
     } catch (err) {
       reject(err);
     }
@@ -167,6 +169,7 @@ function removeFile(filePath) {
         if (err) throw err;
       });
       resolve(filePath);
+
     } catch (err) {
       reject(err);
     }
@@ -220,16 +223,14 @@ async function restoreModifiedFile(
 }
 
 /**
- * Test the component generator and rollback when successful
+ * Test the component generator
  * @param {string} name - Component name
  * @param {string} type - Plop Action type
- * @returns {Promise<string>} - Relative path to the generated component
  */
 async function generateComponent({ name, memo }) {
   const targetFolder = 'components';
   const componentName = `${NAMESPACE}Component${name}`;
   const relativePath = `${targetFolder}/${componentName}`;
-  const component = `component/${memo ? 'Pure' : 'NotPure'}`;
 
   await componentGen
     .runActions({
@@ -239,13 +240,13 @@ async function generateComponent({ name, memo }) {
       wantLoadable: true,
     })
     .then(handleResult)
-    .then(feedbackToUser(`Generated '${component}'`))
+    .then(feedbackToUser(`Generated '${relativePath}'`))
     .catch(reason => reportErrors(reason));
     
   // return a cleanup function
   return async () => {
     await removeDir(relativePath)
-    .then(feedbackToUser(`Cleanup '${component}'`))
+    .then(feedbackToUser(`Cleanup '${relativePath}'`))
     .catch(reason => reportErrors(reason));
   }
 }
@@ -254,7 +255,6 @@ async function generateContainer({ name, memo }) {
   const targetFolder = 'containers';
   const componentName = `${NAMESPACE}Container${name}`;
   const relativePath = `${targetFolder}/${componentName}`;
-  const container = `container/${memo ? 'Pure' : 'NotPure'}`;
 
   await containerGen
     .runActions({
@@ -267,13 +267,13 @@ async function generateContainer({ name, memo }) {
       wantLoadable: true,
     })
     .then(handleResult)
-    .then(feedbackToUser(`Generated '${container}'`))
+    .then(feedbackToUser(`Generated '${relativePath}'`))
     .catch(reason => reportErrors(reason));
 
   // return a cleanup function
   return async () => {
     await removeDir(relativePath)
-      .then(feedbackToUser(`Cleanup '${container}'`))
+      .then(feedbackToUser(`Cleanup '${relativePath}'`))
       .catch(reason => reportErrors(reason));
   }
 }
@@ -281,7 +281,6 @@ async function generateContainer({ name, memo }) {
 /**
  * Generate components
  * @param {array} components
- * @returns {Promise<[string]>}
  */
 async function generateComponents(components) {
   const typesPath = '../../app/types/index.ts'
@@ -299,29 +298,22 @@ async function generateComponents(components) {
     }
     cleanups.push(cleanup);
   }
-
-  // Run lint when all the components are generated to see if they have any linting erros
-  await runLinting()
-    .then(reportSuccess(`Linting test passed`))
-    .catch(reason => reportErrors(reason));
-
-  // Everything is done, so run the cleanups
-  await Promise.all(cleanups.map(async cleanup => await cleanup()))
-  
-  await restoreModifiedFile(backupTypes)
+  const restoreBackups = async () => await restoreModifiedFile(backupTypes)
     .then(feedbackToUser(`Restored: ${typesPath}`))
     .catch(reason => reportErrors(reason));
 
-  await removeFile(backupTypes)
+  const removeBackups = async() =>  await removeFile(backupTypes)
     .then(feedbackToUser(`Removed: ${backupTypes}`))
     .catch(reason => reportErrors(reason));
 
+  // return cleanup functions to run later
+  cleanups.push(restoreBackups, removeBackups);
+  return cleanups;
 }
 
 /**
- * Test the language generator and rollback when successful
+ * Test the language generator
  * @param {string} language
- * @returns {Promise<*>}
  */
 async function generateLanguage(language) {
   // Run generator
@@ -343,26 +335,8 @@ async function generateLanguage(language) {
     )
     .catch(reason => reportErrors(reason));
 
-  // Run eslint on modified and added JS files
-  const lintingTasks = Object.keys(generatedFiles)
-    .filter(
-      filePath =>
-        generatedFiles[filePath] === 'modify' ||
-        generatedFiles[filePath] === 'add',
-    )
-    .filter(filePath => filePath.endsWith('.js'))
-    .map(async filePath => {
-      const result = await runLintingOnFile(filePath)
-        .then(reportSuccess(`Linting test passed for '${filePath}'`))
-        .catch(reason => reportErrors(reason));
-
-      return result;
-    });
-
-  await Promise.all(lintingTasks);
-
   // Restore modified files
-  const restoreTasks = Object.keys(generatedFiles)
+  const restoreTasks =  async () => Object.keys(generatedFiles)
     .filter(filePath => generatedFiles[filePath] === 'backup')
     .map(async filePath => {
       const result = await restoreModifiedFile(filePath)
@@ -379,10 +353,8 @@ async function generateLanguage(language) {
       return result;
     });
 
-  await Promise.all(restoreTasks);
-
   // Remove backup files and added files
-  const removalTasks = Object.keys(generatedFiles)
+  const removalTasks = async () => Object.keys(generatedFiles)
     .filter(
       filePath =>
         generatedFiles[filePath] === 'backup' ||
@@ -396,21 +368,39 @@ async function generateLanguage(language) {
       return result;
     });
 
-  await Promise.all(removalTasks);
-
-  return language;
+  // return cleanup functions to run later
+  const cleanups = [restoreTasks, removalTasks];
+  return cleanups;
 }
 
 /**
  * Run
  */
 (async function () {
-  await generateComponents([
+  const componentsCleanups = await generateComponents([
     { kind: 'component', name: 'Component', memo: false },
     { kind: 'component', name: 'MemoizedComponent', memo: true },
     { kind: 'container', name: 'Container', memo: false },
     { kind: 'container', name: 'MemoizedContainer', memo: true },
   ]).catch(reason => reportErrors(reason));
 
-  await generateLanguage('fr').catch(reason => reportErrors(reason));
+  const languageCleanups = await generateLanguage('fr').catch(reason => reportErrors(reason));
+
+  // Run lint when all the components and languages are generated to see if they have any linting erros
+  const lintingResult = await runLinting()
+    .then(reportSuccess(`Linting test passed`))
+    .catch(reason => { 
+      reportErrors(reason, false); 
+      return false;
+    });
+
+  // Everything is done, so run the cleanups synchronously 
+  const allCleanups = componentsCleanups.concat(...languageCleanups);
+  for (const cleanup of allCleanups) {
+    await cleanup();
+  }
+
+  if(lintingResult === false) {
+    process.exit(1);
+  }
 })();

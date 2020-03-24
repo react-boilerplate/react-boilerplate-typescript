@@ -12,7 +12,10 @@ describe('<List />', () => {
   });
 
   it('should pass all items props to rendered component', () => {
-    const items = [{ id: 1, name: 'Hello' }, { id: 2, name: 'World' }]  as Repo[];
+    const items = [
+      { id: 1, name: 'Hello' },
+      { id: 2, name: 'World' },
+    ] as Repo[];
 
     const component = ({ item }) => <li>{item.name}</li>;
 

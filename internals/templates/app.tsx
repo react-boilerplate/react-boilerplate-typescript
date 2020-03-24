@@ -16,6 +16,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
 // Import root app
 import App from 'containers/App';
@@ -26,6 +27,8 @@ import LanguageProvider from 'containers/LanguageProvider';
 // Load the favicon and the .htaccess file
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess';
+
+import { HelmetProvider } from 'react-helmet-async';
 
 import configureStore from './configureStore';
 
@@ -46,28 +49,31 @@ const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app') as HTMLElement;
 
-const render = (messages: any, Component = App) => {
-  ReactDOM.render(
-    // tslint:disable-next-line:jsx-wrap-multiline
-    <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <Component />
-        </ConnectedRouter>
-      </LanguageProvider>
-    </Provider>,
-    MOUNT_NODE,
-  );
+const ConnectedApp = (props: { messages: any }) => (
+  <Provider store={store}>
+    <LanguageProvider messages={props.messages}>
+      <ConnectedRouter history={history}>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </ConnectedRouter>
+    </LanguageProvider>
+  </Provider>
+);
+const render = (messages: any) => {
+  ReactDOM.render(<ConnectedApp messages={messages} />, MOUNT_NODE);
 };
 
 if (module.hot) {
-  module.hot.accept(['./i18n', './containers/App'], () => {
+  // Hot reloadable translation json files
+  // modules.hot.accept does not accept dynamic dependencies,
+  // have to be constants at compile-time
+  module.hot.accept(['./i18n'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    // tslint:disable-next-line:max-line-length
-    const App = require('./containers/App').default; // https://github.com/webpack/webpack-dev-server/issues/100
-    render(translationMessages, App);
+    render(translationMessages);
   });
 }
+
 // Chunked polyfill for browsers without Intl support
 if (!(window as any).Intl) {
   new Promise(resolve => {
@@ -91,5 +97,5 @@ if (!(window as any).Intl) {
 // it's not most important operation and if main code fails,
 // we do not want it installed
 if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install();
+  OfflinePluginRuntime.install();
 }

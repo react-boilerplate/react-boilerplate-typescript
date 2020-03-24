@@ -1,6 +1,4 @@
-import {
-  makeSelectLocation,
-} from '../selectors';
+import { makeSelectLocation } from '../selectors';
 
 describe('makeSelectLocation', () => {
   it('should select the location', () => {

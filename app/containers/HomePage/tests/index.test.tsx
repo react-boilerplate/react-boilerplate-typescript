@@ -8,6 +8,8 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 
 import * as appActions from 'containers/App/actions';
+import { HelmetProvider } from 'react-helmet-async';
+
 import configureStore from '../../../configureStore';
 import HomePage from '../index';
 import { initialState } from '../reducer';
@@ -18,10 +20,11 @@ jest.mock('containers/App/actions');
 
 const renderHomePage = store =>
   render(
-    // tslint:disable-next-line: jsx-wrap-multiline
     <Provider store={store}>
       <IntlProvider locale="en">
-        <HomePage />
+        <HelmetProvider>
+          <HomePage />
+        </HelmetProvider>
       </IntlProvider>
     </Provider>,
   );

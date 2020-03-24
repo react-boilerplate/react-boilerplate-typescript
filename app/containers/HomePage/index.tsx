@@ -5,14 +5,20 @@
  */
 
 import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
-import { makeSelectError, makeSelectLoading, makeSelectRepos } from 'containers/App/selectors';
+// import { useInjectReducer } from 'utils/injectReducer';
+// import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+
+import {
+  makeSelectError,
+  makeSelectLoading,
+  makeSelectRepos,
+} from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
 import AtPrefix from './AtPrefix';
@@ -42,7 +48,8 @@ export default function HomePage() {
   const dispatch = useDispatch();
 
   // Not gonna declare event types here. No need. any is fine
-  const onChangeUsername = (evt: any) => dispatch(changeUsername(evt.target.value));
+  const onChangeUsername = (evt: any) =>
+    dispatch(changeUsername(evt.target.value));
   const onSubmitForm = (evt?: any) => {
     if (evt !== undefined && evt.preventDefault) {
       evt.preventDefault();

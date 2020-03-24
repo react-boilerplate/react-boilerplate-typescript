@@ -4,7 +4,7 @@
  * List all the features
  */
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { FormattedMessage } from 'react-intl';
 
 import H1 from 'components/H1';
@@ -36,14 +36,14 @@ export default function FeaturePage() {
           </p>
         </ListItem>
 
-          <ListItem>
-            <ListItemTitle>
-              <FormattedMessage {...messages.feedbackHeader} />
-            </ListItemTitle>
-            <p>
-              <FormattedMessage {...messages.feedbackMessage} />
-            </p>
-          </ListItem>
+        <ListItem>
+          <ListItemTitle>
+            <FormattedMessage {...messages.feedbackHeader} />
+          </ListItemTitle>
+          <p>
+            <FormattedMessage {...messages.feedbackMessage} />
+          </p>
+        </ListItem>
         <ListItem>
           <ListItemTitle>
             <FormattedMessage {...messages.feedbackHeader} />

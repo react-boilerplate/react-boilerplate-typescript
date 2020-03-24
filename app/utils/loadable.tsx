@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 
 interface Props {
-  fallback: React.ReactNode | null;
+  fallback?: React.ReactNode | null;
 }
 const loadable = <T extends React.ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,

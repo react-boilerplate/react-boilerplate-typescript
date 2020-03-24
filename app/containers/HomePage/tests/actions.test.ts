@@ -1,7 +1,7 @@
+import { action } from 'typesafe-actions';
 import ActionTypes from '../constants';
 
 import { changeUsername } from '../actions';
-import { action } from 'typesafe-actions';
 
 describe('Home Actions', () => {
   describe('changeUsername', () => {

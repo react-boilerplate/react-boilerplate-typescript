@@ -16,7 +16,6 @@ describe('<ReposList />', () => {
 
   it('should render an error if loading failed', () => {
     const { queryByText } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <IntlProvider locale="en">
         <ReposList loading={false} error={{ message: 'Loading failed!' }} />
       </IntlProvider>,
@@ -25,7 +24,6 @@ describe('<ReposList />', () => {
   });
 
   it('should render the repositories if loading was successful', () => {
-
     const initialState = {
       global: {
         currentUser: 'mxstbr',
@@ -36,10 +34,7 @@ describe('<ReposList />', () => {
         },
       },
     };
-    const store = configureStore(
-      initialState,
-      history,
-    );
+    const store = configureStore(initialState, history);
     const repos = [
       {
         owner: {
@@ -52,10 +47,9 @@ describe('<ReposList />', () => {
       },
     ] as Repo[];
     const { container } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <IntlProvider locale="en">
-          <ReposList repos={repos} error={false} loading={false}/>
+          <ReposList repos={repos} error={false} loading={false} />
         </IntlProvider>
       </Provider>,
     );

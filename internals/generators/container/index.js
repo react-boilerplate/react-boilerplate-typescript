@@ -57,7 +57,7 @@ module.exports = {
       type: 'confirm',
       name: 'wantTypes',
       default: true,
-      message: 'Do you want to have types.d.ts file?',
+      message: 'Do you want to have types.ts file?',
     },
     {
       type: 'confirm',
@@ -67,7 +67,7 @@ module.exports = {
     },
   ],
   actions: data => {
-    // Generate index.js and index.test.js
+    // Generate index.ts and index.test.tsx
     const actions = [
       {
         type: 'add',
@@ -78,10 +78,10 @@ module.exports = {
     ];
 
     // If component wants tests
-    if (data.wantMessages) {
+    if (data.wantTests) {
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/index.test.ts',
+        path: '../../app/containers/{{properCase name}}/tests/index.test.tsx',
         templateFile: './container/test.tsx.hbs',
         abortOnFail: true,
       });
@@ -97,8 +97,8 @@ module.exports = {
       });
     }
 
-    // If they want actions and a reducer, generate actions.js, constants.js,
-    // reducer.js and the corresponding tests for actions and the reducer
+    // If they want actions and a reducer, generate actions.ts, constants.ts,
+    // reducer.ts and the corresponding tests for actions and the reducer
     if (data.wantActionsAndReducer) {
       // Actions
       actions.push({
@@ -180,8 +180,22 @@ module.exports = {
     if (data.wantTypes || data.wantActionsAndReducer) {
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/types.d.ts',
-        templateFile: './container/types.d.hbs',
+        path: '../../app/containers/{{properCase name}}/types.ts',
+        templateFile: './container/types.ts.hbs',
+        abortOnFail: true,
+      });
+      actions.push({
+        type: 'modify',
+        path: '../../app/types/index.ts',
+        pattern: new RegExp(/.*\/\/.*\[IMPORT NEW CONTAINERSTATE ABOVE\].+\n/),
+        templateFile: './container/importContainerState.hbs',
+        abortOnFail: true,
+      });
+      actions.push({
+        type: 'modify',
+        path: '../../app/types/index.ts',
+        pattern: new RegExp(/.*\/\/.*\[INSERT NEW REDUCER KEY ABOVE\].+\n/),
+        templateFile: './container/appendApplicationRootState.hbs',
         abortOnFail: true,
       });
     }

@@ -9,7 +9,8 @@ module.exports = {
     '@babel/preset-react',
   ],
   plugins: [
-    'styled-components',
+    'react-hot-loader/babel',
+    'babel-plugin-styled-components',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
   ],

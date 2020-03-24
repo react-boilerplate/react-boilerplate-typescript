@@ -42,13 +42,18 @@ module.exports = {
       actions.push({
         type: 'backup',
         path: '../../app',
-        file: 'i18n.js',
+        file: 'i18n.ts',
       });
 
       actions.push({
         type: 'backup',
         path: '../../app',
-        file: 'app.js',
+        file: 'app.tsx',
+      });
+      actions.push({
+        type: 'backup',
+        path: '../../app',
+        file: 'locales.ts',
       });
     }
 
@@ -60,7 +65,7 @@ module.exports = {
     });
     actions.push({
       type: 'modify',
-      path: '../../app/i18n.ts',
+      path: '../../app/locales.ts',
       pattern: /(\s+'[a-z]+',\n)(?!.*\s+'[a-z]+',)/g,
       templateFile: './language/app-locale.hbs',
     });

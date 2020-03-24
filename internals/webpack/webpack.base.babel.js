@@ -10,14 +10,14 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = options => ({
   mode: options.mode,
   entry: options.entry,
-  output: Object.assign(
-    {
-      // Compile into js/build.js
-      path: path.resolve(process.cwd(), 'build'),
-      publicPath: '/',
-    },
-    options.output,
-  ), // Merge with env dependent settings
+  output: {
+    // Compile into js/build.js
+    path: path.resolve(process.cwd(), 'build'),
+    publicPath: '/',
+
+    // Merge with env dependent settings
+    ...options.output,
+  },
   optimization: options.optimization,
   module: {
     rules: [
@@ -30,7 +30,7 @@ module.exports = options => ({
         },
       },
       {
-        test: /\.ts(x?)$/,
+        test: /\.ts(x?)$/, // Transform typescript files with ts-loader
         exclude: /node_modules/,
         use: options.tsLoaders,
       },
@@ -121,12 +121,15 @@ module.exports = options => ({
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
+    // Run typescript checker
     new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
   ]),
   resolve: {
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js', '.ts', '.tsx'],
-    mainFields: ['browser', 'jsnext:main', 'main'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window

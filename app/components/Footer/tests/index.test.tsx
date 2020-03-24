@@ -17,7 +17,6 @@ describe('<Footer />', () => {
   it('should render and match the snapshot', () => {
     const renderedComponent = renderer
       .create(
-        // tslint:disable-next-line: jsx-wrap-multiline
         <Provider store={store}>
           <IntlProvider locale="en">
             <Footer />

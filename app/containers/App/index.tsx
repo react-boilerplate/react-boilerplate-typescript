@@ -7,9 +7,10 @@
  */
 
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import styled from 'styles/styled-components';
 import { Switch, Route } from 'react-router-dom';
+import { hot } from 'react-hot-loader/root';
 
 import HomePage from 'containers/HomePage/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
@@ -28,7 +29,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function App() {
+function App() {
   return (
     <AppWrapper>
       <Helmet
@@ -41,10 +42,11 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/features" component={FeaturePage} />
-        <Route path="" component={NotFoundPage} />
+        <Route component={NotFoundPage} />
       </Switch>
       <Footer />
       <GlobalStyle />
     </AppWrapper>
   );
 }
+export default hot(App);

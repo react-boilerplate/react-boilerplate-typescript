@@ -12,7 +12,6 @@ import messages from '../messages';
 describe('<NotFound />', () => {
   it('should render the Page Not Found text', () => {
     const { queryByText } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <IntlProvider locale="en">
         <NotFound />
       </IntlProvider>,

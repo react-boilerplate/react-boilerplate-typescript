@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
-import { ConnectedRouter } from 'connected-react-router/immutable';
+import { ConnectedRouter } from 'connected-react-router';
 import { createMemoryHistory } from 'history';
 
 import Header from '../index';
@@ -14,7 +14,6 @@ describe('<Header />', () => {
 
   it('should render a div', () => {
     const { container } = render(
-      // tslint:disable-next-line: jsx-wrap-multiline
       <Provider store={store}>
         <IntlProvider locale="en">
           <ConnectedRouter history={history}>

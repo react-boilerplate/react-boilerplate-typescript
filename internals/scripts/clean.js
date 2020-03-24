@@ -13,12 +13,11 @@ if (!shell.test('-e', 'internals/templates')) {
 
 process.stdout.write('Cleanup started...');
 
-// Reuse existing LanguageProvider and i18n tests
+// Reuse existing LanguageProvider
 shell.mv(
   'app/containers/LanguageProvider/tests',
   'internals/templates/containers/LanguageProvider',
 );
-shell.cp('app/tests/i18n.test.js', 'internals/templates/tests/i18n.test.js');
 
 // Cleanup components/
 shell.rm('-rf', 'app/components/*');
@@ -42,18 +41,17 @@ shell.mv('internals/templates/utils', 'app');
 shell.cp('internals/templates/app.tsx', 'app/app.tsx');
 shell.cp('internals/templates/global-styles.ts', 'app/global-styles.ts');
 shell.cp('internals/templates/i18n.ts', 'app/i18n.ts');
+shell.cp('internals/templates/locales.ts', 'app/locales.ts');
 shell.cp('internals/templates/index.html', 'app/index.html');
 shell.cp('internals/templates/reducers.ts', 'app/reducers.ts');
 shell.cp('internals/templates/configureStore.ts', 'app/configureStore.ts');
-
-shell.cp('internals/templates/types/index.d.ts', 'app/types/index.d.ts');
+shell.cp('internals/templates/types/index.ts', 'app/types/index.ts');
 
 // Remove the templates folder
 shell.rm('-rf', 'internals/templates');
 
 addCheckMark();
 
-//FIXME: uncomment
 // Commit the changes
 // if (
 //   shell.exec('git add . --all && git commit -qm "Remove default example"')

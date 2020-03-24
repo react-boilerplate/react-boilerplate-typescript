@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<App /> should render and match the snapshot 1`] = `
-<ForwardRef(styled.div)>
-  <HelmetWrapper
+<styled.div>
+  <Helmet
     defaultTitle="React.js Boilerplate"
     defer={true}
     encodeSpecialCharacters={true}
@@ -12,7 +12,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       content="A React.js Boilerplate application"
       name="description"
     />
-  </HelmetWrapper>
+  </Helmet>
   <Header />
   <Switch>
     <Route
@@ -26,10 +26,9 @@ exports[`<App /> should render and match the snapshot 1`] = `
     />
     <Route
       component={[Function]}
-      path=""
     />
   </Switch>
   <Footer />
   <GlobalStyleComponent />
-</ForwardRef(styled.div)>
+</styled.div>
 `;

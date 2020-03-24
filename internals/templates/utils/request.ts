@@ -1,4 +1,3 @@
-
 export class ResponseError extends Error {
   public response: Response;
 
@@ -46,7 +45,10 @@ function checkStatus(response: Response) {
  *
  * @return {object}           The response data
  */
-export default async function request(url: string, options?: RequestInit): Promise<{ } | { err: ResponseError }> {
+export default async function request(
+  url: string,
+  options?: RequestInit,
+): Promise<{} | { err: ResponseError }> {
   const fetchResponse = await fetch(url, options);
   const response = await checkStatus(fetchResponse);
   return parseJSON(response);

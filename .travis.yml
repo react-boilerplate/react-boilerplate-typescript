@@ -1,14 +1,14 @@
 language: node_js
 
 node_js:
-  - 'node'
-  - 'lts/*'
+  - "node"
+  - "lts/*"
 
 services:
   - xvfb
 
 script:
-  # - node ./internals/scripts/generate-templates-for-linting
+  - node ./internals/scripts/generate-templates-for-linting
   - npm test -- --maxWorkers=4
   - npm run build
 
@@ -20,7 +20,7 @@ notifications:
   email:
     on_failure: change
 
-after_success: 'npm run coveralls'
+after_success: "npm run coveralls"
 
 cache:
   directories:

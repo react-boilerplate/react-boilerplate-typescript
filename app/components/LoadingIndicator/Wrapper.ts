@@ -1,4 +1,4 @@
-import styled from 'styles/styled-components';
+import styled from 'app/styles/styled-components';
 
 const Wrapper = styled.div`
   margin: 2em auto;

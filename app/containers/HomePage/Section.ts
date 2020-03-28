@@ -1,4 +1,4 @@
-import styled from 'styles/styled-components';
+import styled from 'app/styles/styled-components';
 
 const Section = styled.section`
   margin: 3em auto;

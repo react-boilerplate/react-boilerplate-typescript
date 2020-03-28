@@ -8,7 +8,7 @@ import React from 'react';
 import { createSelector } from 'reselect';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Toggle from 'components/Toggle';
+import Toggle from 'app/components/Toggle';
 import Wrapper from './Wrapper';
 import messages from './messages';
 import { appLocales } from '../../locales';

@@ -7,7 +7,7 @@ import { render, cleanup, fireEvent } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 
-import * as appActions from 'containers/App/actions';
+import * as appActions from 'app/containers/App/actions';
 import { HelmetProvider } from 'react-helmet-async';
 
 import configureStore from '../../../configureStore';

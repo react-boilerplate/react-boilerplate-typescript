@@ -13,6 +13,13 @@ module.exports = {
     'babel-plugin-styled-components',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
+    [
+      'module-resolver',
+      {
+        root: ['./'],
+        extensions: ['.ts', '.tsx', '.ios.js', '.android.js'],
+      },
+    ],
   ],
   env: {
     production: {

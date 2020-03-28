@@ -4,8 +4,8 @@
 
 import { put, takeLatest } from 'redux-saga/effects';
 
-import ActionTypes from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import ActionTypes from 'app/containers/App/constants';
+import { reposLoaded, repoLoadingError } from 'app/containers/App/actions';
 
 import githubData, { getRepos } from '../saga';
 import { Repo } from '../../RepoListItem/types';

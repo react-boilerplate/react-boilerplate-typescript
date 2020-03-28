@@ -1,4 +1,4 @@
-import styled from 'styles/styled-components';
+import styled from 'app/styles/styled-components';
 
 const Ul = styled.ul`
   list-style: none;

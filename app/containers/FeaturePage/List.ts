@@ -1,4 +1,4 @@
-import styled from 'styles/styled-components';
+import styled from 'app/styles/styled-components';
 
 const List = styled.ul`
   font-family: Georgia, Times, 'Times New Roman', serif;

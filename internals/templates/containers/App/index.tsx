@@ -11,8 +11,8 @@ import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import HomePage from 'app/containers/HomePage/Loadable';
+import NotFoundPage from 'app/containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 function App() {

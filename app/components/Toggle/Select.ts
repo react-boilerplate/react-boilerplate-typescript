@@ -1,4 +1,4 @@
-import styled from 'styles/styled-components';
+import styled from 'app/styles/styled-components';
 
 const Select = styled.select`
   line-height: 1em;

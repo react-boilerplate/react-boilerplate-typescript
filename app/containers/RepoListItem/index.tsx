@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedNumber } from 'react-intl';
 
-import { makeSelectCurrentUser } from 'containers/App/selectors';
-import ListItem from 'components/ListItem';
+import { makeSelectCurrentUser } from 'app/containers/App/selectors';
+import ListItem from 'app/components/ListItem';
 import IssueIcon from './IssueIcon';
 import IssueLink from './IssueLink';
 import RepoLink from './RepoLink';

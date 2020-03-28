@@ -10,7 +10,7 @@ import { History } from 'history';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import createReducer from './reducers';
-import { InjectedStore, ApplicationRootState } from 'types';
+import { InjectedStore, ApplicationRootState } from 'app/types';
 
 export default function configureStore(
   initialState: ApplicationRootState | {} = {},

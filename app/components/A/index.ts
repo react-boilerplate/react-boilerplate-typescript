@@ -2,7 +2,7 @@
  * A link to a certain page, an anchor tag
  */
 
-import styled from 'styles/styled-components';
+import styled from 'app/styles/styled-components';
 
 const A = styled.a`
   color: #41addd;

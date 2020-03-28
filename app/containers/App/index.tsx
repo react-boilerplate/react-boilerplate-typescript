@@ -8,15 +8,15 @@
 
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import styled from 'styles/styled-components';
+import styled from 'app/styles/styled-components';
 import { Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
-import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+import HomePage from 'app/containers/HomePage/Loadable';
+import FeaturePage from 'app/containers/FeaturePage/Loadable';
+import NotFoundPage from 'app/containers/NotFoundPage/Loadable';
+import Header from 'app/components/Header';
+import Footer from 'app/components/Footer';
 
 import GlobalStyle from '../../global-styles';
 

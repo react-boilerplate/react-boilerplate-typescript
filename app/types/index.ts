@@ -3,9 +3,9 @@ import { RouterState } from 'connected-react-router';
 import { Saga } from 'redux-saga';
 import { SagaInjectionModes } from 'redux-injectors';
 
-import { ContainerState as LanguageProviderState } from 'containers/LanguageProvider/types';
-import { ContainerState as AppState } from 'containers/App/types';
-import { ContainerState as HomeState } from 'containers/HomePage/types';
+import { ContainerState as LanguageProviderState } from 'app/containers/LanguageProvider/types';
+import { ContainerState as AppState } from 'app/containers/App/types';
+import { ContainerState as HomeState } from 'app/containers/HomePage/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 export interface InjectedStore extends Store {

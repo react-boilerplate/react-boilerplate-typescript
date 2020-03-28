@@ -1,4 +1,4 @@
-import { css } from 'styles/styled-components';
+import { css } from 'app/styles/styled-components';
 
 const buttonStyles = css`
   display: inline-block;

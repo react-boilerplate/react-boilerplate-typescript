@@ -11,7 +11,7 @@ module.exports = {
     'airbnb-typescript',
     'prettier',
     'prettier/react',
-    'prettier/@typescript-eslint'
+    'prettier/@typescript-eslint',
   ],
   plugins: [
     'prettier',

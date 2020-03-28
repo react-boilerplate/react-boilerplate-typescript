@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import List from 'components/List';
-import ListItem from 'components/ListItem';
-import LoadingIndicator from 'components/LoadingIndicator';
-import RepoListItem from 'containers/RepoListItem';
+import List from 'app/components/List';
+import ListItem from 'app/components/ListItem';
+import LoadingIndicator from 'app/components/LoadingIndicator';
+import RepoListItem from 'app/containers/RepoListItem';
 import { ContainerState, UserData } from '../../containers/App/types';
 
 export type ReposListProps = Pick<ContainerState, 'loading' | 'error'> &

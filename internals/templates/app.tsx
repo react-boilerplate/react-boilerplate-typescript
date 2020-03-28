@@ -14,15 +14,15 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
-import history from 'utils/history';
+import history from 'app/utils/history';
 import 'sanitize.css/sanitize.css';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
 // Import root app
-import App from 'containers/App';
+import App from 'app/containers/App';
 
 // Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
+import LanguageProvider from 'app/containers/LanguageProvider';
 
 // Load the favicon and the .htaccess file
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
@@ -33,7 +33,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import configureStore from './configureStore';
 
 // Import i18n messages
-import { translationMessages } from 'i18n';
+import { translationMessages } from 'app/i18n';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)

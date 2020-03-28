@@ -3,7 +3,7 @@
  */
 
 import { createSelector } from 'reselect';
-import { ApplicationRootState } from 'types';
+import { ApplicationRootState } from 'app/types';
 
 const selectGlobal = (state: ApplicationRootState) => state.global;
 

@@ -1,4 +1,4 @@
-import styled from 'styles/styled-components';
+import styled from 'app/styles/styled-components';
 import Section from './Section';
 
 const CenteredSection = styled(Section)`

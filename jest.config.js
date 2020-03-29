@@ -27,6 +27,7 @@ module.exports = {
     '.*\\.(css|less|styl|scss|sass)$': '<rootDir>/internals/mocks/cssModule.js',
     '.*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/internals/mocks/image.js',
+    '^app/(.*)$': '<rootDir>/app/$1',
   },
   setupFilesAfterEnv: [
     '<rootDir>/internals/testing/test-bundler.js',

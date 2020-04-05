@@ -125,6 +125,9 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
+      node: {
+        extensions: ['.js'] // webstorm IDE cannot resolve the webpack.babel.prod.js module correctly without this
+      },
       webpack: {
         config: './internals/webpack/webpack.prod.babel.js',
       },

@@ -1,13 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoadingIndicator /> should match the snapshot 1`] = `
-.c0 {
-  margin: 2em auto;
-  width: 40px;
-  height: 40px;
-  position: relative;
-}
-
 .c1 {
   width: 100%;
   height: 100%;
@@ -336,6 +329,13 @@ exports[`<LoadingIndicator /> should match the snapshot 1`] = `
   animation-delay: -0.1s;
 }
 
+.c0 {
+  margin: 2em auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
 <div
   class="c0"
 >
@@ -344,36 +344,47 @@ exports[`<LoadingIndicator /> should match the snapshot 1`] = `
   />
   <div
     class="c2"
+    rotate="30"
   />
   <div
     class="c3"
+    rotate="60"
   />
   <div
     class="c4"
+    rotate="90"
   />
   <div
     class="c5"
+    rotate="120"
   />
   <div
     class="c6"
+    rotate="150"
   />
   <div
     class="c7"
+    rotate="180"
   />
   <div
     class="c8"
+    rotate="210"
   />
   <div
     class="c9"
+    rotate="240"
   />
   <div
     class="c10"
+    rotate="270"
   />
   <div
     class="c11"
+    rotate="300"
   />
   <div
     class="c12"
+    rotate="330"
   />
 </div>
 `;

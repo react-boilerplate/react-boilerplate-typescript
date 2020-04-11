@@ -8,43 +8,54 @@ exports[`<ReposList /> should render the loading indicator when its loading 1`] 
     class="sc-bdVaJa kjaCOS"
   >
     <div
-      class="sc-ifAKCX jcAqoe"
+      class="sc-EHOje gGoChr"
     >
       <div
-        class="sc-iwsKbI dPWiyi"
+        class="sc-ifAKCX edDXsf"
       />
       <div
-        class="sc-gZMcBi ebtRmY"
+        class="sc-ifAKCX dwBzUM"
+        rotate="30"
       />
       <div
-        class="sc-gqjmRU cTErFR"
+        class="sc-ifAKCX bwzsCI"
+        rotate="60"
       />
       <div
-        class="sc-VigVT dFmMlF"
+        class="sc-ifAKCX kauFWn"
+        rotate="90"
       />
       <div
-        class="sc-jTzLTM enuhco"
+        class="sc-ifAKCX bxtDgL"
+        rotate="120"
       />
       <div
-        class="sc-fjdhpX jNqnwR"
+        class="sc-ifAKCX QkOVc"
+        rotate="150"
       />
       <div
-        class="sc-jzJRlG fEFjAE"
+        class="sc-ifAKCX droLCd"
+        rotate="180"
       />
       <div
-        class="sc-cSHVUG Hyerz"
+        class="sc-ifAKCX ipLZRC"
+        rotate="210"
       />
       <div
-        class="sc-kAzzGY hOJQGd"
+        class="sc-ifAKCX hMBtdV"
+        rotate="240"
       />
       <div
-        class="sc-chPdSV kNRVZc"
+        class="sc-ifAKCX fNJWDf"
+        rotate="270"
       />
       <div
-        class="sc-kgoBCf jBYbkL"
+        class="sc-ifAKCX idkAbN"
+        rotate="300"
       />
       <div
-        class="sc-kGXeez klHZt"
+        class="sc-ifAKCX ilbcVg"
+        rotate="330"
       />
     </div>
   </ul>
@@ -65,22 +76,22 @@ exports[`<ReposList /> should render the repositories if loading was successful 
         class="sc-htpNat cdjzok"
       >
         <div
-          class="sc-dnqmqq hIJpCG"
+          class="sc-iwsKbI jqiRxi"
         >
           <a
-            class="sc-bZQynM sc-htoDjs zeaOm"
+            class="sc-gzVnrw sc-dnqmqq cnWlmM"
             href="https://github.com/react-boilerplate/react-boilerplate"
             target="_blank"
           >
             react-boilerplate
           </a>
           <a
-            class="sc-bZQynM sc-gzVnrw XFJuy"
+            class="sc-gzVnrw sc-htoDjs eDvFek"
             href="https://github.com/react-boilerplate/react-boilerplate/issues"
             target="_blank"
           >
             <svg
-              class="sc-EHOje bDxpQi"
+              class="sc-bZQynM ijZVQR"
               height="1em"
               width="0.875em"
             >

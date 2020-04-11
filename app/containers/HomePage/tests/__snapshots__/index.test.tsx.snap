@@ -4,7 +4,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
 <article>
   <div>
     <section
-      class="sc-gqjmRU sc-VigVT bCueft"
+      class="sc-VigVT sc-jTzLTM gPzZSo"
     >
       <h2
         class="sc-bdVaJa dAIgSr"
@@ -20,7 +20,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       </p>
     </section>
     <section
-      class="sc-gqjmRU fgHQxZ"
+      class="sc-VigVT GwNEO"
     >
       <h2
         class="sc-bdVaJa dAIgSr"
@@ -30,7 +30,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
         </span>
       </h2>
       <form
-        class="sc-jTzLTM fzeZHJ"
+        class="sc-fjdhpX hPMBNF"
       >
         <label
           for="username"
@@ -39,14 +39,14 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
             Show Github repositories by
           </span>
           <span
-            class="sc-gZMcBi gIzYNa"
+            class="sc-gqjmRU eUVlDE"
           >
             <span>
               @
             </span>
           </span>
           <input
-            class="sc-fjdhpX bmAVzu"
+            class="sc-jzJRlG kiUvcq"
             id="username"
             placeholder="mxstbr"
             type="text"

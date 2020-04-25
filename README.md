@@ -1,3 +1,22 @@
+## ⚠️ Moved to https://github.com/react-boilerplate/react-boilerplate-cra-template
+
+## This boilerplate is now being developed as a custom `create-react-app` template. Much better and stronger with many more features. Powered by Create React App.
+
+Please support us there with your opinions and pull requests :) And with stars ofc :)
+
+<br  />
+<br  />
+<br  />
+<br  />
+<br  />
+<br  />
+<br  />
+<br  />
+<br  />
+<br  />
+
+---
+
 <img  src="https://user-images.githubusercontent.com/3495307/46663063-ca6df600-cbc5-11e8-8a77-d26ab7857f13.png"  alt="react boilerplate typescript banner"  align="center"  />
 
 <br  />
